@@ -14,6 +14,7 @@ public class UDSFCanvas : MonoBehaviour
     
     [Header("Dialogue")]
     public TextMeshProUGUI DialogueTMP;
+    public TextMeshProUGUI CharacterTMP;
 
     public float TextDisplayInterval = 0.05f;
     private float tempDisplayInterval = 0f;
@@ -36,47 +37,44 @@ public class UDSFCanvas : MonoBehaviour
     }
     private int _choiceCallback = -1;
 
-    private void Awake()
-    {
-        //Test
-        ShowLoadScreen(1f, true);
-    }
-
     public IEnumerator DisplayText(string text, params TextDisplayStyle[] displayStyles)
     {
-        tempDisplayInterval = TextDisplayInterval;
-        ResetDialogueTMP();
-
-        for (int i = 0; i < displayStyles.Length; i++)
-        {
-            switch (displayStyles[i])
-            {
-                case TextDisplayStyle.Gigantic:
-                    DialogueTMP.fontSize = 40f;
-                    break;
-                case TextDisplayStyle.Big:
-                    DialogueTMP.fontSize = 25f;
-                    break;
-                case TextDisplayStyle.Small:
-                    DialogueTMP.fontSize = 12f;
-                    break;
-                case TextDisplayStyle.Italic:
-                    DialogueTMP.fontStyle = FontStyles.Italic;
-                    break;
-                case TextDisplayStyle.Bold:
-                    DialogueTMP.fontStyle = FontStyles.Bold;
-                    break;
-                case TextDisplayStyle.Fast:
-                    tempDisplayInterval = 0.015f;
-                    break;
-                case TextDisplayStyle.Slow:
-                    tempDisplayInterval = 0.075f;
-                    break;
-            }
-        }
+        ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
 
         int textIndex = 0;
         while(textIndex < text.Length)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                DialogueTMP.text = text;
+                textIndex = text.Length;
+            }
+            else if (displayIntervalTimer >= tempDisplayInterval)
+            {
+                DialogueTMP.text += text[textIndex];
+                textIndex++;
+                displayIntervalTimer = 0f;
+            }
+            else
+                displayIntervalTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (!Input.GetMouseButtonUp(0)) yield return null;
+        Debug.Log("Finished displaying dialogue.");
+    }
+
+    public IEnumerator DisplayText(string text, string characterName, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+    {
+        ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
+        if (useStylesForCharacterField)
+            ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
+            CharacterTMP.text = characterName;
+
+        int textIndex = 0;
+        while (textIndex < text.Length)
         {
             if (Input.GetMouseButtonUp(0))
             {
@@ -158,11 +156,56 @@ public class UDSFCanvas : MonoBehaviour
         StartCoroutine(UnfadeCanvasGroup(LoadingCanvasGroup, time));
     }
 
-    private void ResetDialogueTMP()
+    public void HideLoadScreen(float time = 1f, bool showOtherComponents = false)
     {
-        DialogueTMP.fontSize = 18f;
-        DialogueTMP.fontStyle = 0;
-        DialogueTMP.text = string.Empty;
+        if (time <= 0f)
+        {
+            time = 1f;
+            Debug.LogWarning("Tried to show load screen with a value for time that's less or equal to zero.");
+        }
+
+        if (showOtherComponents)
+            StartCoroutine(UnfadeCanvasGroup(OveralPanelCanvasGroup, time));
+        StartCoroutine(FadeCanvasGroup(LoadingCanvasGroup, time));
+    }
+
+    private void ApplyTextDisplayStylesToTMP(TextMeshProUGUI tmp, TextDisplayStyle[] displayStyles)
+    {
+        ResetTMP(tmp);
+        for (int i = 0; i < displayStyles.Length; i++)
+        {
+            switch (displayStyles[i])
+            {
+                case TextDisplayStyle.Gigantic:
+                    tmp.fontSize = 40f;
+                    break;
+                case TextDisplayStyle.Big:
+                    tmp.fontSize = 25f;
+                    break;
+                case TextDisplayStyle.Small:
+                    tmp.fontSize = 12f;
+                    break;
+                case TextDisplayStyle.Italic:
+                    tmp.fontStyle = FontStyles.Italic;
+                    break;
+                case TextDisplayStyle.Bold:
+                    tmp.fontStyle = FontStyles.Bold;
+                    break;
+                case TextDisplayStyle.Fast:
+                    tempDisplayInterval = 0.015f;
+                    break;
+                case TextDisplayStyle.Slow:
+                    tempDisplayInterval = 0.075f;
+                    break;
+            }
+        }
+    }
+
+    private void ResetTMP(TextMeshProUGUI tmp)
+    {
+        tmp.fontSize = 18f;
+        tmp.fontStyle = 0;
+        tmp.text = string.Empty;
 
         tempDisplayInterval = TextDisplayInterval;
     }
