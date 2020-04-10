@@ -7,13 +7,15 @@ using System;
 using System.Linq;
 using System.Reflection;
 
+[Serializable]
 public class UDSFStoryEditor : EditorWindowExtended
 {
-    private static Texture2D backgroundTexture;
-    private static StoryContainer storyContainer;
+    public Texture2D backgroundTexture;
+    public StoryContainer storyContainer;
 
-    private static List<StoryElement> storyElements = new List<StoryElement>();
-    private string[] storyElementNames
+    [SerializeField]
+    public List<StoryElement> storyElements = new List<StoryElement>();
+    public string[] storyElementNames
     {
         get
         {
@@ -22,30 +24,38 @@ public class UDSFStoryEditor : EditorWindowExtended
             return storyElements.Select(x => x.ElementName).ToArray();
         }
     }
-    private List<StoryElement> elements { get { return storyElements; } }
 
-    private int moveElement = -1;
-    private bool moveUp = false;
 
-    private int removeElement = -1;
+    public int moveElement = -1;
+    public bool moveUp = false;
 
-    private int selectedIndex = 0;
+    public int removeElement = -1;
 
-    private GUIStyle style = new GUIStyle();
-    private Vector2 scrollPosition = new Vector2();
+    public int selectedIndex = 0;
+
+    public GUIStyle style = new GUIStyle();
+    public Vector2 scrollPosition = new Vector2();
+
+    public bool standardSetup = true;
+
+    public string storyName = "NewStory";
 
     [MenuItem("UDSF/Story Editor")]
     public static void Init()
     {
         UDSFStoryEditor storyWindow = GetWindow<UDSFStoryEditor>();
         storyWindow.Show();
+    }
 
-        storyContainer = CreateInstance<StoryContainer>();
-
+    private void SetStandardBackground()
+    {
         backgroundTexture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
         backgroundTexture.SetPixel(0, 0, new Color(1f, 0.90625f, 0.90625f));
         backgroundTexture.Apply();
+    }
 
+    private void InitializeStoryElements()
+    {
         foreach (Type type in
             Assembly.GetAssembly(typeof(StoryElement)).GetTypes()
             .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(StoryElement))))
@@ -57,17 +67,24 @@ public class UDSFStoryEditor : EditorWindowExtended
 
     private void OnGUI()
     {
-        if (backgroundTexture == null)
+        if (standardSetup)
         {
-            backgroundTexture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-            backgroundTexture.SetPixel(0, 0, new Color(1f, 0.90625f, 0.90625f));
-            backgroundTexture.Apply();
+            SetStandardBackground();
+            InitializeStoryElements();
+            storyContainer = CreateInstance<StoryContainer>();
+            standardSetup = false;
         }
 
         GUI.DrawTexture(new Rect(0, 0, maxSize.x, maxSize.y), backgroundTexture, ScaleMode.StretchToFill);
         GUILayout.BeginVertical(GUILayout.MinWidth(position.width), GUILayout.MinHeight(maxSize.y));
         {
             GUILayout.Label("Create a story here.", EditorStyles.boldLabel);
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.Label("Story Name: ", GUILayout.MaxWidth(80));
+                storyName = GUILayout.TextField(storyName);
+            }
+            GUILayout.EndHorizontal();
             if (GUILayout.Button("Export"))
             {
                 ExportStory();
@@ -79,7 +96,7 @@ public class UDSFStoryEditor : EditorWindowExtended
                 selectedIndex = EditorGUILayout.Popup(selectedIndex, storyElementNames);
                 if (GUILayout.Button("+", GUILayout.MaxWidth(40)))
                 {
-                    storyContainer.StoryElements.Add(Activator.CreateInstance(elements[selectedIndex].GetType()) as StoryElement);
+                    storyContainer.StoryElements.Add(Activator.CreateInstance(storyElements[selectedIndex].GetType()) as StoryElement);
                 }
             }
             GUILayout.EndHorizontal();
@@ -158,7 +175,10 @@ public class UDSFStoryEditor : EditorWindowExtended
 
     private void ExportStory()
     {
-
+        if (!AssetDatabase.IsValidFolder("Assets/Story"))
+            AssetDatabase.CreateFolder("Assets", "Story");
+        AssetDatabase.CreateAsset(storyContainer, $"Assets/Story/{storyName}.asset");
+        AssetDatabase.SaveAssets();
     }
 
     private void ChangeBackgroundStyle(Color color)
