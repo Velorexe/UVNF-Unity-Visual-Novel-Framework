@@ -4,10 +4,11 @@ using System.Reflection;
 using System;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 public static class UDSFSettings
 {
-    public static UDSFSettingsInstace Settings
+    public static UDSFSettingsInstance Settings
     {
         get
         {
@@ -16,7 +17,7 @@ public static class UDSFSettings
             return _settingsInstance;
         }
     }
-    private static UDSFSettingsInstace _settingsInstance;
+    private static UDSFSettingsInstance _settingsInstance;
 
     public static List<StoryElement> StoryElements 
     {
@@ -39,9 +40,14 @@ public static class UDSFSettings
     private static List<StoryElement> _storyElements;
 
 
-    private static UDSFSettingsInstace GetSettings()
+    private static UDSFSettingsInstance GetSettings()
     {
-        return AssetDatabase.LoadAssetAtPath<UDSFSettingsInstace>("Assets/UDSF/Scripts/Core/Settings/Settings.asset");
+        if(AssetDatabase.LoadAssetAtPath<UDSFSettingsInstance>("Assets/UDSF/Scripts/Core/Settings/UDSFSettingsInstance.asset") == null)
+        {
+            AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<UDSFSettingsInstance>(), "Assets/UDSF/Scripts/Core/Settings/UDSFSettingsInstance.asset");
+            AssetDatabase.SaveAssets();
+        }
+        return AssetDatabase.LoadAssetAtPath<UDSFSettingsInstance>("Assets/UDSF/Scripts/Core/Settings/UDSFSettingsInstance.asset");
     }
 
     private static void InitializeStoryElements()
@@ -54,5 +60,32 @@ public static class UDSFSettings
             _storyElements.Add((StoryElement)Activator.CreateInstance(type));
         }
         _storyElements.Sort();
+    }
+
+    public static GUIStyle GetElementStyle(StoryElementTypes type)
+    {
+        GUIStyle newStyle = Settings.DBSFSkin.button;
+        switch (type)
+        {
+            case StoryElementTypes.Audio:
+                newStyle.normal.background = Settings.AudioElementTexture;
+                break;
+            case StoryElementTypes.Scenery:
+                newStyle.normal.background = Settings.SceneryElementTexture;
+                break;
+            case StoryElementTypes.Character:
+                newStyle.normal.background = Settings.CharacterElementTexture;
+                break;
+            case StoryElementTypes.Other:
+                newStyle.normal.background = Settings.OtherElementTexture;
+                break;
+            case StoryElementTypes.Story:
+                newStyle.normal.background = Settings.StoryElementTexture;
+                break;
+            case StoryElementTypes.Utility:
+                newStyle.normal.background = Settings.UtilityElementTexture;
+                break;
+        }
+        return newStyle;
     }
 }

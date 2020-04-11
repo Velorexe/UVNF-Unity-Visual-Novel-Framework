@@ -13,6 +13,8 @@ public class UDSFStoryEditor : EditorWindowExtended
     public Texture2D backgroundTexture;
     public StoryContainer storyContainer;
 
+    public bool Exported = false;
+
     public List<bool> storyElementsFoldout = new List<bool>();
 
     public int moveElement = -1;
@@ -55,7 +57,9 @@ public class UDSFStoryEditor : EditorWindowExtended
         GUI.DrawTexture(new Rect(0, 0, maxSize.x, maxSize.y), backgroundTexture, ScaleMode.StretchToFill);
         GUILayout.BeginVertical(GUILayout.MinWidth(position.width), GUILayout.MinHeight(maxSize.y));
         {
-            GUILayout.Label("Create a story here.", EditorStyles.boldLabel);
+            GUILayout.Label("Give your Story a relevant name and click 'Export' to get started.", EditorStyles.boldLabel);
+            GUILayout.Label("Or drag and drop a Story asset onto this window.");
+
             GUILayout.BeginHorizontal();
             {
                 GUILayout.Label("Story Name: ", GUILayout.MaxWidth(80));
@@ -65,143 +69,168 @@ public class UDSFStoryEditor : EditorWindowExtended
             if (GUILayout.Button("Export"))
             {
                 ExportStory();
+                Exported = true;
             }
 
-            GUILayout.Label("Add Element", EditorStyles.boldLabel);
-            GUILayout.BeginHorizontal();
+            if (Exported)
             {
-                selectedIndex = EditorGUILayout.Popup(selectedIndex, UDSFSettings.StoryElementNames);
-                if (GUILayout.Button("+", GUILayout.MaxWidth(40)))
+                GUILayout.Label("Add Element", EditorStyles.boldLabel);
+                GUILayout.BeginHorizontal();
                 {
-                    storyContainer.StoryElements.Add(Activator.CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement);
-                    storyElementsFoldout.Add(true);
-                }
-            }
-            GUILayout.EndHorizontal();
-
-            {
-                Rect lastRect = GUILayoutUtility.GetLastRect();
-                lastRect.position = new Vector2(lastRect.position.x + 20f, lastRect.position.y + 18f);
-                lastRect.width = 2f;
-                lastRect.height = position.height;
-                EditorGUI.DrawRect(lastRect, Color.grey);
-            }
-
-            scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 80));
-            {
-                if (storyContainer.StoryElements.Count > 0)
-                {
-                    for (int i = 0; i < storyContainer.StoryElements.Count; i++)
+                    selectedIndex = EditorGUILayout.Popup(selectedIndex, UDSFSettings.StoryElementNames);
+                    if (GUILayout.Button("+", GUILayout.MaxWidth(40)))
                     {
-                        if (storyElementsFoldout[i])
-                        {
-                            GUILayout.Space(55f);
-                            GUILayout.BeginHorizontal();
-                            {
-                                GUILayout.Space(40f);
-                                GUILayout.BeginVertical(UDSFSettings.Settings.BoxGUIStyle, GUILayout.MaxWidth(position.size.x));
-                                {
-                                    ChangeBackgroundStyle(storyContainer.StoryElements[i].DisplayColor);
-                                    GUILayout.BeginVertical(style);
-                                    {
-                                        GUILayout.Space(20);
-                                        storyContainer.StoryElements[i].DisplayLayout();
-                                        GUILayout.Label("", GUI.skin.horizontalSlider);
+                        storyContainer.StoryElements.Add(Activator.CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement);
+                        storyElementsFoldout.Add(true);
+                    }
+                }
+                GUILayout.EndHorizontal();
 
-                                        GUILayout.BeginHorizontal();
+                {
+                    Rect lastRect = GUILayoutUtility.GetLastRect();
+                    lastRect.position = new Vector2(lastRect.position.x + 20f, lastRect.position.y + 18f);
+                    lastRect.width = 2f;
+                    lastRect.height = position.height;
+                    EditorGUI.DrawRect(lastRect, Color.grey);
+                }
+
+                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 80));
+                {
+                    if (storyContainer.StoryElements.Count > 0)
+                    {
+                        for (int i = 0; i < storyContainer.StoryElements.Count; i++)
+                        {
+                            if (storyElementsFoldout[i])
+                            {
+                                GUILayout.Space(55f);
+                                GUILayout.BeginHorizontal();
+                                {
+                                    GUILayout.Space(40f);
+                                    GUILayout.BeginVertical(UDSFSettings.Settings.DBSFSkin.box, GUILayout.MaxWidth(700));
+                                    {
+                                        ChangeBackgroundStyle(storyContainer.StoryElements[i].DisplayColor);
+                                        GUILayout.BeginVertical(style);
                                         {
-                                            if (GUILayout.Button("▲"))
+                                            GUILayout.Space(20);
+                                            storyContainer.StoryElements[i].DisplayLayout();
+                                            GUILayout.Label("", GUI.skin.horizontalSlider);
+
+                                            GUILayout.BeginHorizontal();
                                             {
-                                                moveElement = i;
-                                                moveUp = true;
+                                                if (GUILayout.Button("▲"))
+                                                {
+                                                    moveElement = i;
+                                                    moveUp = true;
+                                                }
+                                                else if (GUILayout.Button("▼"))
+                                                {
+                                                    moveElement = i;
+                                                    moveUp = false;
+                                                }
                                             }
-                                            else if (GUILayout.Button("▼"))
+                                            GUILayout.EndHorizontal();
+                                            if (GUILayout.Button("-"))
                                             {
-                                                moveElement = i;
-                                                moveUp = false;
+                                                removeElement = i;
                                             }
                                         }
-                                        GUILayout.EndHorizontal();
-                                        if (GUILayout.Button("-"))
-                                        {
-                                            removeElement = i;
-                                        }
+                                        GUILayout.EndVertical();
                                     }
                                     GUILayout.EndVertical();
                                 }
-                                GUILayout.EndVertical();
+                                GUILayout.EndHorizontal();
                             }
-                            GUILayout.EndHorizontal();
-                        }
-                        else
-                        {
-                            GUILayout.Space(10f);
+                            else
+                            {
+                                GUILayout.Space(10f);
+                            }
+
+                            if (!storyElementsFoldout[i])
+                            {
+                                GUILayout.Space(5f + (i != 0 ? 4f : 0f));
+                                if (GUILayout.Button(storyContainer.StoryElements[i].ElementName, UDSFSettings.GetElementStyle(storyContainer.StoryElements[i].Type)))
+                                {
+                                    storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                }
+                                Rect lastRect = GUILayoutUtility.GetLastRect();
+                                lastRect.width = 50f;
+                                lastRect.height = 50f;
+                                lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
+                                GUI.DrawTexture(lastRect, UDSFSettings.Settings.DialogueElementTexture);
+                            }
+                            else
+                            {
+                                Rect lastRect = GUILayoutUtility.GetLastRect();
+                                lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y - 40f);
+                                if (GUI.Button(lastRect, storyContainer.StoryElements[i].ElementName, UDSFSettings.GetElementStyle(storyContainer.StoryElements[i].Type)))
+                                {
+                                    storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                }
+                                lastRect.width = 50f;
+                                lastRect.height = 50f;
+                                lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
+                                GUI.DrawTexture(lastRect, UDSFSettings.Settings.DialogueElementTexture);
+                            }
                         }
 
-                        if (!storyElementsFoldout[i])
+                        if (moveElement != -1)
                         {
-                            GUILayout.Space(5f);
-                            if (GUILayout.Button(storyContainer.StoryElements[i].ElementName, UDSFSettings.Settings.GetElementStyle(storyContainer.StoryElements[i].Type)))
+                            if (moveUp && moveElement > 0)
                             {
-                                storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                StoryElement shiftElement = storyContainer.StoryElements[moveElement - 1];
+                                storyContainer.StoryElements[moveElement - 1] = storyContainer.StoryElements[moveElement];
+                                storyContainer.StoryElements[moveElement] = shiftElement;
+
+                                bool shiftFoldout = storyElementsFoldout[moveElement - 1];
+                                storyElementsFoldout[moveElement - 1] = storyElementsFoldout[moveElement];
+                                storyElementsFoldout[moveElement] = shiftFoldout;
                             }
-                            Rect lastRect = GUILayoutUtility.GetLastRect();
-                            lastRect.width = 50f;
-                            lastRect.height = 50f;
-                            lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                            GUI.DrawTexture(lastRect, UDSFSettings.Settings.DialogueElementTexture);
+                            else if (moveElement < storyContainer.StoryElements.Count - 1)
+                            {
+                                StoryElement shiftElement = storyContainer.StoryElements[moveElement + 1];
+                                storyContainer.StoryElements[moveElement + 1] = storyContainer.StoryElements[moveElement];
+                                storyContainer.StoryElements[moveElement] = shiftElement;
+
+                                bool shiftFoldout = storyElementsFoldout[moveElement + 1];
+                                storyElementsFoldout[moveElement + 1] = storyElementsFoldout[moveElement];
+                                storyElementsFoldout[moveElement] = shiftFoldout;
+                            }
+
+                            moveElement = -1;
                         }
-                        else
+
+                        if (removeElement != -1)
                         {
-                            Rect lastRect = GUILayoutUtility.GetLastRect();
-                            lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y - 40f);
-                            if (GUI.Button(lastRect, storyContainer.StoryElements[i].ElementName, UDSFSettings.Settings.GetElementStyle(storyContainer.StoryElements[i].Type)))
-                            {
-                                storyElementsFoldout[i] = !storyElementsFoldout[i];
-                            }
-                            lastRect.width = 50f;
-                            lastRect.height = 50f;
-                            lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                            GUI.DrawTexture(lastRect, UDSFSettings.Settings.DialogueElementTexture);
+                            storyContainer.StoryElements.RemoveAt(removeElement);
+                            storyElementsFoldout.RemoveAt(removeElement);
+                            removeElement = -1;
                         }
                     }
-                    if (moveElement != -1)
+                }
+                GUILayout.EndScrollView();
+            }
+            else
+            {
+                Rect dADRect = GUILayoutUtility.GetRect(position.width, position.height);
+                GUI.Box(dADRect, "Drag and Drop here", UDSFSettings.Settings.DBSFSkin.box);
+                if (dADRect.Contains(Event.current.mousePosition))
+                {
+                    if(Event.current.type == EventType.DragUpdated)
                     {
-                        if (moveUp && moveElement > 0)
-                        {
-                            StoryElement shiftElement = storyContainer.StoryElements[moveElement - 1];
-                            storyContainer.StoryElements[moveElement - 1] = storyContainer.StoryElements[moveElement];
-                            storyContainer.StoryElements[moveElement] = shiftElement;
-
-                            bool shiftFoldout = storyElementsFoldout[moveElement - 1];
-                            storyElementsFoldout[moveElement - 1] = storyElementsFoldout[moveElement];
-                            storyElementsFoldout[moveElement] = shiftFoldout;
-                        }
-                        else if (moveElement < storyContainer.StoryElements.Count - 1)
-                        {
-                            StoryElement shiftElement = storyContainer.StoryElements[moveElement + 1];
-                            storyContainer.StoryElements[moveElement + 1] = storyContainer.StoryElements[moveElement];
-                            storyContainer.StoryElements[moveElement] = shiftElement;
-
-                            bool shiftFoldout = storyElementsFoldout[moveElement + 1];
-                            storyElementsFoldout[moveElement + 1] = storyElementsFoldout[moveElement];
-                            storyElementsFoldout[moveElement] = shiftFoldout;
-                        }
-
-                        moveElement = -1;
+                        DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+                        Event.current.Use();
                     }
-
-                    if (removeElement != -1)
+                    else if(Event.current.type == EventType.DragPerform)
                     {
-                        storyContainer.StoryElements.RemoveAt(removeElement);
-                        storyElementsFoldout.RemoveAt(removeElement);
-                        removeElement = -1;
+                        if (DragAndDrop.objectReferences[0] is StoryContainer container)
+                            storyContainer = container;
+                        Exported = true;
+                        Event.current.Use();
                     }
                 }
             }
-            GUILayout.EndScrollView();
+            GUILayout.EndVertical();
         }
-        GUILayout.EndVertical();
     }
 
     private void ExportStory()
