@@ -57,7 +57,7 @@ public static class UDSFSettings
             Assembly.GetAssembly(typeof(StoryElement)).GetTypes()
             .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(StoryElement))))
         {
-            _storyElements.Add((StoryElement)Activator.CreateInstance(type));
+            _storyElements.Add(ScriptableObject.CreateInstance(type) as StoryElement);
         }
         _storyElements.Sort();
     }

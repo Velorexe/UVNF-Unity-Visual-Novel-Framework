@@ -51,6 +51,7 @@ public class UDSFStoryEditor : EditorWindowExtended
         {
             SetStandardBackground();
             storyContainer = CreateInstance<StoryContainer>();
+            EditorUtility.SetDirty(storyContainer);
             standardSetup = false;
         }
 
@@ -80,8 +81,16 @@ public class UDSFStoryEditor : EditorWindowExtended
                     selectedIndex = EditorGUILayout.Popup(selectedIndex, UDSFSettings.StoryElementNames);
                     if (GUILayout.Button("+", GUILayout.MaxWidth(40)))
                     {
-                        storyContainer.StoryElements.Add(Activator.CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement);
+                        //Activator.CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement
+                        //storyContainer.StoryElements.Add(CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement);
+                        StoryElement newElement = CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement;
+                        newElement.name = newElement.ElementName;
+
+                        AssetDatabase.AddObjectToAsset(newElement, storyContainer);
                         storyElementsFoldout.Add(true);
+
+                        storyContainer.StoryElements.Add(newElement);
+                        AssetDatabase.SaveAssets();
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -147,7 +156,7 @@ public class UDSFStoryEditor : EditorWindowExtended
 
                             if (!storyElementsFoldout[i])
                             {
-                                GUILayout.Space(5f + (i != 0 ? 4f : 0f));
+                                GUILayout.Space(5f + (i != 0 && !storyElementsFoldout[i - 1] ? 4f : 0f));
                                 if (GUILayout.Button(storyContainer.StoryElements[i].ElementName, UDSFSettings.GetElementStyle(storyContainer.StoryElements[i].Type)))
                                 {
                                     storyElementsFoldout[i] = !storyElementsFoldout[i];
@@ -201,6 +210,8 @@ public class UDSFStoryEditor : EditorWindowExtended
 
                         if (removeElement != -1)
                         {
+                            AssetDatabase.RemoveObjectFromAsset(storyContainer.StoryElements[removeElement]);
+                            AssetDatabase.SaveAssets();
                             storyContainer.StoryElements.RemoveAt(removeElement);
                             storyElementsFoldout.RemoveAt(removeElement);
                             removeElement = -1;

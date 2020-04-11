@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[Serializable]
-public abstract class StoryElement : IComparable
+public abstract class StoryElement : ScriptableObject, IComparable
 {
     public abstract string ElementName { get; }
     public abstract Color32 DisplayColor { get; }
     public abstract StoryElementTypes Type { get; }
 
-    public abstract IEnumerable Execute();
+    public StoryElement Next;
+
+    public abstract IEnumerable Execute(GameManager managerCallback, UDSFCanvas canvas);
 
     public abstract void DisplayLayout();
 

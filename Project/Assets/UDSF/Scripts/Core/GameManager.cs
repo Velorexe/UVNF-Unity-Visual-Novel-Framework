@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Core;
@@ -6,10 +7,14 @@ using Entities;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Manager;
+    public Player Player;
+    public Location CurrentLocation;
 
-    public static Player Player;
-    public static Location CurrentLocation;
+    public UDSFCanvas Canvas;
+
+    public StoryContainer CurrentStory;
+    public StoryElement CurrentElement;
+    private List<Tuple<string, string>> _storyLog = new List<Tuple<string, string>>();
 
     private Dictionary<string, object[]> _eventFlags;
 
@@ -32,4 +37,22 @@ public class GameManager : MonoBehaviour
             return null;
         return _eventFlags[eventFlag];
     }
+
+    #region StoryElements
+    public void Awake()
+    {
+        //TODO
+        //Accept a storycontainer, set the first node as start
+    }
+
+    private void AdvanceStory()
+    {
+
+    }
+
+    public void LogStoryEvent(string characterName, string text)
+    {
+        _storyLog.Add(new Tuple<string, string>(characterName, text));
+    }
+    #endregion
 }
