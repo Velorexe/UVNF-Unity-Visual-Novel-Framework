@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core;
 using Entities;
+using CoroutineManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,11 +13,18 @@ public class GameManager : MonoBehaviour
 
     public UDSFCanvas Canvas;
 
+    [Header("Story Settings")]
     public StoryContainer CurrentStory;
-    public StoryElement CurrentElement;
+
+    public float TimeoutBeforeStart = 0f;
+    private float _timeoutTimer = 0f;
+
+    private StoryElement CurrentElement;
+    private TaskManager.TaskState _currentTask;
+
     private List<Tuple<string, string>> _storyLog = new List<Tuple<string, string>>();
 
-    private Dictionary<string, object[]> _eventFlags;
+    private Dictionary<string, object[]> _eventFlags = new Dictionary<string, object[]>();
 
     public bool AddEventFlag(string eventFlag, params object[] eventValues)
     {
@@ -41,11 +49,44 @@ public class GameManager : MonoBehaviour
     #region StoryElements
     public void Awake()
     {
-        //TODO
-        //Accept a storycontainer, set the first node as start
+        Canvas.HideLoadScreen();
+
+        CurrentStory.ConnectStoryElements();
+        StartStory();
     }
 
-    private void AdvanceStory()
+    public void StartStory()
+    {
+        CurrentElement = CurrentStory.StoryElements[0];
+
+        _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
+        _currentTask.Finished += AdvanceStory;
+        _currentTask.Start();
+    }
+
+    public void AdvanceStory(bool manual)
+    {
+        if (manual)
+        {
+            Debug.Log("Story Element cancelled manually.");
+        }
+        else
+        {
+            if (CurrentElement.Next != null)
+            {
+                CurrentElement = CurrentElement.Next;
+                _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
+                _currentTask.Finished += AdvanceStory;
+                _currentTask.Start();
+            }
+            else
+            {
+                Debug.Log("Story finished.");
+            }
+        }
+    }
+
+    public void AdvanceStory(StoryElement newStoryPoint)
     {
 
     }

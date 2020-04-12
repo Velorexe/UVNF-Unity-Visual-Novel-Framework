@@ -239,6 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f826f994f31b958419e3d4db69f0e587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 2086034938}
+  CurrentStory: {fileID: 11400000, guid: e9fcce70378f37749995bb0beca5955d, type: 2}
+  TimeoutBeforeStart: 0
 --- !u!4 &119077503
 Transform:
   m_ObjectHideFlags: 0
@@ -432,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &448179615
 RectTransform:
   m_ObjectHideFlags: 0
@@ -521,7 +524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &520669877
 RectTransform:
   m_ObjectHideFlags: 0
@@ -848,10 +851,10 @@ RectTransform:
   m_Father: {fileID: 520669877}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 75}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 200, y: -130.3}
+  m_SizeDelta: {x: 400, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &615798852
 MonoBehaviour:
@@ -1431,7 +1434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380714460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2246,7 +2249,7 @@ MonoBehaviour:
   LoadingCanvasGroup: {fileID: 448179618}
   DialogueTMP: {fileID: 1441700062}
   CharacterTMP: {fileID: 2116293984}
-  TextDisplayInterval: 0.05
+  TextDisplayInterval: 0.025
   ChoiceButton: {fileID: 9188443421959378659, guid: 34485b99011280b4fb858d30b071ab23,
     type: 3}
   ChoicePanelTransform: {fileID: 520669877}

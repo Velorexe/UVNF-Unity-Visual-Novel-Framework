@@ -37,9 +37,15 @@ public class UDSFCanvas : MonoBehaviour
     }
     private int _choiceCallback = -1;
 
+    public bool BottomPanelEnabled => BottomPanelCanvasGroup.gameObject.activeSelf;
+    public bool ChoiceCanvasEnabled => ChoiceCanvasGroup.gameObject.activeSelf;
+    public bool OveralPanelCanvasEnabled => OveralPanelCanvasGroup.gameObject.activeSelf;
+    public bool LoadingCanvasEnabled => LoadingCanvasGroup.gameObject.activeSelf;
+
     public IEnumerator DisplayText(string text, params TextDisplayStyle[] displayStyles)
     {
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
+        BottomPanelCanvasGroup.gameObject.SetActive(true);
 
         int textIndex = 0;
         while(textIndex < text.Length)
@@ -61,7 +67,6 @@ public class UDSFCanvas : MonoBehaviour
         }
 
         while (!Input.GetMouseButtonUp(0)) yield return null;
-        Debug.Log("Finished displaying dialogue.");
     }
 
     public IEnumerator DisplayText(string text, string characterName, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
@@ -69,6 +74,8 @@ public class UDSFCanvas : MonoBehaviour
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
         if (useStylesForCharacterField)
             ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        BottomPanelCanvasGroup.gameObject.SetActive(true);
 
         if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
             CharacterTMP.text = characterName;
@@ -93,11 +100,18 @@ public class UDSFCanvas : MonoBehaviour
         }
 
         while (!Input.GetMouseButtonUp(0)) yield return null;
-        Debug.Log("Finished displaying dialogue.");
     }
 
-    public IEnumerator DisplayChoice(string[] options, params TextDisplayStyle[] displayStyles)
+    public void DisplayChoice(string[] options, bool hideDialogue = true , params TextDisplayStyle[] displayStyles)
     {
+        StartCoroutine(DisplayChoiceCoroutine(options, hideDialogue, displayStyles));
+    }
+
+    public IEnumerator DisplayChoiceCoroutine(string[] options, bool hideDialogue = true, params TextDisplayStyle[] displayStyles)
+    {
+        BottomPanelCanvasGroup.gameObject.SetActive(!hideDialogue);
+        ChoiceCanvasGroup.gameObject.SetActive(true);
+
         foreach(Transform child in ChoicePanelTransform)
             Destroy(child.gameObject);
 
@@ -108,6 +122,8 @@ public class UDSFCanvas : MonoBehaviour
         }
 
         while (_choiceCallback == -1) yield return null;
+
+        ChoiceCanvasGroup.gameObject.SetActive(false);
 
         foreach (Transform child in ChoicePanelTransform)
             Destroy(child.gameObject);
@@ -126,10 +142,13 @@ public class UDSFCanvas : MonoBehaviour
             canvasGroup.alpha -= Time.deltaTime / time;
             yield return null;
         }
+        canvasGroup.gameObject.SetActive(false);
     }
 
     public IEnumerator UnfadeCanvasGroup(CanvasGroup canvasGroup, float time = 1f)
     {
+        canvasGroup.gameObject.SetActive(true);
+
         if(time <= 0f)
         {
             time = 1f;
@@ -192,10 +211,10 @@ public class UDSFCanvas : MonoBehaviour
                     tmp.fontStyle = FontStyles.Bold;
                     break;
                 case TextDisplayStyle.Fast:
-                    tempDisplayInterval = 0.015f;
+                    tempDisplayInterval = TextDisplayInterval * 3f;
                     break;
                 case TextDisplayStyle.Slow:
-                    tempDisplayInterval = 0.075f;
+                    tempDisplayInterval = TextDisplayInterval / 2f;
                     break;
             }
         }
