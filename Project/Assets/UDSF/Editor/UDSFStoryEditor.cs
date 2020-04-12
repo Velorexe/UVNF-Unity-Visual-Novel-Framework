@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-using System;
-using System.Linq;
-using System.Reflection;
-
-[Serializable]
 public class UDSFStoryEditor : EditorWindowExtended
 {
     public Texture2D backgroundTexture;
@@ -102,12 +97,13 @@ public class UDSFStoryEditor : EditorWindowExtended
                     EditorGUI.DrawRect(lastRect, Color.grey);
                 }
 
-                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 80));
+                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 115f));
                 {
                     if (storyContainer.StoryElements.Count > 0)
                     {
                         for (int i = 0; i < storyContainer.StoryElements.Count; i++)
                         {
+                            storyContainer.StoryElements[i].Active = false;
                             if (storyElementsFoldout[i])
                             {
                                 GUILayout.Space(55f);
@@ -153,10 +149,14 @@ public class UDSFStoryEditor : EditorWindowExtended
                                 GUILayout.Space(10f);
                             }
 
+                            GUIStyle buttonStyle = new GUIStyle(UDSFSettings.GetElementStyle(storyContainer.StoryElements[i].Type));
+                            if (storyContainer.StoryElements[i].Active)
+                                buttonStyle.normal.textColor = UDSFSettings.Settings.ActiveElementColor;
+
                             if (!storyElementsFoldout[i])
                             {
                                 GUILayout.Space(5f + (i != 0 && !storyElementsFoldout[i - 1] ? 4f : 0f));
-                                if (GUILayout.Button(storyContainer.StoryElements[i].ElementName, UDSFSettings.GetElementStyle(storyContainer.StoryElements[i].Type)))
+                                if (GUILayout.Button(storyContainer.StoryElements[i].ElementName, buttonStyle))
                                 {
                                     storyElementsFoldout[i] = !storyElementsFoldout[i];
                                 }
@@ -170,7 +170,7 @@ public class UDSFStoryEditor : EditorWindowExtended
                             {
                                 Rect lastRect = GUILayoutUtility.GetLastRect();
                                 lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y - 40f);
-                                if (GUI.Button(lastRect, storyContainer.StoryElements[i].ElementName, UDSFSettings.GetElementStyle(storyContainer.StoryElements[i].Type)))
+                                if (GUI.Button(lastRect, storyContainer.StoryElements[i].ElementName, buttonStyle))
                                 {
                                     storyElementsFoldout[i] = !storyElementsFoldout[i];
                                 }
@@ -235,7 +235,11 @@ public class UDSFStoryEditor : EditorWindowExtended
                     else if(Event.current.type == EventType.DragPerform)
                     {
                         if (DragAndDrop.objectReferences[0] is StoryContainer container)
+                        {
                             storyContainer = container;
+                            for (int i = 0; i < container.StoryElements.Count; i++)
+                                storyElementsFoldout.Add(true);
+                        }
                         Exported = true;
                         Event.current.Use();
                     }

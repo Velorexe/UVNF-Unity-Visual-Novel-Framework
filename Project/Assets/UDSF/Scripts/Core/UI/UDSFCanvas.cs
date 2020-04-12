@@ -1,16 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UDSFCanvas : MonoBehaviour
 {
     [Header("Canvas Group")]
-    public CanvasGroup BottomPanelCanvasGroup;
+    public CanvasGroup BottomCanvasGroup;
     public CanvasGroup ChoiceCanvasGroup;
-    public CanvasGroup OveralPanelCanvasGroup;
     public CanvasGroup LoadingCanvasGroup;
+    public CanvasGroup BackgroundCanvasGroup;
     
     [Header("Dialogue")]
     public TextMeshProUGUI DialogueTMP;
@@ -25,6 +25,9 @@ public class UDSFCanvas : MonoBehaviour
     public GameObject ChoiceButton;
     public Transform ChoicePanelTransform;
 
+    [Header("Background")]
+    public Image BackgroundImage;
+
     public int ChoiceCallback
     {
         get
@@ -37,15 +40,15 @@ public class UDSFCanvas : MonoBehaviour
     }
     private int _choiceCallback = -1;
 
-    public bool BottomPanelEnabled => BottomPanelCanvasGroup.gameObject.activeSelf;
+    public bool BottomPanelEnabled => BottomCanvasGroup.gameObject.activeSelf;
     public bool ChoiceCanvasEnabled => ChoiceCanvasGroup.gameObject.activeSelf;
-    public bool OveralPanelCanvasEnabled => OveralPanelCanvasGroup.gameObject.activeSelf;
     public bool LoadingCanvasEnabled => LoadingCanvasGroup.gameObject.activeSelf;
 
+    #region Dialogue
     public IEnumerator DisplayText(string text, params TextDisplayStyle[] displayStyles)
     {
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
-        BottomPanelCanvasGroup.gameObject.SetActive(true);
+        BottomCanvasGroup.gameObject.SetActive(true);
 
         int textIndex = 0;
         while(textIndex < text.Length)
@@ -75,7 +78,7 @@ public class UDSFCanvas : MonoBehaviour
         if (useStylesForCharacterField)
             ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
 
-        BottomPanelCanvasGroup.gameObject.SetActive(true);
+        BottomCanvasGroup.gameObject.SetActive(true);
 
         if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
             CharacterTMP.text = characterName;
@@ -101,7 +104,9 @@ public class UDSFCanvas : MonoBehaviour
 
         while (!Input.GetMouseButtonUp(0)) yield return null;
     }
+    #endregion
 
+    #region Choice
     public void DisplayChoice(string[] options, bool hideDialogue = true , params TextDisplayStyle[] displayStyles)
     {
         StartCoroutine(DisplayChoiceCoroutine(options, hideDialogue, displayStyles));
@@ -109,7 +114,7 @@ public class UDSFCanvas : MonoBehaviour
 
     public IEnumerator DisplayChoiceCoroutine(string[] options, bool hideDialogue = true, params TextDisplayStyle[] displayStyles)
     {
-        BottomPanelCanvasGroup.gameObject.SetActive(!hideDialogue);
+        BottomCanvasGroup.gameObject.SetActive(!hideDialogue);
         ChoiceCanvasGroup.gameObject.SetActive(true);
 
         foreach(Transform child in ChoicePanelTransform)
@@ -128,7 +133,9 @@ public class UDSFCanvas : MonoBehaviour
         foreach (Transform child in ChoicePanelTransform)
             Destroy(child.gameObject);
     }
+    #endregion
 
+    #region Utility
     public IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float time = 1f)
     {
         if (time <= 0f)
@@ -171,7 +178,10 @@ public class UDSFCanvas : MonoBehaviour
         }
 
         if (hideOtherComponents)
-            StartCoroutine(FadeCanvasGroup(OveralPanelCanvasGroup, time));
+        {
+            StartCoroutine(FadeCanvasGroup(BottomCanvasGroup, time));
+            StartCoroutine(FadeCanvasGroup(ChoiceCanvasGroup, time));
+        }
         StartCoroutine(UnfadeCanvasGroup(LoadingCanvasGroup, time));
     }
 
@@ -184,9 +194,25 @@ public class UDSFCanvas : MonoBehaviour
         }
 
         if (showOtherComponents)
-            StartCoroutine(UnfadeCanvasGroup(OveralPanelCanvasGroup, time));
+        {
+            StartCoroutine(UnfadeCanvasGroup(BottomCanvasGroup, time));
+            StartCoroutine(UnfadeCanvasGroup(ChoiceCanvasGroup, time));
+        }
         StartCoroutine(FadeCanvasGroup(LoadingCanvasGroup, time));
     }
+    #endregion
+
+    #region Scenery
+    public void ChangeBackground(Sprite newBackground)
+    {
+        BackgroundImage.sprite = newBackground;
+    }
+
+    public IEnumerator ChangeBackgroundCoroutine(Sprite newBackground, float transitionTime)
+    {
+        return null;
+    }
+    #endregion
 
     private void ApplyTextDisplayStylesToTMP(TextMeshProUGUI tmp, TextDisplayStyle[] displayStyles)
     {

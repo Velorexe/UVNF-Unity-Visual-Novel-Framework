@@ -10,6 +10,7 @@ public abstract class StoryElement : ScriptableObject, IComparable
     public abstract Color32 DisplayColor { get; }
     public abstract StoryElementTypes Type { get; }
 
+    public bool Active = false;
     public StoryElement Next;
 
     public abstract IEnumerator Execute(GameManager managerCallback, UDSFCanvas canvas);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using Core;
 using Entities;
 using CoroutineManager;
@@ -46,6 +47,15 @@ public class GameManager : MonoBehaviour
         return _eventFlags[eventFlag];
     }
 
+#if UNITY_EDITOR
+    public void Update()
+    {
+
+        foreach (StoryElement element in CurrentStory.StoryElements)
+            element.Active = false;
+    }
+#endif
+
     #region StoryElements
     public void Awake()
     {
@@ -58,6 +68,12 @@ public class GameManager : MonoBehaviour
     public void StartStory()
     {
         CurrentElement = CurrentStory.StoryElements[0];
+#if UNITY_EDITOR
+        foreach (StoryElement element in CurrentStory.StoryElements)
+            element.Active = false;
+
+        CurrentElement.Active = true;
+#endif
 
         _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
         _currentTask.Finished += AdvanceStory;
@@ -74,7 +90,12 @@ public class GameManager : MonoBehaviour
         {
             if (CurrentElement.Next != null)
             {
+#if UNITY_EDITOR
+                CurrentElement.Active = false;
+                CurrentElement.Next.Active = true;
+#endif
                 CurrentElement = CurrentElement.Next;
+
                 _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
                 _currentTask.Finished += AdvanceStory;
                 _currentTask.Start();
