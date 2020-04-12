@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: UDSFSettingsInstance
   m_EditorClassIdentifier: 
   DBSFSkin: {fileID: 11400000, guid: 16fab56623a7b294e935d328318a8613, type: 2}
+  ActiveElementColor:
+    serializedVersion: 2
+    rgba: 4294955505
   StoryElementTexture: {fileID: 2800000, guid: 59ceeea6d7f5db24590f81b797998fbd, type: 3}
   CharacterElementTexture: {fileID: 2800000, guid: e0c9bd1581734b3438046d6146259d5e,
     type: 3}
@@ -32,7 +35,9 @@ MonoBehaviour:
   - Dialogue
   - Choice
   - Spawn Object
+  - Change Background
   ElementHintTextures:
   - {fileID: 2800000, guid: dbef10c086f857c408f67aeafa18f180, type: 3}
   - {fileID: 2800000, guid: dacc52a2dd37a244c9c4701ef5633473, type: 3}
   - {fileID: 2800000, guid: e87752abd176fba4dbdcbae2da9cd622, type: 3}
+  - {fileID: 2800000, guid: 1c1151116aee8fc46b415e1210f5d931, type: 3}

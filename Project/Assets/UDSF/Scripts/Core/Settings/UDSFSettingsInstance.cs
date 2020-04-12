@@ -7,6 +7,7 @@ public class UDSFSettingsInstance : ScriptableObject, ISerializationCallbackRece
 {
     [Header("DBSF GUI Skin")]
     public GUISkin DBSFSkin;
+    public Color32 ActiveElementColor = new Color32(0xf1, 0xd1, 0xff, 0xff);
 
     [Header("Element Textures")]
     public Texture2D StoryElementTexture;

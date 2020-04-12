@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2357906403164498230
+--- !u!114 &-3143834829403044452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
   m_Name: Dialogue
   m_EditorClassIdentifier: 
+  Active: 0
   Next: {fileID: 0}
   CharacterName: 
   Dialogue: 
@@ -28,10 +29,9 @@ MonoBehaviour:
   m_Name: NewStory
   m_EditorClassIdentifier: 
   StoryElements:
-  - {fileID: 7396125719691097613}
-  - {fileID: 5061725578864284617}
-  - {fileID: -2357906403164498230}
---- !u!114 &5061725578864284617
+  - {fileID: 3706295531221265562}
+  - {fileID: -3143834829403044452}
+--- !u!114 &3706295531221265562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,28 +40,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5078e2883b71e7438a5d965f15f77c8, type: 3}
-  m_Name: Choice
+  m_Script: {fileID: 11500000, guid: 61fe714cebce5fe4ba0b71d53f36fade, type: 3}
+  m_Name: Change Background
   m_EditorClassIdentifier: 
+  Active: 0
   Next: {fileID: 0}
-  Choices:
-  - Pizza
-  - Burger
-  - Nothing
-  ShuffleChocies: 0
-  HideDialogue: 0
---- !u!114 &7396125719691097613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: 
-  Next: {fileID: 5061725578864284617}
-  CharacterName: Mom
-  Dialogue: Hey! What do you want to eat today?
+  NewBackground: {fileID: 0}
