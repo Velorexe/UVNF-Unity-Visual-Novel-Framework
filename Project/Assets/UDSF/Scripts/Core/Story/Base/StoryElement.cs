@@ -12,7 +12,7 @@ public abstract class StoryElement : ScriptableObject, IComparable
 
     public StoryElement Next;
 
-    public abstract IEnumerable Execute(GameManager managerCallback, UDSFCanvas canvas);
+    public abstract IEnumerator Execute(GameManager managerCallback, UDSFCanvas canvas);
 
     public abstract void DisplayLayout();
 

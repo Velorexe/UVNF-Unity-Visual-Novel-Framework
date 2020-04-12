@@ -55,7 +55,6 @@ public class UDSFStoryEditor : EditorWindowExtended
             standardSetup = false;
         }
 
-        GUI.DrawTexture(new Rect(0, 0, maxSize.x, maxSize.y), backgroundTexture, ScaleMode.StretchToFill);
         GUILayout.BeginVertical(GUILayout.MinWidth(position.width), GUILayout.MinHeight(maxSize.y));
         {
             GUILayout.Label("Give your Story a relevant name and click 'Export' to get started.", EditorStyles.boldLabel);
@@ -165,7 +164,7 @@ public class UDSFStoryEditor : EditorWindowExtended
                                 lastRect.width = 50f;
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                                GUI.DrawTexture(lastRect, UDSFSettings.Settings.DialogueElementTexture);
+                                GUI.DrawTexture(lastRect, UDSFSettings.Settings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
                             else
                             {
@@ -178,7 +177,7 @@ public class UDSFStoryEditor : EditorWindowExtended
                                 lastRect.width = 50f;
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                                GUI.DrawTexture(lastRect, UDSFSettings.Settings.DialogueElementTexture);
+                                GUI.DrawTexture(lastRect, UDSFSettings.Settings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
                         }
 
@@ -193,6 +192,8 @@ public class UDSFStoryEditor : EditorWindowExtended
                                 bool shiftFoldout = storyElementsFoldout[moveElement - 1];
                                 storyElementsFoldout[moveElement - 1] = storyElementsFoldout[moveElement];
                                 storyElementsFoldout[moveElement] = shiftFoldout;
+
+                                storyContainer.ConnectStoryElements();
                             }
                             else if (moveElement < storyContainer.StoryElements.Count - 1)
                             {

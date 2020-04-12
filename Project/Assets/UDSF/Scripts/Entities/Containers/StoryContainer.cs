@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class StoryContainer : ScriptableObject
 {
-    public StoryElement NewElement;
-
     public List<StoryElement> StoryElements = new List<StoryElement>();
 
-    public void PullNewelement()
+    public void ConnectStoryElements()
     {
-        StoryElements.Add(NewElement);
-        NewElement = null;
+        for (int i = 0; i < StoryElements.Count; i++)
+        {
+            if (i < StoryElements.Count - 1)
+            {
+                StoryElements[i].Next = StoryElements[i + 1];
+            }
+            else
+            {
+                StoryElements[i].Next = null;
+            }
+        }
     }
 }
