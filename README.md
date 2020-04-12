@@ -19,4 +19,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
-The art that is contributed by artist **Jocelyn Hatch** are not for commercial use and should be removed from your project when published commercially. The commisioned art is only used for creating example scenes, trailers and/or tutorial videos create by **Velorexe** or other users. When the art is found used by products in a case mentioned above as not-allowed, we kindly ask you either take down the product or remove the content that's marked as non-commercial use.
+The art that is contributed by artist **Jocelyn Hatch** is not for commercial use and should be removed from your project when published commercially. When the art is found used by products in a case mentioned above, we kindly ask you either take down the product or remove the content that's marked as non-commercial use. The commisioned art is only used for creating example scenes, trailers and/or tutorial videos create by **Velorexe** or other users.
