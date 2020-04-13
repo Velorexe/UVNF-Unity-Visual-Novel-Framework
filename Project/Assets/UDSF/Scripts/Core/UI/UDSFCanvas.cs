@@ -27,6 +27,7 @@ public class UDSFCanvas : MonoBehaviour
 
     [Header("Background")]
     public Image BackgroundImage;
+    public Image BackgroundFade;
 
     public int ChoiceCallback
     {
@@ -43,6 +44,16 @@ public class UDSFCanvas : MonoBehaviour
     public bool BottomPanelEnabled => BottomCanvasGroup.gameObject.activeSelf;
     public bool ChoiceCanvasEnabled => ChoiceCanvasGroup.gameObject.activeSelf;
     public bool LoadingCanvasEnabled => LoadingCanvasGroup.gameObject.activeSelf;
+
+    private void Awake()
+    {
+        if(BackgroundCanvasGroup != null)
+            BackgroundCanvasGroup.gameObject.SetActive(true);
+        if(ChoiceCanvasGroup != null)
+            ChoiceCanvasGroup.gameObject.SetActive(false);
+        if(BottomCanvasGroup != null)
+            BottomCanvasGroup.gameObject.SetActive(false);
+    }
 
     #region Dialogue
     public IEnumerator DisplayText(string text, params TextDisplayStyle[] displayStyles)
@@ -205,12 +216,22 @@ public class UDSFCanvas : MonoBehaviour
     #region Scenery
     public void ChangeBackground(Sprite newBackground)
     {
+        BackgroundCanvasGroup.gameObject.SetActive(true);
         BackgroundImage.sprite = newBackground;
     }
 
-    public IEnumerator ChangeBackgroundCoroutine(Sprite newBackground, float transitionTime)
+    public void ChangeBackground(Sprite newBackground, float transitionTime)
     {
-        return null;
+        BackgroundCanvasGroup.gameObject.SetActive(true);
+        Color32 alpha = BackgroundFade.color;
+        alpha.a = 255;
+        BackgroundFade.color = alpha;
+
+        BackgroundFade.sprite = BackgroundImage.sprite;
+        BackgroundImage.sprite = newBackground;
+
+        BackgroundFade.canvasRenderer.SetAlpha(1f);
+        BackgroundFade.CrossFadeAlpha(0f, transitionTime, false);
     }
     #endregion
 

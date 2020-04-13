@@ -12,32 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d491f6cd9d840af49b6cf1c30e05ccf5, type: 3}
   m_Name: UDSFSettingsInstance
   m_EditorClassIdentifier: 
-  DBSFSkin: {fileID: 11400000, guid: 16fab56623a7b294e935d328318a8613, type: 2}
+  DBSFSkin: {fileID: 0}
   ActiveElementColor:
     serializedVersion: 2
     rgba: 4294955505
-  StoryElementTexture: {fileID: 2800000, guid: 59ceeea6d7f5db24590f81b797998fbd, type: 3}
-  CharacterElementTexture: {fileID: 2800000, guid: e0c9bd1581734b3438046d6146259d5e,
-    type: 3}
-  SceneryElementTexture: {fileID: 2800000, guid: 8b0f307fb5f94aa4aa3374de6a0089d0,
-    type: 3}
-  AudioElementTexture: {fileID: 2800000, guid: be2c7b238eb7a1c4eb96f63c57e7822e, type: 3}
-  UtilityElementTexture: {fileID: 2800000, guid: 9b2a5c2afb77b0d43b7491d0813ff269,
-    type: 3}
-  OtherElementTexture: {fileID: 2800000, guid: c1adfbadafb46ed43a127e2cfc279e31, type: 3}
+  StoryElementTexture: {fileID: 0}
+  CharacterElementTexture: {fileID: 0}
+  SceneryElementTexture: {fileID: 0}
+  AudioElementTexture: {fileID: 0}
+  UtilityElementTexture: {fileID: 0}
+  OtherElementTexture: {fileID: 0}
   StoryElementColor: {r: 0.99607843, g: 0.76862746, b: 0.76862746, a: 1}
   CharacterElementColor: {r: 0.99607843, g: 0.9254902, b: 0.80784315, a: 1}
   SceneryElementColor: {r: 1, g: 0.9411765, b: 0.6666667, a: 1}
   AudioElementColor: {r: 0.8, g: 0.9882353, b: 0.7647059, a: 1}
   UtilityElementColor: {r: 0.7019608, g: 0.7411765, b: 0.92941177, a: 1}
   OtherElementColor: {r: 0.7176471, g: 0.7176471, b: 0.7176471, a: 1}
-  ElementHintTexturesName:
-  - Dialogue
-  - Choice
-  - Spawn Object
-  - Change Background
-  ElementHintTextures:
-  - {fileID: 2800000, guid: dbef10c086f857c408f67aeafa18f180, type: 3}
-  - {fileID: 2800000, guid: dacc52a2dd37a244c9c4701ef5633473, type: 3}
-  - {fileID: 2800000, guid: e87752abd176fba4dbdcbae2da9cd622, type: 3}
-  - {fileID: 2800000, guid: 1c1151116aee8fc46b415e1210f5d931, type: 3}
+  ElementHintTexturesName: []
+  ElementHintTextures: []

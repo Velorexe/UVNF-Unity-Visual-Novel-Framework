@@ -7,7 +7,7 @@ public class ChoiceElement : StoryElement
 {
     public override string ElementName => "Choice";
 
-    public override Color32 DisplayColor => UDSFSettings.Settings.StoryElementColor;
+    public override Color32 DisplayColor => new Color32(0xFE, 0xC4, 0xC4, 0xff);
 
     public override StoryElementTypes Type => StoryElementTypes.Story;
 

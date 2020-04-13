@@ -8,7 +8,11 @@ public static class DatabaseManager
 
     public static CharacterDatabase GetCharacterDatabase()
     {
-        if (!File.Exists(Application.dataPath + @"UDSF/Scripts/Core/Databases/Instances/CharacterDatabase.asset"))
+#if UNITY_STANDALONE
+        _characterDatabase = Resources.Load<CharacterDatabase>("Databases/CharacterDatabase.asset");
+#endif
+#if UNITY_EDITOR
+        if (!File.Exists(Application.dataPath + @"/Resources/Databases/CharacterDatabase.asset"))
         {
             CharacterDatabase db = ScriptableObject.CreateInstance(typeof(CharacterDatabase)) as CharacterDatabase;
             for (int i = 0; i < 10; i++)
@@ -16,10 +20,11 @@ public static class DatabaseManager
             db.AddCharacter();
 
             }
-            AssetDatabase.CreateAsset(db, "Assets/UDSF/Scripts/Core/Databases/Instances/CharacterDatabase.asset");
+            AssetDatabase.CreateAsset(db, @"Assets/Resources/Databases/CharacterDatabase.asset");
             AssetDatabase.SaveAssets();
-            _characterDatabase = AssetDatabase.LoadAssetAtPath(@"Assets/UDSF/Scripts/Core/Databases/Instances/CharacterDatabase.asset", typeof(CharacterDatabase)) as CharacterDatabase;
         }
+        _characterDatabase = AssetDatabase.LoadAssetAtPath(@"Assets/Resources/Databases/CharacterDatabase.asset", typeof(CharacterDatabase)) as CharacterDatabase;
+#endif
         return _characterDatabase;
     }
 }
