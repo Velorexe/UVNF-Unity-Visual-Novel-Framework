@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using XNode;
 
 public abstract class StoryElement : ScriptableObject, IComparable
 {
@@ -10,7 +11,9 @@ public abstract class StoryElement : ScriptableObject, IComparable
     public abstract Color32 DisplayColor { get; }
     public abstract StoryElementTypes Type { get; }
 
+    [HideInInspector]
     public bool Active = false;
+    [HideInInspector]
     public StoryElement Next;
 
     public abstract IEnumerator Execute(GameManager managerCallback, UDSFCanvas canvas);
