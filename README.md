@@ -6,6 +6,8 @@ This repository provides a set of examples, tools, workflows and other resources
 Several ways of writing your own visual novels without any programming. Using a writer-friendly node based dialogue editor and a more in depth story editor, you can view your story visually without having to dive into a pogramming language or complex settings.
 
 <p align="center">
+    <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/GraphStoryEditor.png" width=300>
+    <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/UDSFStoryEditor.png" width=600>
 </p>
 
 ## Installation
