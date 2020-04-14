@@ -7,8 +7,10 @@ using XNode;
 [NodeTint("#FEECCE"), Serializable]
 public class BranchNode : Node
 {
-    [Input]
+    [Input(ShowBackingValue.Never, ConnectionType.Override)]
     public Empty Previous;
-    [Output]
+    [Output(ShowBackingValue.Never, ConnectionType.Override)]
     public Empty Next;
+
+
 }
