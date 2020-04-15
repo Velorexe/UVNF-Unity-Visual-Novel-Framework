@@ -56,7 +56,7 @@ public class BranchNodeEditor : NodeEditor
             GUILayout.Space(11f);
         }
 
-        if (removeIndex != -1) 
+        if (removeIndex != -1)
         {
             branchNode.Choices.RemoveAt(removeIndex);
             branchNode.ChoicePorts.RemoveAt(removeIndex);
@@ -88,7 +88,7 @@ public class DialogueNodeEditor : NodeEditor
     }
 
     public override void OnBodyGUI()
-    {    
+    {
         NodeEditorGUILayout.AddPortField(dialogueNode.GetInputPort("Previous"));
         NodeEditorGUILayout.AddPortField(dialogueNode.GetOutputPort("Next"));
 
@@ -116,7 +116,7 @@ public class StartNodeEditor : NodeEditor
 
     public override void OnBodyGUI()
     {
-        if(!startNode.IsRoot)
+        if (!startNode.IsRoot)
             NodeEditorGUILayout.AddPortField(startNode.GetInputPort("Previous"));
         NodeEditorGUILayout.AddPortField(startNode.GetOutputPort("Next"));
 

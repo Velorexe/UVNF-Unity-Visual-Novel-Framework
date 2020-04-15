@@ -79,6 +79,10 @@ MonoBehaviour:
     - dynamicInput_0
     - dynamicInput_1
     - dynamicInput_2
+    - dynamicInput_3
+    - dynamicInput_4
+    - dynamicInput_5
+    - dynamicInput_6
     values:
     - _fieldName: Previous
       _node: {fileID: -3677968519532456762}
@@ -96,6 +100,42 @@ MonoBehaviour:
       _node: {fileID: -3677968519532456762}
       _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dynamicInput_1
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dynamicInput_2
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dynamicInput_3
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dynamicInput_4
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: Previous
         node: {fileID: -1760585801915930048}
@@ -104,7 +144,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 1
-    - _fieldName: dynamicInput_1
+    - _fieldName: dynamicInput_5
       _node: {fileID: -3677968519532456762}
       _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
@@ -116,7 +156,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 1
-    - _fieldName: dynamicInput_2
+    - _fieldName: dynamicInput_6
       _node: {fileID: -3677968519532456762}
       _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
@@ -138,11 +178,11 @@ MonoBehaviour:
     _typeConstraint: 0
     _dynamic: 0
   Choices:
-  - Strawberry
-  - Chocolate
-  - Vanilla
+  - 
+  - 
+  - 
   ChoicePorts:
-  - _fieldName: dynamicInput_0
+  - _fieldName: dynamicInput_4
     _node: {fileID: -3677968519532456762}
     _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
@@ -154,7 +194,7 @@ MonoBehaviour:
     _connectionType: 1
     _typeConstraint: 0
     _dynamic: 1
-  - _fieldName: dynamicInput_1
+  - _fieldName: dynamicInput_5
     _node: {fileID: -3677968519532456762}
     _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
@@ -166,7 +206,7 @@ MonoBehaviour:
     _connectionType: 1
     _typeConstraint: 0
     _dynamic: 1
-  - _fieldName: dynamicInput_2
+  - _fieldName: dynamicInput_6
     _node: {fileID: -3677968519532456762}
     _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
@@ -202,7 +242,7 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: dynamicInput_2
+      - fieldName: dynamicInput_6
         node: {fileID: -3677968519532456762}
         reroutePoints: []
       _direction: 0
@@ -262,7 +302,7 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: dynamicInput_0
+      - fieldName: dynamicInput_4
         node: {fileID: -3677968519532456762}
         reroutePoints: []
       _direction: 0
@@ -469,7 +509,7 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: dynamicInput_1
+      - fieldName: dynamicInput_5
         node: {fileID: -3677968519532456762}
         reroutePoints: []
       _direction: 0
