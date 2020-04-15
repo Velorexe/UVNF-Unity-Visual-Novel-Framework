@@ -44,8 +44,10 @@ public class AudioManager : MonoBehaviour
         newBGSource.volume = 0f;
 
         AudioSource oldBGSource = BackgroundMusic;
+        
         BackgroundMusic = newBGSource;
-
+        BackgroundMusic.Play();
+        
         StartCoroutine(CrossfadeAudioSourceDown(oldBGSource, crossfadeTime));
         StartCoroutine(CrossfadeAudioSourceUp(BackgroundMusic, crossfadeTime));
     }

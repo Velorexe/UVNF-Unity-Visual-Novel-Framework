@@ -13,4 +13,37 @@ MonoBehaviour:
   m_Name: NewStory
   m_EditorClassIdentifier: 
   StoryElements:
-  - {fileID: 0}
+  - {fileID: 3409339312693934563}
+  - {fileID: 2013847695097940381}
+--- !u!114 &2013847695097940381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3ce2b406697714681ce456f5424af4, type: 3}
+  m_Name: Background Music
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 0}
+  BackgroundMusic: {fileID: 0}
+  Crossfade: 1
+--- !u!114 &3409339312693934563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3ce2b406697714681ce456f5424af4, type: 3}
+  m_Name: Background Music
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 0}
+  BackgroundMusic: {fileID: 8300000, guid: 73e58990e9e6190488725f517f799d00, type: 3}
+  Crossfade: 0

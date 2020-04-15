@@ -6,7 +6,10 @@ using UnityEditor;
 public class DialogueElement : StoryElement
 {
     public override string ElementName => "Dialogue";
-    public override Color32 DisplayColor => new Color32(0xFE, 0xC4, 0xC4, 0xff);
+
+    public override Color32 DisplayColor => _displayColor;
+    private Color32 _displayColor = new Color32().Story();
+
     public override StoryElementTypes Type => StoryElementTypes.Story;
 
     public string CharacterName;
