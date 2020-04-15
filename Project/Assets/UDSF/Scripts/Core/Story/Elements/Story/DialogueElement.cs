@@ -12,13 +12,21 @@ public class DialogueElement : StoryElement
     public string CharacterName;
     public string Dialogue;
 
+    private GUIStyle textAreaStyle;
+
+    private void Awake()
+    {
+        textAreaStyle = new GUIStyle("TextArea");
+        textAreaStyle.richText = true;
+    }
+
     public override void DisplayLayout()
     {
 #if UNITY_EDITOR
         GUILayout.Label("Character", EditorStyles.boldLabel);
         CharacterName = GUILayout.TextField(CharacterName);
         GUILayout.Label("Dialogue", EditorStyles.boldLabel);
-        Dialogue = EditorGUILayout.TextArea(Dialogue, GUILayout.ExpandHeight(true), GUILayout.MaxHeight(50));
+        Dialogue = EditorGUILayout.TextArea(Dialogue, textAreaStyle, GUILayout.ExpandHeight(true), GUILayout.MaxHeight(50));
 #endif
     }
 

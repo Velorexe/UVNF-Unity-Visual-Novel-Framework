@@ -1,58 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8324443806026040885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61fe714cebce5fe4ba0b71d53f36fade, type: 3}
-  m_Name: Change Background
-  m_EditorClassIdentifier: 
-  Active: 0
-  Next: {fileID: 0}
-  NewBackground: {fileID: 0}
-  Fade: 1
-  FadeTime: 1
---- !u!114 &-3233195256793280970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5078e2883b71e7438a5d965f15f77c8, type: 3}
-  m_Name: Choice
-  m_EditorClassIdentifier: 
-  Active: 0
-  Next: {fileID: 0}
-  Choices:
-  - Strawberry
-  - Chocolate
-  - Vanilla
-  ShuffleChocies: 0
-  HideDialogue: 0
---- !u!114 &-3212971240355372451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: 
-  Active: 0
-  Next: {fileID: -3233195256793280970}
-  CharacterName: Me
-  Dialogue: Man they have so many flavours, I wonder which one I should pick?
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,39 +13,4 @@ MonoBehaviour:
   m_Name: NewStory
   m_EditorClassIdentifier: 
   StoryElements:
-  - {fileID: 2103871263411264664}
-  - {fileID: -3212971240355372451}
-  - {fileID: -3233195256793280970}
-  - {fileID: -8324443806026040885}
-  - {fileID: 4510269288498742047}
---- !u!114 &2103871263411264664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: 
-  Active: 0
-  Next: {fileID: -3212971240355372451}
-  CharacterName: Mom
-  Dialogue: Let's go outside and get some ice cream!
---- !u!114 &4510269288498742047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8c1f10e2849f8459929005181ff6a3, type: 3}
-  m_Name: Spawn Object
-  m_EditorClassIdentifier: 
-  Active: 0
-  Next: {fileID: 0}
-  ObjectToSpawn: {fileID: 0}
+  - {fileID: 0}
