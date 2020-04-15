@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     public Player Player;
     public Location CurrentLocation;
 
+    [Header("UDSF Components")]
     public UDSFCanvas Canvas;
+    public AudioManager AudioManager;
 
     [Header("Story Settings")]
     public StoryContainer CurrentStory;

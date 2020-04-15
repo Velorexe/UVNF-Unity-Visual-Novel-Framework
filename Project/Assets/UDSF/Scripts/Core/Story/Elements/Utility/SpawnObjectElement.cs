@@ -5,7 +5,10 @@ using UnityEditor;
 public class SpawnObjectElement : StoryElement
 {
     public override string ElementName => "Spawn Object";
-    public override Color32 DisplayColor => new Color32(0xB3, 0xBD, 0xED, 0xff);
+
+    public override Color32 DisplayColor => _displayColor;
+    private Color32 _displayColor = new Color32().Utility();
+
     public override StoryElementTypes Type => StoryElementTypes.Utility;
 
     public GameObject ObjectToSpawn;

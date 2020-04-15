@@ -7,7 +7,8 @@ public class ChangeBackgroundElement : StoryElement
 {
     public override string ElementName => "Change Background";
 
-    public override Color32 DisplayColor => new Color32(0xFF, 0xF0, 0xAA, 0xff);
+    public override Color32 DisplayColor => _displayColor;
+    private Color32 _displayColor = new Color32().Scene();
 
     public override StoryElementTypes Type => StoryElementTypes.Scenery;
 
