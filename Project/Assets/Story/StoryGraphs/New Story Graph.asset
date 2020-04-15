@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7115862241806612094
+--- !u!114 &-6351034304941272144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,42 +9,176 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef76c18864c0b064c9ef4112e4dab690, type: 3}
-  m_Name: Dialogue
+  m_Script: {fileID: 11500000, guid: a47813dd5be49754e83f49e8ef99a6cf, type: 3}
+  m_Name: Start
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 184, y: -696}
+  position: {x: -680, y: -168}
   ports:
     keys:
-    - Next
     - Previous
+    - Next
     values:
+    - _fieldName: Previous
+      _node: {fileID: -6351034304941272144}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
     - _fieldName: Next
-      _node: {fileID: -7115862241806612094}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      _node: {fileID: -6351034304941272144}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
       - fieldName: Previous
-        node: {fileID: -311276488955853307}
+        node: {fileID: 5128801658151390296}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  IsRoot: 1
+--- !u!114 &-3677968519532456762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1fedf8fd4395b4fa3c983da071b328, type: 3}
+  m_Name: Branch
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 216, y: -168}
+  ports:
+    keys:
+    - Previous
+    - dynamicInput_0
+    - dynamicInput_1
+    - dynamicInput_2
+    values:
     - _fieldName: Previous
-      _node: {fileID: -7115862241806612094}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
       - fieldName: Next
-        node: {fileID: 3788573357715607679}
+        node: {fileID: 8853661912470255941}
         reroutePoints: []
       _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  Dialogue: Wow, what a hot day
---- !u!114 &-1091079776337346230
+    - _fieldName: dynamicInput_0
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Previous
+        node: {fileID: -1760585801915930048}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dynamicInput_1
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Previous
+        node: {fileID: 7894949306964360655}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dynamicInput_2
+      _node: {fileID: -3677968519532456762}
+      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Previous
+        node: {fileID: -3423623743307186131}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Choices:
+  - Strawberry
+  - Chocolate
+  - Vanilla
+  ChoicePorts:
+  - _fieldName: dynamicInput_0
+    _node: {fileID: -3677968519532456762}
+    _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    connections:
+    - fieldName: Previous
+      node: {fileID: -1760585801915930048}
+      reroutePoints: []
+    _direction: 1
+    _connectionType: 1
+    _typeConstraint: 0
+    _dynamic: 1
+  - _fieldName: dynamicInput_1
+    _node: {fileID: -3677968519532456762}
+    _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    connections:
+    - fieldName: Previous
+      node: {fileID: 7894949306964360655}
+      reroutePoints: []
+    _direction: 1
+    _connectionType: 1
+    _typeConstraint: 0
+    _dynamic: 1
+  - _fieldName: dynamicInput_2
+    _node: {fileID: -3677968519532456762}
+    _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    connections:
+    - fieldName: Previous
+      node: {fileID: -3423623743307186131}
+      reroutePoints: []
+    _direction: 1
+    _connectionType: 1
+    _typeConstraint: 0
+    _dynamic: 1
+--- !u!114 &-3423623743307186131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,35 +191,54 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 600, y: -696}
+  position: {x: 568, y: 168}
   ports:
     keys:
-    - Next
     - Previous
+    - Next
     values:
+    - _fieldName: Previous
+      _node: {fileID: -3423623743307186131}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: dynamicInput_2
+        node: {fileID: -3677968519532456762}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
     - _fieldName: Next
-      _node: {fileID: -1091079776337346230}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      _node: {fileID: -3423623743307186131}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: Previous
-      _node: {fileID: -1091079776337346230}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Next
-        node: {fileID: -311276488955853307}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-  Dialogue: That would seriously be a blessing at the moment...
---- !u!114 &-311276488955853307
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Character: Me
+  Dialogue: Plain vanilla, always the best to get.
+--- !u!114 &-1760585801915930048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,37 +251,53 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 392, y: -696}
+  position: {x: 568, y: -408}
   ports:
     keys:
-    - Next
     - Previous
+    - Next
     values:
-    - _fieldName: Next
-      _node: {fileID: -311276488955853307}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Previous
-        node: {fileID: -1091079776337346230}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: Previous
-      _node: {fileID: -311276488955853307}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      _node: {fileID: -1760585801915930048}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: Next
-        node: {fileID: -7115862241806612094}
+      - fieldName: dynamicInput_0
+        node: {fileID: -3677968519532456762}
         reroutePoints: []
       _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  Dialogue: I wonder if they sell ice cream at the local supermarket today.
+    - _fieldName: Next
+      _node: {fileID: -1760585801915930048}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Character: Me
+  Dialogue: I'll get the strawberry flavoured ice cream!
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,11 +311,15 @@ MonoBehaviour:
   m_Name: New Story Graph
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 3788573357715607679}
-  - {fileID: -7115862241806612094}
-  - {fileID: -311276488955853307}
-  - {fileID: -1091079776337346230}
---- !u!114 &3788573357715607679
+  - {fileID: -6351034304941272144}
+  - {fileID: 5128801658151390296}
+  - {fileID: 5941446268021801503}
+  - {fileID: -3677968519532456762}
+  - {fileID: -1760585801915930048}
+  - {fileID: 7894949306964360655}
+  - {fileID: -3423623743307186131}
+  - {fileID: 8853661912470255941}
+--- !u!114 &5128801658151390296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,24 +328,243 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47813dd5be49754e83f49e8ef99a6cf, type: 3}
-  m_Name: Start
+  m_Script: {fileID: 11500000, guid: ef76c18864c0b064c9ef4112e4dab690, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -40, y: -696}
+  position: {x: -456, y: -168}
   ports:
     keys:
+    - Previous
     - Next
     values:
+    - _fieldName: Previous
+      _node: {fileID: 5128801658151390296}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Next
+        node: {fileID: -6351034304941272144}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
     - _fieldName: Next
-      _node: {fileID: 3788573357715607679}
-      _typeQualifiedName: XNode.Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      _node: {fileID: 5128801658151390296}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
       - fieldName: Previous
-        node: {fileID: -7115862241806612094}
+        node: {fileID: 5941446268021801503}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Character: Mom
+  Dialogue: Let's go outside and get some ice cream!
+--- !u!114 &5941446268021801503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef76c18864c0b064c9ef4112e4dab690, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -232, y: -168}
+  ports:
+    keys:
+    - Previous
+    - Next
+    values:
+    - _fieldName: Previous
+      _node: {fileID: 5941446268021801503}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Next
+        node: {fileID: 5128801658151390296}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Next
+      _node: {fileID: 5941446268021801503}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Previous
+        node: {fileID: 8853661912470255941}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Character: Me
+  Dialogue: Yeah I'd love to! Let's see what kind of flavours they got.
+--- !u!114 &7894949306964360655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef76c18864c0b064c9ef4112e4dab690, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 568, y: -104}
+  ports:
+    keys:
+    - Previous
+    - Next
+    values:
+    - _fieldName: Previous
+      _node: {fileID: 7894949306964360655}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: dynamicInput_1
+        node: {fileID: -3677968519532456762}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Next
+      _node: {fileID: 7894949306964360655}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Character: Me
+  Dialogue: I love chocolate, I want that today!
+--- !u!114 &8853661912470255941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef76c18864c0b064c9ef4112e4dab690, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -8, y: -168}
+  ports:
+    keys:
+    - Previous
+    - Next
+    values:
+    - _fieldName: Previous
+      _node: {fileID: 8853661912470255941}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Next
+        node: {fileID: 5941446268021801503}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Next
+      _node: {fileID: 8853661912470255941}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Previous
+        node: {fileID: -3677968519532456762}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Previous:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Next:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  Character: Me
+  Dialogue: Man they have so many flavours, I wonder which one I should pick?

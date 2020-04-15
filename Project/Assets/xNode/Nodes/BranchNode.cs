@@ -8,9 +8,8 @@ using XNode;
 public class BranchNode : Node
 {
     [Input(ShowBackingValue.Never, ConnectionType.Override)]
-    public Empty Previous;
-    [Output(ShowBackingValue.Never, ConnectionType.Override)]
-    public Empty Next;
+    public NodePort Previous;
 
-
+    public List<string> Choices = new List<string>();
+    public List<NodePort> ChoicePorts = new List<NodePort>();
 }

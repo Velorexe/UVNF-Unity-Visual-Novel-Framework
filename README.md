@@ -6,8 +6,7 @@ This repository provides a set of examples, tools, workflows and other resources
 Several ways of writing your own visual novels without any programming. Using a writer-friendly node based dialogue editor and a more in depth story editor, you can view your story visually without having to dive into a pogramming language or complex settings.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/GraphStoryEditor.png" width=300>
-    <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/UDSFStoryEditor.png" width=600>
+    <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/Preview%20Image.png">
 </p>
 
 ## Installation
@@ -22,6 +21,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 > Jocelyn (Art/Character Designer)
 * [Instagram](https://www.instagram.com/jade.lynxx/)
+
+## Credits
+> [Siccity](https://github.com/Siccity)
+* [Xnode](https://github.com/Siccity/xNode)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
