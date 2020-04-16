@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d491f6cd9d840af49b6cf1c30e05ccf5, type: 3}
+  m_Name: UVNFSettingsInstance
+  m_EditorClassIdentifier: 
+  DBSFSkin: {fileID: 11400000, guid: 16fab56623a7b294e935d328318a8613, type: 2}
+  ActiveElementColor:
+    serializedVersion: 2
+    rgba: 4294955505
+  StoryElementTexture: {fileID: 2800000, guid: 59ceeea6d7f5db24590f81b797998fbd, type: 3}
+  CharacterElementTexture: {fileID: 2800000, guid: e0c9bd1581734b3438046d6146259d5e,
+    type: 3}
+  SceneryElementTexture: {fileID: 2800000, guid: 8b0f307fb5f94aa4aa3374de6a0089d0,
+    type: 3}
+  AudioElementTexture: {fileID: 2800000, guid: be2c7b238eb7a1c4eb96f63c57e7822e, type: 3}
+  UtilityElementTexture: {fileID: 2800000, guid: 9b2a5c2afb77b0d43b7491d0813ff269,
+    type: 3}
+  OtherElementTexture: {fileID: 2800000, guid: c1adfbadafb46ed43a127e2cfc279e31, type: 3}
+  StoryElementColor: {r: 0.99607843, g: 0.76862746, b: 0.76862746, a: 1}
+  CharacterElementColor: {r: 0.99607843, g: 0.9254902, b: 0.80784315, a: 1}
+  SceneryElementColor: {r: 1, g: 0.9411765, b: 0.6666667, a: 1}
+  AudioElementColor: {r: 0.7607843, g: 0.91764706, b: 0.7254902, a: 1}
+  UtilityElementColor: {r: 0.7019608, g: 0.7411765, b: 0.92941177, a: 1}
+  OtherElementColor: {r: 0.7176471, g: 0.7176471, b: 0.7176471, a: 1}
+  ElementHintTexturesName:
+  - Dialogue
+  - Choice
+  - Spawn Object
+  - Change Background
+  - Background Music
+  - Sound Effect
+  ElementHintTextures:
+  - {fileID: 2800000, guid: 0b9112c3641db2c429ea33777440caeb, type: 3}
+  - {fileID: 2800000, guid: ff7daedc706119349b047d75c4c91190, type: 3}
+  - {fileID: 2800000, guid: 8128e2216ff2c0d41808ef445100f671, type: 3}
+  - {fileID: 2800000, guid: 194a82a72fe2b4a4ba4ee20bec19a8df, type: 3}
+  - {fileID: 2800000, guid: b409ebdc2ece2a4409f076f287c9a5bc, type: 3}
+  - {fileID: 2800000, guid: c5c2172c7bd39c545952079553dfe628, type: 3}
