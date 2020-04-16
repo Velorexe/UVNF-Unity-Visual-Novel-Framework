@@ -1,6 +1,6 @@
-![UDSF_Logo](https://raw.githubusercontent.com/Velorexe/UDSF/develop/Project/Assets/Resources/UI/Sprites/FullLogo.png)
-# UDSF - Unity Dating Simulator Framework
-UDSF is a free Unity framework for creating Visual Novels and Dating Simulators in Unity.
+![UVNF_Logo](https://raw.githubusercontent.com/Velorexe/UDSF/develop/Project/Assets/Resources/UI/Sprites/FullLogo.png)
+# UVNF - Unity Visuan Novel Framework
+UDSF is a free Unity framework for creating Visual Novels in Unity.
 This repository provides a set of examples, tools, workflows and other resources to help you get started on your project.
 
 Several ways of writing your own visual novels without any programming. Using a writer-friendly node based dialogue editor and a more in depth story editor, you can view your story visually without having to dive into a pogramming language or complex settings.
@@ -12,6 +12,9 @@ Several ways of writing your own visual novels without any programming. Using a 
 ## Installation
 
 Clone/Download the repository and use Unity Hub to add the Project folder to your list of existing projects. You can then open the project and it will lead you to a list of settings to customize your framework experience (settings can be changed later on).
+
+## Future Plans
+* Creating Unitypackages for easy installation
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
