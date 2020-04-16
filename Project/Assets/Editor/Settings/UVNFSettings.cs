@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using System;
 using System.Linq;
@@ -8,16 +7,16 @@ using UnityEngine;
 
 public static class UVNFSettings
 {
-    public static UVNFSettingsInstance Settings
+    public static UVNFEditorSettings EditorSettings
     {
         get
         {
-            if (_settingsInstance == null)
-                _settingsInstance = GetSettings();
-            return _settingsInstance;
+            if (_editorSettingsInstance == null)
+                _editorSettingsInstance = GetEditorSettings();
+            return _editorSettingsInstance;
         }
     }
-    private static UVNFSettingsInstance _settingsInstance;
+    private static UVNFEditorSettings _editorSettingsInstance;
 
     public static List<StoryElement> StoryElements 
     {
@@ -40,14 +39,14 @@ public static class UVNFSettings
     private static List<StoryElement> _storyElements;
 
 
-    private static UVNFSettingsInstance GetSettings()
+    private static UVNFEditorSettings GetEditorSettings()
     {
-        if(AssetDatabase.LoadAssetAtPath<UVNFSettingsInstance>("Assets/Editor/Settings/UVNFSettingsInstance.asset") == null)
+        if(AssetDatabase.LoadAssetAtPath<UVNFEditorSettings>("Assets/Editor/Settings/UVNFEditorSettings.asset") == null)
         {
-            AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<UVNFSettingsInstance>(), "Assets/Editor/Settings/UVNFSettingsInstance.asset");
+            AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<UVNFEditorSettings>(), "Assets/Editor/Settings/UVNFEditorSettings.asset");
             AssetDatabase.SaveAssets();
         }
-        return AssetDatabase.LoadAssetAtPath<UVNFSettingsInstance>("Assets/Editor/Settings/UVNFSettingsInstance.asset");
+        return AssetDatabase.LoadAssetAtPath<UVNFEditorSettings>("Assets/Editor/Settings/UVNFEditorSettings.asset");
     }
 
     private static void InitializeStoryElements()
@@ -64,26 +63,26 @@ public static class UVNFSettings
 
     public static GUIStyle GetElementStyle(StoryElementTypes type)
     {
-        GUIStyle newStyle = Settings.DVNFSkin.button;
+        GUIStyle newStyle = EditorSettings.DVNFSkin.button;
         switch (type)
         {
             case StoryElementTypes.Audio:
-                newStyle.normal.background = Settings.AudioElementTexture;
+                newStyle.normal.background = EditorSettings.AudioElementTexture;
                 break;
             case StoryElementTypes.Scenery:
-                newStyle.normal.background = Settings.SceneryElementTexture;
+                newStyle.normal.background = EditorSettings.SceneryElementTexture;
                 break;
             case StoryElementTypes.Character:
-                newStyle.normal.background = Settings.CharacterElementTexture;
+                newStyle.normal.background = EditorSettings.CharacterElementTexture;
                 break;
             case StoryElementTypes.Other:
-                newStyle.normal.background = Settings.OtherElementTexture;
+                newStyle.normal.background = EditorSettings.OtherElementTexture;
                 break;
             case StoryElementTypes.Story:
-                newStyle.normal.background = Settings.StoryElementTexture;
+                newStyle.normal.background = EditorSettings.StoryElementTexture;
                 break;
             case StoryElementTypes.Utility:
-                newStyle.normal.background = Settings.UtilityElementTexture;
+                newStyle.normal.background = EditorSettings.UtilityElementTexture;
                 break;
         }
         return newStyle;

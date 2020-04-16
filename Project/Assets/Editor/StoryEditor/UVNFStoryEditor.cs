@@ -112,7 +112,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 GUILayout.BeginHorizontal();
                                 {
                                     GUILayout.Space(40f);
-                                    GUILayout.BeginVertical(UVNFSettings.Settings.DVNFSkin.box, GUILayout.MaxWidth(700));
+                                    GUILayout.BeginVertical(UVNFSettings.EditorSettings.DVNFSkin.box, GUILayout.MaxWidth(700));
                                     {
                                         ChangeBackgroundStyle(storyContainer.StoryElements[i].DisplayColor);
                                         GUILayout.BeginVertical(style);
@@ -153,7 +153,7 @@ public class UVNFStoryEditor : EditorWindowExtended
 
                             GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetElementStyle(storyContainer.StoryElements[i].Type));
                             if (storyContainer.StoryElements[i].Active)
-                                buttonStyle.normal.textColor = UVNFSettings.Settings.ActiveElementColor;
+                                buttonStyle.normal.textColor = UVNFSettings.EditorSettings.ActiveElementColor;
 
                             if (!storyElementsFoldout[i])
                             {
@@ -166,7 +166,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.width = 50f;
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                                GUI.DrawTexture(lastRect, UVNFSettings.Settings.ElementHints[storyContainer.StoryElements[i].ElementName]);
+                                GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
                             else
                             {
@@ -179,7 +179,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.width = 50f;
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                                GUI.DrawTexture(lastRect, UVNFSettings.Settings.ElementHints[storyContainer.StoryElements[i].ElementName]);
+                                GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
                         }
 
@@ -226,7 +226,7 @@ public class UVNFStoryEditor : EditorWindowExtended
             else
             {
                 Rect dADRect = GUILayoutUtility.GetRect(position.width, position.height);
-                GUI.Box(dADRect, "Drag and Drop here", UVNFSettings.Settings.DVNFSkin.box);
+                GUI.Box(dADRect, "Drag and Drop here", UVNFSettings.EditorSettings.DVNFSkin.box);
                 if (dADRect.Contains(Event.current.mousePosition))
                 {
                     if(Event.current.type == EventType.DragUpdated)
