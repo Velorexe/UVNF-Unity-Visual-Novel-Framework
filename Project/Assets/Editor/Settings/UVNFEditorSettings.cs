@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UVNFSettingsInstance : ScriptableObject, ISerializationCallbackReceiver
+public class UVNFEditorSettings : ScriptableObject, ISerializationCallbackReceiver
 {
     [Header("DVNF GUI Skin")]
     public GUISkin DVNFSkin;
