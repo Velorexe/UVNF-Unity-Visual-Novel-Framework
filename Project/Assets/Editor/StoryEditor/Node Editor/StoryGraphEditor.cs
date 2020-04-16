@@ -8,6 +8,12 @@ using XNode;
 [CustomNodeGraphEditor(typeof(StoryGraph))]
 public class StoryGraphEditor : NodeGraphEditor
 {
+    public override void OnOpen()
+    {
+        base.OnOpen();
+        window.name = "Story Graph Editor";
+    }
+
     public override string GetNodeMenuName(Type type)
     {
         if (type.BaseType == typeof(Node))
