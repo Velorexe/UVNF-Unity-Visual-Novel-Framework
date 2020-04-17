@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 2086034938}
   AudioManager: {fileID: 1221267970}
-  CurrentStory: {fileID: 11400000, guid: 29c1616e40a9caf4b980f2fa7001ade8, type: 2}
+  CurrentStory: {fileID: 11400000, guid: 81d4154d90a3a3c4db944c7753def020, type: 2}
   TimeoutBeforeStart: 0
 --- !u!4 &119077503
 Transform:

@@ -16,6 +16,8 @@ public class BackgroundMusicElement : StoryElement
     public bool Crossfade = true;
     public float CrossfadeTime = 1f;
 
+    public float Volume;
+
     public override void DisplayLayout()
     {
 #if UNITY_EDITOR
@@ -26,6 +28,7 @@ public class BackgroundMusicElement : StoryElement
             CrossfadeTime = EditorGUILayout.FloatField("Crossfade Time", CrossfadeTime);
 
         if (CrossfadeTime < 0) CrossfadeTime = 0;
+        Volume = EditorGUILayout.Slider("Volume", Volume, 0f, 1f);
 #endif
     }
 

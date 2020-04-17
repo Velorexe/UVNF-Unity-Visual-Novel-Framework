@@ -22,7 +22,7 @@ public class SoundEffectElement : StoryElement
     {
 #if UNITY_EDITOR
         AudioClip = EditorGUILayout.ObjectField("Audio Clip", AudioClip, typeof(AudioClip), false) as AudioClip;
-        Volume = EditorGUILayout.FloatField("Volume", Volume);
+        Volume = EditorGUILayout.Slider("Volume", Volume, 0f, 1f);
         WaitForAudio = GUILayout.Toggle(WaitForAudio, "Wait For Audio");
 #endif
     }
