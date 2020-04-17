@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 0
   Next: {fileID: 0}
-  CharacterName: 
-  Dialogue: 
-  Boop: 0
-  BoopSoundEffect: {fileID: 0}
-  Dialogue: {fileID: 0}
+  CharacterName: Me
+  Dialogue: This is now an animal crossing framework, fuck you.
+  Beep: 1
+  PitchShift: 1
+  MaxPitch: 0.2
+  BoopSoundEffect: {fileID: 8300000, guid: c8fa33de6006b874dbe76170f373dc23, type: 3}
+  DialogueClip: {fileID: 8300000, guid: 73e58990e9e6190488725f517f799d00, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,3 +35,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryElements:
   - {fileID: -7714755575274202440}
+  - {fileID: 9184535298565792498}
+--- !u!114 &9184535298565792498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b90670ceb2b4bc47861dd6a43ce8cf0, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 0}
+  LogText: 
