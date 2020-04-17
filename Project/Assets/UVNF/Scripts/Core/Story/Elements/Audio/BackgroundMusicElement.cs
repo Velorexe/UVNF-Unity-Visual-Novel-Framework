@@ -18,7 +18,7 @@ public class BackgroundMusicElement : StoryElement
 
     public float Volume;
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
         BackgroundMusic = EditorGUILayout.ObjectField(BackgroundMusic, typeof(AudioClip), false) as AudioClip;

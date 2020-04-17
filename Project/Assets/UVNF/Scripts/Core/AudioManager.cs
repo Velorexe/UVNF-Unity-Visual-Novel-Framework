@@ -62,6 +62,11 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(PlaySoundCoroutine(clip, volume));
     }
 
+    public void PlaySound(AudioClip clip, float volume, float extraPitch)
+    {
+        StartCoroutine(PlaySoundCoroutine(clip, volume, extraPitch));
+    }
+
     public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume)
     {
         GameObject sfxPlayer = new GameObject(clip.name);
@@ -69,6 +74,24 @@ public class AudioManager : MonoBehaviour
 
         AudioSource source = sfxPlayer.AddComponent<AudioSource>();
         source.clip = clip;
+
+        //TODO volume * GameManager.UserSettings.Volume;
+        source.volume = volume;
+        source.Play();
+
+        while (source.isPlaying) yield return null;
+
+        Destroy(sfxPlayer);
+    }
+
+    public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume, float extraPitch)
+    {
+        GameObject sfxPlayer = new GameObject(clip.name);
+        sfxPlayer.transform.SetParent(SFXParent);
+
+        AudioSource source = sfxPlayer.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.pitch += extraPitch;
 
         //TODO volume * GameManager.UserSettings.Volume;
         source.volume = volume;

@@ -90,7 +90,6 @@ public class UVNFStoryEditor : EditorWindowExtended
                     }
                 }
                 GUILayout.EndHorizontal();
-
                 {
                     Rect lastRect = GUILayoutUtility.GetLastRect();
                     lastRect.position = new Vector2(lastRect.position.x + 20f, lastRect.position.y + 18f);
@@ -118,7 +117,8 @@ public class UVNFStoryEditor : EditorWindowExtended
                                         GUILayout.BeginVertical(style);
                                         {
                                             GUILayout.Space(20);
-                                            storyContainer.StoryElements[i].DisplayLayout();
+                                            Rect lastRect = GUILayoutUtility.GetLastRect();
+                                            storyContainer.StoryElements[i].DisplayLayout(GUILayoutUtility.GetLastRect());
                                             GUILayout.Label("", GUI.skin.horizontalSlider);
 
                                             GUILayout.BeginHorizontal();
@@ -166,7 +166,9 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.width = 50f;
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                                GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
+
+                                if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
+                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
                             else
                             {
@@ -179,7 +181,9 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.width = 50f;
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
-                                GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
+
+                                if(UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
+                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
                         }
 

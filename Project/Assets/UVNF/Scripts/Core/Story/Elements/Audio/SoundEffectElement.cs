@@ -18,7 +18,7 @@ public class SoundEffectElement : StoryElement
 
     public bool WaitForAudio = false;
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
         AudioClip = EditorGUILayout.ObjectField("Audio Clip", AudioClip, typeof(AudioClip), false) as AudioClip;

@@ -19,7 +19,7 @@ public class EnterSceneElement : StoryElement
     public ScenePositions EnterFromDirection = ScenePositions.Left;
     public ScenePositions FinalPosition = ScenePositions.Left;
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
         GUILayout.BeginHorizontal();
@@ -29,25 +29,21 @@ public class EnterSceneElement : StoryElement
 
         Flip = GUILayout.Toggle(Flip, "Flip");
 
-        Rect lastRect = GUILayoutUtility.GetLastRect();
         if (Character != null)
         {
             foldOut = EditorGUILayout.Foldout(foldOut, "Preview", true);
             if (foldOut)
             {
-                lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y + 10);
-                lastRect.width = 1000;
-                lastRect.height = 500;
+                layoutRect.position = new Vector2(layoutRect.x, layoutRect.y + 70);
+                layoutRect.width = 1000;
+                layoutRect.height = 500;
 
-                GUILayout.BeginArea(lastRect);
-                {
-                    lastRect.width = Character.rect.width / (Character.rect.height / 500);
-                    //if (Flip) lastRect.width = -lastRect.width;
-                    lastRect.height = 500;
-                    GUI.DrawTexture(lastRect, Character.texture, ScaleMode.ScaleToFit);
-                }
-                GUILayout.EndArea();
-                GUILayout.Space(400);
+                layoutRect.width = Character.rect.width / (Character.rect.height / 500);
+                //if (Flip) layoutRect.width = -layoutRect.width * 2;
+                layoutRect.height = 500;
+                
+                GUI.DrawTexture(layoutRect, Character.texture, ScaleMode.ScaleToFit);
+                GUILayout.Space(500);
             }
         }
 
@@ -58,6 +54,7 @@ public class EnterSceneElement : StoryElement
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        yield return null;
+        managerCallback.CharacterManager.AddCharacter(Character, Flip, EnterFromDirection, FinalPosition);
+        return null;
     }
 }

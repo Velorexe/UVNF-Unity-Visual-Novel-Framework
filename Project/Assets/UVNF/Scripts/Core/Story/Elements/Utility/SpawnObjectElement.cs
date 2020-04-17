@@ -13,7 +13,7 @@ public class SpawnObjectElement : StoryElement
 
     public GameObject ObjectToSpawn;
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
         GUILayout.Label("Object To Spawn", EditorStyles.boldLabel);

@@ -115,6 +115,78 @@ public class UVNFCanvas : MonoBehaviour
 
         while (!Input.GetMouseButtonUp(0)) yield return null;
     }
+    
+    public IEnumerator DisplayText(string text, string characterName, AudioClip dialogue, AudioManager audio, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+    {
+        ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
+        if (useStylesForCharacterField)
+            ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        BottomCanvasGroup.gameObject.SetActive(true);
+
+        if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
+            CharacterTMP.text = characterName;
+
+        audio.PlaySound(dialogue, 1f);
+
+        int textIndex = 0;
+        while (textIndex < text.Length)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                DialogueTMP.text = text;
+                textIndex = text.Length;
+            }
+            else if (displayIntervalTimer >= tempDisplayInterval)
+            {
+                DialogueTMP.text += text[textIndex];
+                textIndex++;
+                displayIntervalTimer = 0f;
+            }
+            else
+                displayIntervalTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (!Input.GetMouseButtonUp(0)) yield return null;
+    }
+
+    public IEnumerator DisplayText(string text, string characterName, AudioClip boop, AudioManager audio, float pitchShift, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+    {
+        ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
+        if (useStylesForCharacterField)
+            ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        BottomCanvasGroup.gameObject.SetActive(true);
+
+        if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
+            CharacterTMP.text = characterName;
+
+        int textIndex = 0;
+        while (textIndex < text.Length)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                DialogueTMP.text = text;
+                textIndex = text.Length;
+            }
+            else if (displayIntervalTimer >= tempDisplayInterval)
+            {
+                DialogueTMP.text += text[textIndex];
+                textIndex++;
+                displayIntervalTimer = 0f;
+
+                if (text[textIndex] != ' ')
+                    audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
+            }
+            else
+                displayIntervalTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (!Input.GetMouseButtonUp(0)) yield return null;
+    }
+
     #endregion
 
     #region Choice
