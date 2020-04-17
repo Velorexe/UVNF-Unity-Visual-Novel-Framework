@@ -17,15 +17,15 @@ public class DialogueElement : StoryElement
 
     private GUIStyle textAreaStyle;
 
-    private void Awake()
-    {
-        textAreaStyle = new GUIStyle("TextArea");
-        textAreaStyle.richText = true;
-    }
-
     public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
+        if(textAreaStyle == null)
+        {
+            textAreaStyle = new GUIStyle("TextArea");
+            textAreaStyle.richText = true;
+        }
+
         GUILayout.Label("Character", EditorStyles.boldLabel);
         CharacterName = GUILayout.TextField(CharacterName);
         GUILayout.Label("Dialogue", EditorStyles.boldLabel);

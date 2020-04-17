@@ -10,6 +10,7 @@ public class AudioDialogueElement : DialogueElement
     public override StoryElementTypes Type => StoryElementTypes.Story;
 
     public bool Beep;
+    public bool BeepOnVowel;
 
     public bool PitchShift;
     public float MaxPitch;
@@ -24,9 +25,12 @@ public class AudioDialogueElement : DialogueElement
         Beep = GUILayout.Toggle(Beep, "Beep");
         if (Beep)
         {
-            BoopSoundEffect = EditorGUILayout.ObjectField("Boop Sound Effect", BoopSoundEffect, typeof(AudioClip), false) as AudioClip;
+            BoopSoundEffect = EditorGUILayout.ObjectField("Beep Sound Effect", BoopSoundEffect, typeof(AudioClip), false) as AudioClip;
+            BeepOnVowel = GUILayout.Toggle(BeepOnVowel, "Beep Only On Vowel");
+
             PitchShift = GUILayout.Toggle(PitchShift, "Pitch Shift");
-            MaxPitch = EditorGUILayout.Slider(MaxPitch, 0f, 0.2f);
+            if(PitchShift)
+                MaxPitch = EditorGUILayout.Slider(MaxPitch, 0f, 0.2f);
         }
         else
             DialogueClip = EditorGUILayout.ObjectField("Dialogue", DialogueClip, typeof(AudioClip), false) as AudioClip;
@@ -36,7 +40,7 @@ public class AudioDialogueElement : DialogueElement
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
         if (Beep)
-            return canvas.DisplayText(Dialogue, CharacterName, BoopSoundEffect, managerCallback.AudioManager, MaxPitch);
+            return canvas.DisplayText(Dialogue, CharacterName, BoopSoundEffect, managerCallback.AudioManager, MaxPitch, BeepOnVowel);
         else
             return canvas.DisplayText(Dialogue, CharacterName, DialogueClip, managerCallback.AudioManager);
     }

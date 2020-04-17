@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7714755575274202440
+--- !u!114 &-5176387350191322618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,18 +9,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adabf642a00adb64f98845666fedcc5a, type: 3}
-  m_Name: Audio Dialogue
+  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: 6847633153162792109}
   CharacterName: Me
-  Dialogue: This is now an animal crossing framework, fuck you.
-  Beep: 1
-  PitchShift: 1
-  MaxPitch: 0.2
-  BoopSoundEffect: {fileID: 8300000, guid: c8fa33de6006b874dbe76170f373dc23, type: 3}
-  DialogueClip: {fileID: 8300000, guid: 73e58990e9e6190488725f517f799d00, type: 3}
+  Dialogue: Where am I?
+--- !u!114 &-3564151044725871029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Loading Screen
+  m_EditorClassIdentifier: Assembly-CSharp::ShowLoadingScreen
+  Active: 0
+  Next: {fileID: -1253289355200967432}
+  ShowLoadScreen: 1
+  FadeOutTime: 1
+  FadeOtherElements: 1
+  WaitToFinish: 1
+--- !u!114 &-1253289355200967432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Loading Screen
+  m_EditorClassIdentifier: Assembly-CSharp::ShowLoadingScreen
+  Active: 0
+  Next: {fileID: -5176387350191322618}
+  ShowLoadScreen: 0
+  FadeOutTime: 1
+  FadeOtherElements: 1
+  WaitToFinish: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,9 +65,15 @@ MonoBehaviour:
   m_Name: NewStory
   m_EditorClassIdentifier: 
   StoryElements:
-  - {fileID: -7714755575274202440}
-  - {fileID: 9184535298565792498}
---- !u!114 &9184535298565792498
+  - {fileID: 87086310264574351}
+  - {fileID: -3564151044725871029}
+  - {fileID: -1253289355200967432}
+  - {fileID: -5176387350191322618}
+  - {fileID: 6847633153162792109}
+  - {fileID: 679089458082712715}
+  - {fileID: 5862760948040734924}
+  - {fileID: 7485473001122257985}
+--- !u!114 &87086310264574351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,9 +82,85 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b90670ceb2b4bc47861dd6a43ce8cf0, type: 3}
-  m_Name: Log
+  m_Script: {fileID: 11500000, guid: 61fe714cebce5fe4ba0b71d53f36fade, type: 3}
+  m_Name: Change Background
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: -3564151044725871029}
+  NewBackground: {fileID: 21300000, guid: c1c5f8594f55d794881d7c62fb9dbb42, type: 3}
+  Fade: 1
+  FadeTime: 1
+--- !u!114 &679089458082712715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5078e2883b71e7438a5d965f15f77c8, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 5862760948040734924}
+  Choices:
+  - Wake Up
+  - Ignore
+  ShuffleChocies: 0
+  HideDialogue: 1
+--- !u!114 &5862760948040734924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
   Active: 0
   Next: {fileID: 0}
-  LogText: 
+  CharacterName: Me
+  Dialogue: You have died.
+--- !u!114 &6847633153162792109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adabf642a00adb64f98845666fedcc5a, type: 3}
+  m_Name: Audio Dialogue
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 679089458082712715}
+  CharacterName: Unknown Voice
+  Dialogue: Hey! You doing alright?
+  Beep: 1
+  BeepOnVowel: 1
+  PitchShift: 1
+  MaxPitch: 0.2
+  BoopSoundEffect: {fileID: 8300000, guid: c8fa33de6006b874dbe76170f373dc23, type: 3}
+  DialogueClip: {fileID: 0}
+--- !u!114 &7485473001122257985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fe714cebce5fe4ba0b71d53f36fade, type: 3}
+  m_Name: Change Background
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 0}
+  NewBackground: {fileID: 0}
+  Fade: 1
+  FadeTime: 1

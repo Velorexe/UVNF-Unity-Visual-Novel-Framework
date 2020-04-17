@@ -151,7 +151,7 @@ public class UVNFCanvas : MonoBehaviour
         while (!Input.GetMouseButtonUp(0)) yield return null;
     }
 
-    public IEnumerator DisplayText(string text, string characterName, AudioClip boop, AudioManager audio, float pitchShift, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+    public IEnumerator DisplayText(string text, string characterName, AudioClip boop, AudioManager audio, float pitchShift, bool beepOnVowel = false, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
     {
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
         if (useStylesForCharacterField)
@@ -175,7 +175,12 @@ public class UVNFCanvas : MonoBehaviour
                 DialogueTMP.text += text[textIndex];
 
                 if (text[textIndex] != ' ')
-                    audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
+                {
+                    if(beepOnVowel && text[textIndex].IsVowel())
+                        audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
+                    else if(!beepOnVowel)
+                        audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
+                }
 
                 textIndex++;
                 displayIntervalTimer = 0f;

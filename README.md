@@ -9,6 +9,10 @@ Several ways of writing your own visual novels without any programming. Using a 
     <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/Preview%20Image.png">
 </p>
 
+<p align="center">
+    <img src="https://cdn.discordapp.com/attachments/445299422012637204/700819498977984533/StoryEditorSecondFinished2.gif">
+</p>
+
 ## Installation
 
 Clone/Download the repository and use Unity Hub to add the Project folder to your list of existing projects. You can then open the project and it will lead you to a list of settings to customize your framework experience (settings can be changed later on).
