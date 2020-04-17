@@ -14,6 +14,8 @@ public class EnterSceneElement : StoryElement
     public Sprite Character;
     private bool foldOut = false;
 
+    public bool Flip = false;
+
     public ScenePositions EnterFromDirection = ScenePositions.Left;
     public ScenePositions FinalPosition = ScenePositions.Left;
 
@@ -25,6 +27,7 @@ public class EnterSceneElement : StoryElement
         Character = EditorGUILayout.ObjectField(Character, typeof(Sprite), true) as Sprite;
         GUILayout.EndHorizontal();
 
+        Flip = GUILayout.Toggle(Flip, "Flip");
 
         Rect lastRect = GUILayoutUtility.GetLastRect();
         if (Character != null)
@@ -39,8 +42,9 @@ public class EnterSceneElement : StoryElement
                 GUILayout.BeginArea(lastRect);
                 {
                     lastRect.width = Character.rect.width / (Character.rect.height / 500);
+                    //if (Flip) lastRect.width = -lastRect.width;
                     lastRect.height = 500;
-                    GUI.DrawTexture(lastRect, Character.texture);
+                    GUI.DrawTexture(lastRect, Character.texture, ScaleMode.ScaleToFit);
                 }
                 GUILayout.EndArea();
                 GUILayout.Space(400);
@@ -54,6 +58,6 @@ public class EnterSceneElement : StoryElement
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 }
