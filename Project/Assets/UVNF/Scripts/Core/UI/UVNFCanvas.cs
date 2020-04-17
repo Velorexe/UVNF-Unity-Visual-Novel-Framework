@@ -173,11 +173,13 @@ public class UVNFCanvas : MonoBehaviour
             else if (displayIntervalTimer >= tempDisplayInterval)
             {
                 DialogueTMP.text += text[textIndex];
-                textIndex++;
-                displayIntervalTimer = 0f;
 
                 if (text[textIndex] != ' ')
                     audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
+
+                textIndex++;
+                displayIntervalTimer = 0f;
+
             }
             else
                 displayIntervalTimer += Time.deltaTime;
