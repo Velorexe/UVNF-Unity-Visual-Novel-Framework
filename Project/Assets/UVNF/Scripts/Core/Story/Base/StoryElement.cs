@@ -18,7 +18,7 @@ public abstract class StoryElement : ScriptableObject, IComparable
 
     public abstract IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas);
 
-    public abstract void DisplayLayout();
+    public abstract void DisplayLayout(Rect layoutRect);
 
     public int CompareTo(object obj)
     {

@@ -13,6 +13,12 @@ public static class VectorExtensions
         return v;
     }
 
+    public static Vector3 SetX(this Vector3 v, float x)
+    {
+        v.x = x;
+        return v;
+    }
+
     public static Vector2 SetY(this Vector2 v, float y)
     {
         v.y = y;

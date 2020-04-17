@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("UDSF Components")]
     public UVNFCanvas Canvas;
     public AudioManager AudioManager;
+    public CanvasCharacterManager CharacterManager;
 
     [Header("Story Settings")]
     public StoryContainer CurrentStory;

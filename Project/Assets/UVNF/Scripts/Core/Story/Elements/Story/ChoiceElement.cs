@@ -16,7 +16,7 @@ public class ChoiceElement : StoryElement
     public bool ShuffleChocies = true;
     public bool HideDialogue = false;
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
         for (int i = 0; i < Choices.Count; i++)
         {

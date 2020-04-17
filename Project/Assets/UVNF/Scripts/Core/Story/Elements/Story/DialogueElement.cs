@@ -23,7 +23,7 @@ public class DialogueElement : StoryElement
         textAreaStyle.richText = true;
     }
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
         GUILayout.Label("Character", EditorStyles.boldLabel);

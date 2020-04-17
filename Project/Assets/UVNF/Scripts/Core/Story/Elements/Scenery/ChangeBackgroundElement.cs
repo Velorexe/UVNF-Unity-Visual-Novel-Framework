@@ -16,7 +16,7 @@ public class ChangeBackgroundElement : StoryElement
     public bool Fade = true;
     public float FadeTime = 1f;
 
-    public override void DisplayLayout()
+    public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
         GUILayout.Label("New Background");
