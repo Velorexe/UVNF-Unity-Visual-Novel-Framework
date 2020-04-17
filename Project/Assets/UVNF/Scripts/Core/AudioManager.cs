@@ -29,9 +29,14 @@ public class AudioManager : MonoBehaviour
         BackgroundMusic.Stop();
     }
 
-    public void StopBackgroundMusic(float fadeOutTime = 1f)
+    public void StopBackgroundMusic(float fadeOutTime = 1f, bool destroy = true)
     {
-        CrossfadeAudioSourceDown(BackgroundMusic, fadeOutTime, false);
+        CrossfadeAudioSourceDown(BackgroundMusic, fadeOutTime, destroy);
+    }
+
+    public void PauseBackgroundMusic()
+    {
+        BackgroundMusic.Pause();
     }
 
     public void CrossfadeBackgroundMusic(AudioClip clip, float crossfadeTime = 1f)

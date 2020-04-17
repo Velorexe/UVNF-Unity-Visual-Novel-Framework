@@ -3,15 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Core;
-using Entities;
 using CoroutineManager;
 
 public class GameManager : MonoBehaviour
 {
-    public Player Player;
-    public Location CurrentLocation;
-
     [Header("UDSF Components")]
     public UVNFCanvas Canvas;
     public AudioManager AudioManager;
