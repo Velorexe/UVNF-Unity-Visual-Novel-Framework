@@ -87,4 +87,37 @@ public static class UVNFSettings
         }
         return newStyle;
     }
+
+    public static GUIStyle GetColorByElement(StoryElementTypes type)
+    {
+        GUIStyle newStyle = EditorSettings.DVNFSkin.button;
+
+        Texture2D background = new Texture2D(1, 1);
+        newStyle.normal.background = background;
+
+        switch (type)
+        {
+            case StoryElementTypes.Audio:
+                newStyle.normal.background.SetPixel(0, 0, new Color32().Audio());
+                break;
+            case StoryElementTypes.Character:
+                newStyle.normal.background.SetPixel(0, 0, new Color32().Character());
+                break;
+            case StoryElementTypes.Scenery:
+                newStyle.normal.background.SetPixel(0, 0, new Color32().Scene());
+                break;
+            case StoryElementTypes.Story:
+                newStyle.normal.background.SetPixel(0, 0, new Color32().Story());
+                break;
+            case StoryElementTypes.Utility:
+                newStyle.normal.background.SetPixel(0, 0, new Color32().Utility());
+                break;
+            case StoryElementTypes.Other:
+                newStyle.normal.background.SetPixel(0, 0, new Color32().Other());
+                break;
+        }
+
+        newStyle.normal.background.Apply();
+        return newStyle;
+    }
 }
