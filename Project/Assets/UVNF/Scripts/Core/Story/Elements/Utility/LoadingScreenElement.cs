@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class ShowLoadingScreen : StoryElement
+public class LoadingScreenElement : StoryElement
 {
     public override string ElementName => "Loading Screen";
 

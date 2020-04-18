@@ -19,6 +19,8 @@ public class EnterSceneElement : StoryElement
     public ScenePositions EnterFromDirection = ScenePositions.Left;
     public ScenePositions FinalPosition = ScenePositions.Left;
 
+    public float EnterTime = 2f;
+
     public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
@@ -49,12 +51,14 @@ public class EnterSceneElement : StoryElement
 
         EnterFromDirection = (ScenePositions)EditorGUILayout.EnumPopup("Enter From", EnterFromDirection);
         FinalPosition = (ScenePositions)EditorGUILayout.EnumPopup("Final Position", FinalPosition);
+
+        EnterTime = EditorGUILayout.Slider(EnterTime, 1f, 10f);
 #endif
     }
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        managerCallback.CharacterManager.AddCharacter(Character, Flip, EnterFromDirection, FinalPosition);
+        managerCallback.CharacterManager.AddCharacter(Character, Flip, EnterFromDirection, FinalPosition, EnterTime);
         return null;
     }
 }
