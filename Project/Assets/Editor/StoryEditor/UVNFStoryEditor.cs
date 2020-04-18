@@ -55,19 +55,9 @@ public class UVNFStoryEditor : EditorWindowExtended
             GUILayout.Label("Give your Story a relevant name and click 'Export' to get started.", EditorStyles.boldLabel);
             GUILayout.Label("Or drag and drop a Story asset onto this window.");
 
-            GUILayout.BeginHorizontal();
-            {
-                GUILayout.Label("Story Name: ", GUILayout.MaxWidth(80));
-                storyName = GUILayout.TextField(storyName);
-            }
-            GUILayout.EndHorizontal();
-            if (GUILayout.Button("Export"))
-            {
-                ExportStory();
-                Exported = true;
-            }
+            storyContainer = EditorGUILayout.ObjectField("Story", storyContainer, typeof(StoryContainer), false) as StoryContainer;
 
-            if (Exported)
+            if (storyContainer != null)
             {
                 GUILayout.Label("Add Element", EditorStyles.boldLabel);
                 GUILayout.BeginHorizontal();
@@ -226,30 +216,6 @@ public class UVNFStoryEditor : EditorWindowExtended
                     }
                 }
                 GUILayout.EndScrollView();
-            }
-            else
-            {
-                Rect dADRect = GUILayoutUtility.GetRect(position.width, position.height);
-                GUI.Box(dADRect, "Drag and Drop here", UVNFSettings.EditorSettings.DVNFSkin.box);
-                if (dADRect.Contains(Event.current.mousePosition))
-                {
-                    if(Event.current.type == EventType.DragUpdated)
-                    {
-                        DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
-                        Event.current.Use();
-                    }
-                    else if(Event.current.type == EventType.DragPerform)
-                    {
-                        if (DragAndDrop.objectReferences[0] is StoryContainer container)
-                        {
-                            storyContainer = container;
-                            for (int i = 0; i < container.StoryElements.Count; i++)
-                                storyElementsFoldout.Add(true);
-                        }
-                        Exported = true;
-                        Event.current.Use();
-                    }
-                }
             }
             GUILayout.EndVertical();
         }

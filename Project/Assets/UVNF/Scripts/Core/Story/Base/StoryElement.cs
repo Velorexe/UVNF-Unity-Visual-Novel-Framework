@@ -16,6 +16,9 @@ public abstract class StoryElement : ScriptableObject, IComparable
     [HideInInspector]
     public StoryElement Next;
 
+    public virtual void OnCreate() { }
+    public virtual void OnDelete() { }
+
     public abstract IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas);
 
     public abstract void DisplayLayout(Rect layoutRect);

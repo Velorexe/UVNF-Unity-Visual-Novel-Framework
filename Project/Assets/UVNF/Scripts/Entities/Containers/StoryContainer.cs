@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu()]
 public class StoryContainer : ScriptableObject
 {
     public List<StoryElement> StoryElements = new List<StoryElement>();

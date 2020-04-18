@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073705e96cd39ed44bd3e8e7f6dafcb3, type: 3}
+  m_Name: TestStory
+  m_EditorClassIdentifier: 
+  StoryElements:
+  - {fileID: 5875938659872192250}
+--- !u!114 &5875938659872192250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 0}
+  Character: {fileID: 0}
+  Flip: 0
+  EnterFromDirection: 0
+  FinalPosition: 0
