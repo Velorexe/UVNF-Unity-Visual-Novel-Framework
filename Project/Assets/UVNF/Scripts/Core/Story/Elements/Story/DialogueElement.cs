@@ -29,7 +29,7 @@ public class DialogueElement : StoryElement
         GUILayout.Label("Character", EditorStyles.boldLabel);
         CharacterName = GUILayout.TextField(CharacterName);
         GUILayout.Label("Dialogue", EditorStyles.boldLabel);
-        Dialogue = EditorGUILayout.TextArea(Dialogue, textAreaStyle, GUILayout.ExpandHeight(true), GUILayout.MaxHeight(50));
+        Dialogue = EditorGUILayout.TextArea(Dialogue, textAreaStyle, GUILayout.MinHeight(50));
 #endif
     }
 

@@ -11,6 +11,8 @@ public class EnterSceneElement : StoryElement
 
     public override StoryElementTypes Type => StoryElementTypes.Character;
 
+    public string CharacterName;
+
     public Sprite Character;
     private bool foldOut = false;
 
@@ -21,11 +23,18 @@ public class EnterSceneElement : StoryElement
 
     public float EnterTime = 2f;
 
+    public override void OnCreate()
+    {
+        base.OnCreate();
+    }
+
     public override void DisplayLayout(Rect layoutRect)
     {
 #if UNITY_EDITOR
+        CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
+
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Character Sprite");
+        GUILayout.Label("Character Sprite", GUILayout.MaxWidth(147));
         Character = EditorGUILayout.ObjectField(Character, typeof(Sprite), true) as Sprite;
         GUILayout.EndHorizontal();
 
@@ -52,13 +61,13 @@ public class EnterSceneElement : StoryElement
         EnterFromDirection = (ScenePositions)EditorGUILayout.EnumPopup("Enter From", EnterFromDirection);
         FinalPosition = (ScenePositions)EditorGUILayout.EnumPopup("Final Position", FinalPosition);
 
-        EnterTime = EditorGUILayout.Slider(EnterTime, 1f, 10f);
+        EnterTime = EditorGUILayout.Slider("Enter Time", EnterTime, 1f, 10f);
 #endif
     }
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        managerCallback.CharacterManager.AddCharacter(Character, Flip, EnterFromDirection, FinalPosition, EnterTime);
+        managerCallback.CharacterManager.AddCharacter(CharacterName, Character, Flip, EnterFromDirection, FinalPosition, EnterTime);
         return null;
     }
 }
