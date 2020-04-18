@@ -11,6 +11,7 @@ Several ways of writing your own visual novels without any programming. Using a 
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/445299422012637204/700819498977984533/StoryEditorSecondFinished2.gif">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701163713650229268/EnterScene.gif">
 </p>
 
 ## Installation
