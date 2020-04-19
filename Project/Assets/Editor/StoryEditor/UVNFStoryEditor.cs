@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -31,6 +32,10 @@ public class UVNFStoryEditor : EditorWindowExtended
     {
         UVNFStoryEditor storyWindow = GetWindow<UVNFStoryEditor>();
         storyWindow.Show();
+
+        UVNFStoryElements elementWindow = GetWindow<UVNFStoryElements>();
+        elementWindow.editor = GetWindow<UVNFStoryEditor>();
+        elementWindow.Show();
     }
 
     private void SetStandardBackground()
@@ -50,6 +55,14 @@ public class UVNFStoryEditor : EditorWindowExtended
             standardSetup = false;
         }
 
+        if(storyElementsFoldout.Count != storyContainer.StoryElements.Count)
+        {
+            for (int i = 0; i < storyContainer.StoryElements.Count; i++)
+            {
+                storyElementsFoldout.Add(true);
+            }
+        }
+
         GUILayout.BeginVertical(GUILayout.MinWidth(position.width), GUILayout.MinHeight(maxSize.y));
         {
             GUILayout.Label("Give your Story a relevant name and click 'Export' to get started.", EditorStyles.boldLabel);
@@ -65,18 +78,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                     selectedIndex = EditorGUILayout.Popup(selectedIndex, UVNFSettings.StoryElementNames);
                     if (GUILayout.Button("+", GUILayout.MaxWidth(40)))
                     {
-                        //Activator.CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement
-                        //storyContainer.StoryElements.Add(CreateInstance(UDSFSettings.StoryElements[selectedIndex].GetType()) as StoryElement);
-                        StoryElement newElement = CreateInstance(UVNFSettings.StoryElements[selectedIndex].GetType()) as StoryElement;
-                        newElement.name = newElement.ElementName;
-
-                        EditorUtility.SetDirty(newElement);
-
-                        AssetDatabase.AddObjectToAsset(newElement, storyContainer);
-                        storyElementsFoldout.Add(true);
-
-                        storyContainer.StoryElements.Add(newElement);
-                        AssetDatabase.SaveAssets();
+                        AddElement(UVNFSettings.StoryElements[selectedIndex].GetType());
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -223,6 +225,20 @@ public class UVNFStoryEditor : EditorWindowExtended
             }
             GUILayout.EndVertical();
         }
+    }
+
+    public void AddElement(Type storyElement)
+    {
+        StoryElement newElement = CreateInstance(storyElement) as StoryElement;
+        newElement.name = newElement.ElementName;
+
+        EditorUtility.SetDirty(newElement);
+
+        AssetDatabase.AddObjectToAsset(newElement, storyContainer);
+        storyElementsFoldout.Add(true);
+
+        storyContainer.StoryElements.Add(newElement);
+        AssetDatabase.SaveAssets();
     }
 
     private void ExportStory()

@@ -12,6 +12,8 @@ public class UVNFStoryElements : EditorWindow
         ((StoryElementTypes[])Enum.GetValues(typeof(StoryElementTypes))).OrderBy(x => x.ToString()).ToArray();
     private bool[] elementFoldouts;
 
+    public UVNFStoryEditor editor;
+
     GUIStyle storyStyle;
 
     [MenuItem("UVNF/Story Elements")]
@@ -38,11 +40,19 @@ public class UVNFStoryElements : EditorWindow
             for (int i = 0; i < elementFoldouts.Length; i++) elementFoldouts[i] = true;
         }
 
+        if(editor == null)
+        {
+            editor = GetWindow<UVNFStoryEditor>();
+            editor.Show();
+        }
+
         for (int i = 0; i < storyElementCategories.Length; i++)
         {
             storyStyle = UVNFSettings.GetColorByElement(storyElementCategories[i]);
+            GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetColorByElement(storyElementCategories[i]));
+            buttonStyle.fixedWidth = position.width;
 
-            bool buttonPress = GUILayout.Button(storyElementCategories[i].ToString(), storyStyle);
+            bool buttonPress = GUILayout.Button((elementFoldouts[i] ? "▼" : "▲") + storyElementCategories[i].ToString(), buttonStyle);
             if (buttonPress)
                 elementFoldouts[i] = !elementFoldouts[i];
 
@@ -52,7 +62,8 @@ public class UVNFStoryElements : EditorWindow
                 for (int j = 0; j < elementByCategory.Length; j++)
                 {
                     GUILayout.Space(5f + (i != 0 && !elementFoldouts[i] ? 4f : 0f));
-                    GUILayout.Button(elementByCategory[j].ElementName, UVNFSettings.GetElementStyle(storyElementCategories[i]));
+                    if (GUILayout.Button(elementByCategory[j].ElementName, UVNFSettings.GetElementStyle(storyElementCategories[i])))
+                        editor.AddElement(elementByCategory[j].GetType());
 
                     Rect lastRect = GUILayoutUtility.GetLastRect();
                     lastRect.width = 50f;
