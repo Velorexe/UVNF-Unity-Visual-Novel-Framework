@@ -10,8 +10,12 @@ Several ways of writing your own visual novels without any programming. Using a 
 </p>
 
 <p align="center">
-    <img src="https://cdn.discordapp.com/attachments/445299422012637204/700819498977984533/StoryEditorSecondFinished2.gif">
-    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701163713650229268/EnterScene.gif">
+    <img src="https://cdn.discordapp.com/attachments/445299422012637204/700819498977984533/StoryEditorSecondFinished2.gif" width="590">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701163713650229268/EnterScene.gif" width="520">
+</p>
+<p align="center">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701391595349737472/NewMenu.gif" width="500">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701392160460767252/ShowOff.gif" width="500">
 </p>
 
 ## Installation
@@ -20,6 +24,8 @@ Clone/Download the repository and use Unity Hub to add the Project folder to you
 
 ## Future Plans
 * Creating Unitypackages for easy installation
+* Creating more story elements
+* Create transitions
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
