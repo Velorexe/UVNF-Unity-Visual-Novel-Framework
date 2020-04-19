@@ -13,6 +13,7 @@ public class UVNFStoryElements : EditorWindow
     private bool[] elementFoldouts;
 
     public UVNFStoryEditor editor;
+    public Vector2 ScrollPosition;
 
     GUIStyle storyStyle;
 
@@ -46,35 +47,47 @@ public class UVNFStoryElements : EditorWindow
             editor.Show();
         }
 
-        for (int i = 0; i < storyElementCategories.Length; i++)
         {
-            storyStyle = UVNFSettings.GetColorByElement(storyElementCategories[i]);
-            GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetColorByElement(storyElementCategories[i]));
-            buttonStyle.fixedWidth = position.width;
+            Rect lastRect = new Rect();
+            lastRect.position = new Vector2(lastRect.position.x + 25f, lastRect.position.y + 18f);
+            lastRect.width = 2f;
+            lastRect.height = position.height;
+            EditorGUI.DrawRect(lastRect, Color.grey);
+        }
 
-            bool buttonPress = GUILayout.Button((elementFoldouts[i] ? "▼" : "▲") + storyElementCategories[i].ToString(), buttonStyle);
-            if (buttonPress)
-                elementFoldouts[i] = !elementFoldouts[i];
-
-            if (elementFoldouts[i])
+        ScrollPosition = GUILayout.BeginScrollView(ScrollPosition, false, true);
+        {
+            for (int i = 0; i < storyElementCategories.Length; i++)
             {
-                StoryElement[] elementByCategory = StoryElements.Where(x => x.Type == storyElementCategories[i]).ToArray();
-                for (int j = 0; j < elementByCategory.Length; j++)
+                storyStyle = UVNFSettings.GetColorByElement(storyElementCategories[i]);
+                GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetColorByElement(storyElementCategories[i]));
+                buttonStyle.fixedWidth = position.width - 15f;
+
+                bool buttonPress = GUILayout.Button((elementFoldouts[i] ? "▼" : "▲") + storyElementCategories[i].ToString(), buttonStyle);
+                if (buttonPress)
+                    elementFoldouts[i] = !elementFoldouts[i];
+
+                if (elementFoldouts[i])
                 {
-                    GUILayout.Space(5f + (i != 0 && !elementFoldouts[i] ? 4f : 0f));
-                    if (GUILayout.Button(elementByCategory[j].ElementName, UVNFSettings.GetElementStyle(storyElementCategories[i])))
-                        editor.AddElement(elementByCategory[j].GetType());
+                    StoryElement[] elementByCategory = StoryElements.Where(x => x.Type == storyElementCategories[i]).ToArray();
+                    for (int j = 0; j < elementByCategory.Length; j++)
+                    {
+                        GUILayout.Space(5f + (i != 0 && !elementFoldouts[i] ? 4f : 0f));
+                        if (GUILayout.Button(elementByCategory[j].ElementName, UVNFSettings.GetElementStyle(storyElementCategories[i])))
+                            editor.AddElement(elementByCategory[j].GetType());
 
-                    Rect lastRect = GUILayoutUtility.GetLastRect();
-                    lastRect.width = 50f;
-                    lastRect.height = 50f;
-                    lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
+                        Rect lastRect = GUILayoutUtility.GetLastRect();
+                        lastRect.width = 50f;
+                        lastRect.height = 50f;
+                        lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
-                    if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(elementByCategory[j].ElementName))
-                        GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[elementByCategory[j].ElementName]);
-                    GUILayout.Space(10f);
+                        if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(elementByCategory[j].ElementName))
+                            GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[elementByCategory[j].ElementName], ScaleMode.ScaleToFit);
+                        GUILayout.Space(10f);
+                    }
                 }
             }
         }
+        GUILayout.EndScrollView();
     }
 }
