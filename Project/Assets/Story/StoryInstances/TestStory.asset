@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8619597601936787817
+--- !u!114 &-6502067193283125658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,13 +9,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b90670ceb2b4bc47861dd6a43ce8cf0, type: 3}
-  m_Name: Log
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
   m_EditorClassIdentifier: 
   Active: 0
-  Next: {fileID: 0}
-  LogText: 
---- !u!114 &-2688509679373562778
+  Next: {fileID: -5954546511474137739}
+  WaitTime: 0.5
+--- !u!114 &-6277662915392677871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 750273598612843056}
+  WaitTime: 0.5
+--- !u!114 &-5954546511474137739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: -6277662915392677871}
+  CharacterName: Dfs
+  Character: {fileID: 21300000, guid: b878a6e26bd8bee43814ef7cfb92ce47, type: 3}
+  Flip: 0
+  EnterFromDirection: 0
+  FinalPosition: 0
+  EnterTime: 2
+--- !u!114 &-5889584874914968772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: -4605383734190294277}
+  CharacterName: Uvie
+  Character: {fileID: 21300000, guid: 4c2f728a4fbd8644f93df4257f7d1022, type: 3}
+  Flip: 1
+  EnterFromDirection: 0
+  FinalPosition: 0
+  EnterTime: 2
+--- !u!114 &-5222500001792325655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,12 +84,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 0
   Next: {fileID: 0}
-  CharacterName: 
-  Character: {fileID: 0}
+  CharacterName: FAfasfa
+  Character: {fileID: 21300000, guid: 5a263f0efe0c15242bcc465bfaa22a6c, type: 3}
   Flip: 0
   EnterFromDirection: 0
   FinalPosition: 0
   EnterTime: 2
+--- !u!114 &-4605383734190294277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 3206941609767690973}
+  WaitTime: 0.5
+--- !u!114 &-2688509679373562778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 3512340645827293112}
+  CharacterName: Novle
+  Character: {fileID: 21300000, guid: 73683e6458bceec42aacbd9f95dd4b8a, type: 3}
+  Flip: 0
+  EnterFromDirection: 1
+  FinalPosition: 1
+  EnterTime: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,10 +138,23 @@ MonoBehaviour:
   m_Name: TestStory
   m_EditorClassIdentifier: 
   StoryElements:
+  - {fileID: 0}
   - {fileID: -2688509679373562778}
-  - {fileID: -8619597601936787817}
-  - {fileID: 212971310333130156}
---- !u!114 &212971310333130156
+  - {fileID: 3512340645827293112}
+  - {fileID: -5889584874914968772}
+  - {fileID: -4605383734190294277}
+  - {fileID: 3206941609767690973}
+  - {fileID: 1520810425615877989}
+  - {fileID: 4936167035627669442}
+  - {fileID: 591450184501487332}
+  - {fileID: 8722301893187052802}
+  - {fileID: -6502067193283125658}
+  - {fileID: -5954546511474137739}
+  - {fileID: -6277662915392677871}
+  - {fileID: 750273598612843056}
+  - {fileID: 6206773625265022884}
+  - {fileID: -5222500001792325655}
+--- !u!114 &591450184501487332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,16 +163,134 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adabf642a00adb64f98845666fedcc5a, type: 3}
-  m_Name: Audio Dialogue
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
   m_EditorClassIdentifier: 
   Active: 0
-  Next: {fileID: 0}
-  CharacterName: 
-  Dialogue: 
-  Beep: 0
-  BeepOnVowel: 0
-  PitchShift: 0
-  MaxPitch: 0
-  BoopSoundEffect: {fileID: 0}
-  DialogueClip: {fileID: 0}
+  Next: {fileID: 8722301893187052802}
+  WaitTime: 0.5
+--- !u!114 &750273598612843056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 6206773625265022884}
+  CharacterName: GGGGGGGG
+  Character: {fileID: 21300000, guid: 8b12781bcd037404e956b90e268aa08d, type: 3}
+  Flip: 1
+  EnterFromDirection: 1
+  FinalPosition: 1
+  EnterTime: 2
+--- !u!114 &1520810425615877989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 4936167035627669442}
+  WaitTime: 0.5
+--- !u!114 &3206941609767690973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 1520810425615877989}
+  CharacterName: Dingle
+  Character: {fileID: 21300000, guid: c9ba3a579969eca44a7b61df5e6ce4ba, type: 3}
+  Flip: 0
+  EnterFromDirection: 1
+  FinalPosition: 1
+  EnterTime: 2
+--- !u!114 &3512340645827293112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: -5889584874914968772}
+  WaitTime: 0.5
+--- !u!114 &4936167035627669442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: 591450184501487332}
+  CharacterName: fsdafs
+  Character: {fileID: 21300000, guid: c9ba3a579969eca44a7b61df5e6ce4ba, type: 3}
+  Flip: 1
+  EnterFromDirection: 0
+  FinalPosition: 0
+  EnterTime: 2
+--- !u!114 &6206773625265022884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: -5222500001792325655}
+  WaitTime: 0.5
+--- !u!114 &8722301893187052802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
+  m_EditorClassIdentifier: 
+  Active: 0
+  Next: {fileID: -6502067193283125658}
+  CharacterName: Dippie
+  Character: {fileID: 21300000, guid: 4a4df1ce1b4b2c748981856482690b2b, type: 3}
+  Flip: 1
+  EnterFromDirection: 1
+  FinalPosition: 1
+  EnterTime: 2

@@ -15,6 +15,7 @@ public class UVNFCanvas : MonoBehaviour
     [Header("Dialogue")]
     public TextMeshProUGUI DialogueTMP;
     public TextMeshProUGUI CharacterTMP;
+    public GameObject CharacterNamePlate;
 
     public float TextDisplayInterval = 0.05f;
     private float tempDisplayInterval = 0f;
@@ -61,6 +62,8 @@ public class UVNFCanvas : MonoBehaviour
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
         BottomCanvasGroup.gameObject.SetActive(true);
 
+        CharacterNamePlate.SetActive(false);
+
         int textIndex = 0;
         while(textIndex < text.Length)
         {
@@ -88,6 +91,8 @@ public class UVNFCanvas : MonoBehaviour
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
         if (useStylesForCharacterField)
             ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
         BottomCanvasGroup.gameObject.SetActive(true);
 
@@ -121,6 +126,8 @@ public class UVNFCanvas : MonoBehaviour
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
         if (useStylesForCharacterField)
             ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
         BottomCanvasGroup.gameObject.SetActive(true);
 
@@ -156,6 +163,8 @@ public class UVNFCanvas : MonoBehaviour
         ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
         if (useStylesForCharacterField)
             ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+
+        CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
         BottomCanvasGroup.gameObject.SetActive(true);
 

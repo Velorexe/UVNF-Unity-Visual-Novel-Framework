@@ -160,7 +160,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
                                 if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
-                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
+                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName], ScaleMode.ScaleToFit);
                             }
                             else
                             {
@@ -175,7 +175,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
                                 if(UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
-                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
+                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName], ScaleMode.ScaleToFit);
                             }
 
                             if (i == storyContainer.StoryElements.Count - 1)

@@ -25,6 +25,12 @@ public static class VectorExtensions
         return v;
     }
 
+    public static Vector2 SetX(this Vector2 v, float x)
+    {
+        v.x = x;
+        return v;
+    }
+
     public static Vector2 OffsetY(this Vector2 v, float offset)
     {
         v.y -= offset;

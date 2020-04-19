@@ -45,6 +45,7 @@ MonoBehaviour:
   - Exit Scene
   - Wait
   - Stop Audio
+  - Move To Character
   ElementHintTextures:
   - {fileID: 2800000, guid: 0b9112c3641db2c429ea33777440caeb, type: 3}
   - {fileID: 2800000, guid: b409ebdc2ece2a4409f076f287c9a5bc, type: 3}
@@ -59,3 +60,4 @@ MonoBehaviour:
   - {fileID: 2800000, guid: c84e0e40c3c37054fa8bf3cf8f9136a6, type: 3}
   - {fileID: 2800000, guid: d7671b62661082747a12083af170ec90, type: 3}
   - {fileID: 2800000, guid: 8a621697cd3983c4d882ffe22ac3799a, type: 3}
+  - {fileID: 2800000, guid: cd408ade1943eb8419ab8c12edffbd93, type: 3}
