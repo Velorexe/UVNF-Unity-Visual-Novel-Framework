@@ -23,21 +23,25 @@ public class UVNFStoryElements : EditorWindow
 
     public void OnGUI()
     {
-        if (StoryElements == null)
+        if (StoryElements == null || StoryElements[0] == null)
         {
             StoryElements = UVNFSettings.StoryElements;
-
-            elementFoldouts = new bool[StoryElements.Count];
-            for (int i = 0; i < elementFoldouts.Length; i++) elementFoldouts[i] = true;
-
             storyStyle = new GUIStyle("Box");
+
             Texture2D texture = new Texture2D(1, 1);
             storyStyle.normal.background = texture;
+        }
+
+        if(elementFoldouts == null || StoryElements.Count != elementFoldouts.Length)
+        {
+            elementFoldouts = new bool[StoryElements.Count];
+            for (int i = 0; i < elementFoldouts.Length; i++) elementFoldouts[i] = true;
         }
 
         for (int i = 0; i < storyElementCategories.Length; i++)
         {
             storyStyle = UVNFSettings.GetColorByElement(storyElementCategories[i]);
+
             bool buttonPress = GUILayout.Button(storyElementCategories[i].ToString(), storyStyle);
             if (buttonPress)
                 elementFoldouts[i] = !elementFoldouts[i];

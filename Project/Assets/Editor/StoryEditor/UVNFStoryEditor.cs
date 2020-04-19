@@ -88,7 +88,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                     EditorGUI.DrawRect(lastRect, Color.grey);
                 }
 
-                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 115f));
+                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 100f));
                 {
                     if (storyContainer.StoryElements.Count > 0)
                     {
@@ -175,6 +175,10 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 if(UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
                                     GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName]);
                             }
+
+                            if (i == storyContainer.StoryElements.Count - 1)
+                                GUILayout.Space(20f);
+
                         }
 
                         if (moveElement != -1)
