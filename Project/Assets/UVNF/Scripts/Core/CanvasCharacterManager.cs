@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CanvasCharacterManager : MonoBehaviour
 {
-    public List<Transform> CharactersOnScreen;
+    public List<Character> CharactersOnScreen;
 
     public RectTransform LeftSideCharacterStack;
     private Dictionary<string, Transform> _leftSideCharacters = new Dictionary<string, Transform>();
@@ -57,48 +57,51 @@ public class CanvasCharacterManager : MonoBehaviour
         switch (enter)
         {
             case ScenePositions.Left:
-                startPosition = new Vector3(characterSprite.rect.width - parentTransform.position.x, 0, 0);
+                startPosition = new Vector3(-spriteTransform.rect.width * 1.5f/*- parentTransform.position.x*/, 0, 0);
                 break;
             case ScenePositions.Top:
-                startPosition = new Vector3(0, parentTransform.position.y + parentTransform.rect.y + characterSprite.rect.height, 0);
+                startPosition = new Vector3(0, spriteTransform.rect.height, 0);
                 break;
             case ScenePositions.Right:
-                startPosition = new Vector3(parentTransform.anchoredPosition.x + characterSprite.rect.width, 0, 0);
+                startPosition = new Vector3(-parentTransform.anchoredPosition.x + spriteTransform.rect.width, 0, 0);
                 break;
         }
 
-        CharactersOnScreen.Add(spriteTransform);
+        spriteTransform.anchoredPosition = startPosition;
+
+        Character character = obj.AddComponent<Character>();
+        character.Name = characterName;
+        character.Transform = spriteTransform;
+        character.Parent = parentTransform;
+
+        CharactersOnScreen.Add(character);
         _leftSideCharacters.Add(characterName, spriteTransform);
 
         //TODO: Calculate with already set characters
         Vector3 endPosition = new Vector3(0, 0, 0);
-        StartCoroutine(MoveCharacter(spriteTransform, startPosition, endPosition, enterTime));
+        character.MoveCharacter(endPosition, enterTime);
     }
 
     public void RemoveCharacter(string characterName, ScenePositions exitPosition, float exitTime)
     {
-        Tuple<RectTransform, RectTransform> characterResult = GetCharacter(characterName);
-        
-        RectTransform characterSprite = characterResult.Item1;
-        RectTransform parentTransform = characterResult.Item2;
+        Character character = CharactersOnScreen.Find(x => x.Name == characterName);
 
         Vector3 endPosition = new Vector3();
 
         switch (exitPosition)
         {
             case ScenePositions.Left:
-                endPosition = new Vector3(-characterSprite.rect.width /*- parentTransform.position.x*/, 0, 0);
+                endPosition = new Vector3(-character.Transform.rect.width * 1.5f, 0, 0);
                 break;
             case ScenePositions.Top:
-                endPosition = new Vector3(0, parentTransform.position.y + parentTransform.rect.y + characterSprite.rect.height, 0);
+                endPosition = new Vector3(0, character.Parent.position.y + character.Parent.rect.y + character.Transform.rect.height, 0);
                 break;
             case ScenePositions.Right:
-                endPosition = new Vector3(parentTransform.anchoredPosition.x + characterSprite.rect.width, 0, 0);
+                endPosition = new Vector3(character.Parent.anchoredPosition.x + character.Transform.rect.width, 0, 0);
                 break;
         }
 
-        ScenePositions characterPosition = GetCharacterPosition(characterName);
-        switch (characterPosition)
+        switch (character.CurrentPosition)
         {
             case ScenePositions.Left:
                 _leftSideCharacters.Remove(characterName);
@@ -110,48 +113,6 @@ public class CanvasCharacterManager : MonoBehaviour
                 _rightSideCharacters.Remove(characterName);
                 break;
         }
-        StartCoroutine(MoveCharacter(characterSprite, characterSprite.anchoredPosition, endPosition, exitTime));
-    }
-
-    private IEnumerator MoveCharacter(RectTransform character, Vector2 startPosition, Vector2 endPosition, float enterTime)
-    {
-        float time = enterTime;
-
-        float distance = Vector3.Distance(startPosition, endPosition);
-        float currentLerpTime = 0f;
-
-        while(character.anchoredPosition != endPosition)
-        {
-            currentLerpTime += Time.deltaTime;
-            if (currentLerpTime > time)
-                currentLerpTime = time;
-
-            float t = currentLerpTime / time;
-            t = t * t * t * (t * (6f * t - 15f) + 10f);
-            character.anchoredPosition = Vector2.Lerp(startPosition, endPosition, t);
-            yield return null;
-        }
-    }
-
-    private Tuple<RectTransform, RectTransform> GetCharacter(string characterName)
-    {
-        if (_leftSideCharacters.ContainsKey(characterName))
-            return new Tuple<RectTransform, RectTransform>(_leftSideCharacters[characterName].GetComponent<RectTransform>(), LeftSideCharacterStack);
-        if (_middleSideCharacters.ContainsKey(characterName))
-            return new Tuple<RectTransform, RectTransform>(_middleSideCharacters[characterName].GetComponent<RectTransform>(), MiddleCharacterStack);
-        if (_rightSideCharacters.ContainsKey(characterName))
-            return new Tuple<RectTransform, RectTransform>(_rightSideCharacters[characterName].GetComponent<RectTransform>(), RightSideCharacterStack);
-        return null;
-    }
-
-    private ScenePositions GetCharacterPosition(string characterName)
-    {
-        if (_leftSideCharacters.ContainsKey(characterName))
-            return ScenePositions.Left;
-        if (_middleSideCharacters.ContainsKey(characterName))
-            return ScenePositions.Middle;
-        if (_rightSideCharacters.ContainsKey(characterName))
-            return ScenePositions.Right;
-        return ScenePositions.Middle;
+        character.MoveCharacter(endPosition, exitTime);
     }
 }
