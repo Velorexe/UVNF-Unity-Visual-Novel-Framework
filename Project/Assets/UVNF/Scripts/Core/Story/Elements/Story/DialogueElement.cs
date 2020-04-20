@@ -13,6 +13,7 @@ public class DialogueElement : StoryElement
     public override StoryElementTypes Type => StoryElementTypes.Story;
 
     public string CharacterName;
+    [TextArea(3, 5)]
     public string Dialogue;
 
     private GUIStyle textAreaStyle;
@@ -26,9 +27,8 @@ public class DialogueElement : StoryElement
             textAreaStyle.richText = true;
         }
 
-        GUILayout.Label("Character", EditorStyles.boldLabel);
-        CharacterName = GUILayout.TextField(CharacterName);
-        GUILayout.Label("Dialogue", EditorStyles.boldLabel);
+        CharacterName = EditorGUILayout.TextField("Character", CharacterName);
+        GUILayout.Label("Dialogue");
         Dialogue = EditorGUILayout.TextArea(Dialogue, textAreaStyle, GUILayout.MinHeight(50));
 #endif
     }

@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9005497396375030776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3ce2b406697714681ce456f5424af4, type: 3}
+  m_Name: Background Music Element
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1832, y: 296}
+  ports:
+    keys:
+    - PreviousNode
+    - NextNode
+    values:
+    - _fieldName: PreviousNode
+      _node: {fileID: -9005497396375030776}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: NextNode
+      _node: {fileID: -9005497396375030776}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: PreviousNode
+        node: {fileID: -1305670587488541801}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Active: 0
+  Next: {fileID: 0}
+  PreviousNode:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  NextNode:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  BackgroundMusic: {fileID: 8300000, guid: c8fa33de6006b874dbe76170f373dc23, type: 3}
+  Crossfade: 1
+  CrossfadeTime: 1
+  Volume: 0
+--- !u!114 &-1305670587488541801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
+  m_Name: Dialogue Element
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 2168, y: 296}
+  ports:
+    keys:
+    - PreviousNode
+    - NextNode
+    values:
+    - _fieldName: PreviousNode
+      _node: {fileID: -1305670587488541801}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: NextNode
+        node: {fileID: -9005497396375030776}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: NextNode
+      _node: {fileID: -1305670587488541801}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: PreviousNode
+        node: {fileID: 767597334618567001}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Active: 0
+  Next: {fileID: 0}
+  PreviousNode:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  NextNode:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  CharacterName: 
+  Dialogue: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,9 +142,10 @@ MonoBehaviour:
   m_Name: New Story Graph
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 5381062433608321288}
-  - {fileID: 2212490680363546773}
---- !u!114 &2212490680363546773
+  - {fileID: -9005497396375030776}
+  - {fileID: -1305670587488541801}
+  - {fileID: 767597334618567001}
+--- !u!114 &767597334618567001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24,30 +154,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c599ddc9a1b854f85859c7762a12fb, type: 3}
-  m_Name: Dialogue Element
+  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
+  m_Name: Enter Scene
   m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1896, y: 264}
+  graph: {fileID: 0}
+  position: {x: 2504, y: 296}
   ports:
     keys:
     - PreviousNode
     - NextNode
     values:
     - _fieldName: PreviousNode
-      _node: {fileID: 2212490680363546773}
+      _node: {fileID: 767597334618567001}
       _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
       - fieldName: NextNode
-        node: {fileID: 5381062433608321288}
+        node: {fileID: -1305670587488541801}
         reroutePoints: []
       _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: NextNode
-      _node: {fileID: 2212490680363546773}
+      _node: {fileID: 767597334618567001}
       _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections: []
@@ -76,70 +206,8 @@ MonoBehaviour:
     _typeConstraint: 0
     _dynamic: 0
   CharacterName: 
-  Dialogue: Node System Works!
---- !u!114 &5381062433608321288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
-  m_Name: Enter Scene Element
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1640, y: 216}
-  ports:
-    keys:
-    - PreviousNode
-    - NextNode
-    values:
-    - _fieldName: PreviousNode
-      _node: {fileID: 5381062433608321288}
-      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: NextNode
-      _node: {fileID: 5381062433608321288}
-      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: PreviousNode
-        node: {fileID: 2212490680363546773}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-  Active: 0
-  Next: {fileID: 2212490680363546773}
-  PreviousNode:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  NextNode:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  CharacterName: Uvie
-  Character: {fileID: 21300000, guid: 7b9629ce5c6bc004b984ba6608fe31ea, type: 3}
-  Flip: 1
+  Character: {fileID: 0}
+  Flip: 0
   EnterFromDirection: 0
   FinalPosition: 0
   EnterTime: 2
