@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: -5954546511474137739}
   WaitTime: 0.5
@@ -27,6 +32,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 750273598612843056}
   WaitTime: 0.5
@@ -42,6 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: -6277662915392677871}
   CharacterName: Dfs
@@ -62,6 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: -4605383734190294277}
   CharacterName: Uvie
@@ -82,6 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 0}
   CharacterName: FAfasfa
@@ -102,6 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 3206941609767690973}
   WaitTime: 0.5
@@ -117,6 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 3512340645827293112}
   CharacterName: Novle
@@ -138,7 +173,6 @@ MonoBehaviour:
   m_Name: TestStory
   m_EditorClassIdentifier: 
   StoryElements:
-  - {fileID: 0}
   - {fileID: -2688509679373562778}
   - {fileID: 3512340645827293112}
   - {fileID: -5889584874914968772}
@@ -154,6 +188,7 @@ MonoBehaviour:
   - {fileID: 750273598612843056}
   - {fileID: 6206773625265022884}
   - {fileID: -5222500001792325655}
+  - {fileID: 0}
 --- !u!114 &591450184501487332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 8722301893187052802}
   WaitTime: 0.5
@@ -181,6 +221,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 6206773625265022884}
   CharacterName: GGGGGGGG
@@ -201,6 +246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 4936167035627669442}
   WaitTime: 0.5
@@ -216,6 +266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 1520810425615877989}
   CharacterName: Dingle
@@ -236,6 +291,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: -5889584874914968772}
   WaitTime: 0.5
@@ -251,6 +311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: 591450184501487332}
   CharacterName: fsdafs
@@ -271,6 +336,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186519c80b988364fba5cea0c54f9e49, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: -5222500001792325655}
   WaitTime: 0.5
@@ -286,6 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f75b66cbe889d4cb63a0a491cf5a3b, type: 3}
   m_Name: Enter Scene
   m_EditorClassIdentifier: 
+  graph: {fileID: 0}
+  position: {x: 0, y: 0}
+  ports:
+    keys: []
+    values: []
   Active: 0
   Next: {fileID: -6502067193283125658}
   CharacterName: Dippie

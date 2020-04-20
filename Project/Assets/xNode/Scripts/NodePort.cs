@@ -23,12 +23,12 @@ namespace XNode {
         public Node.ConnectionType connectionType { get { return _connectionType; } }
         public Node.TypeConstraint typeConstraint { get { return _typeConstraint; } }
 
-        /// <summary> Is this port connected to anytihng? </summary>
+        /// <summary> Is this port connected to anything? </summary>
         public bool IsConnected { get { return connections.Count != 0; } }
         public bool IsInput { get { return direction == IO.Input; } }
         public bool IsOutput { get { return direction == IO.Output; } }
 
-        public string fieldName { get { return _fieldName; } }
+        public string fieldName { get { return _fieldName; } set { _fieldName = value; } }
         public Node node { get { return _node; } }
         public bool IsDynamic { get { return _dynamic; } }
         public bool IsStatic { get { return !_dynamic; } }

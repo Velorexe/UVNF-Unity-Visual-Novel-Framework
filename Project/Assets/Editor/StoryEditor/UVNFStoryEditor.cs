@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEditor;
 public class UVNFStoryEditor : EditorWindowExtended
 {
     public Texture2D backgroundTexture;
-    public StoryContainer storyContainer;
+    public StoryGraph storyContainer;
 
     public bool Exported = false;
 
@@ -50,11 +51,11 @@ public class UVNFStoryEditor : EditorWindowExtended
         if (standardSetup)
         {
             SetStandardBackground();
-            storyContainer = CreateInstance<StoryContainer>();
+            storyContainer = CreateInstance<StoryGraph>();
             EditorUtility.SetDirty(storyContainer);
             standardSetup = false;
         }
-
+        
         if(storyElementsFoldout.Count != storyContainer.StoryElements.Count)
         {
             for (int i = 0; i < storyContainer.StoryElements.Count; i++)
@@ -63,12 +64,13 @@ public class UVNFStoryEditor : EditorWindowExtended
             }
         }
 
+
         GUILayout.BeginVertical(GUILayout.MinWidth(position.width), GUILayout.MinHeight(maxSize.y));
         {
             GUILayout.Label("Give your Story a relevant name and click 'Export' to get started.", EditorStyles.boldLabel);
             GUILayout.Label("Or drag and drop a Story asset onto this window.");
 
-            storyContainer = EditorGUILayout.ObjectField("Story", storyContainer, typeof(StoryContainer), false) as StoryContainer;
+            storyContainer = EditorGUILayout.ObjectField("Story", storyContainer, typeof(StoryGraph), false) as StoryGraph;
 
             if (storyContainer != null)
             {

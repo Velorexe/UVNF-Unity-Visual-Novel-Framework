@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 
-public abstract class StoryElement : ScriptableObject, IComparable
+public abstract class StoryElement : Node, IComparable
 {
     public abstract string ElementName { get; }
     public abstract Color32 DisplayColor { get; }
@@ -15,6 +15,16 @@ public abstract class StoryElement : ScriptableObject, IComparable
     public bool Active = false;
     [HideInInspector]
     public StoryElement Next;
+
+    [Input(ShowBackingValue.Never, ConnectionType.Override)] public NodePort PreviousNode;
+    [Output(ShowBackingValue.Never, ConnectionType.Override)] public NodePort NextNode;
+
+    public override object GetValue(NodePort port)
+    {
+        if(port.IsConnected)
+            return port.Connection.node;
+        return null;
+    }
 
     public virtual void OnCreate() { }
     public virtual void OnDelete() { }
