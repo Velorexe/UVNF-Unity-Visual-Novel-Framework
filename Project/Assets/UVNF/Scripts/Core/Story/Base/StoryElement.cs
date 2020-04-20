@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 
+[NodeWidth(300)]
 public abstract class StoryElement : Node, IComparable
 {
     public abstract string ElementName { get; }
@@ -16,7 +17,9 @@ public abstract class StoryElement : Node, IComparable
     [HideInInspector]
     public StoryElement Next;
 
+    [HideInInspector]
     [Input(ShowBackingValue.Never, ConnectionType.Override)] public NodePort PreviousNode;
+    [HideInInspector]
     [Output(ShowBackingValue.Never, ConnectionType.Override)] public NodePort NextNode;
 
     public override object GetValue(NodePort port)

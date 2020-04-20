@@ -26,10 +26,14 @@ namespace XNodeEditor {
             serializedObject.Update();
             string[] excludes = { "m_Script", "graph", "position", "ports" };
 
+            EditorUtility.SetDirty(target);
+            NodeEditorGUILayout.AddPortField(target.GetInputPort("PreviousNode"));
+            NodeEditorGUILayout.AddPortField(target.GetOutputPort("NextNode"));
+
             // Iterate through serialized properties and draw them like the Inspector (But with ports)
             SerializedProperty iterator = serializedObject.GetIterator();
             bool enterChildren = true;
-            EditorGUIUtility.labelWidth = 84;
+            EditorGUIUtility.labelWidth = 120;
             while (iterator.NextVisible(enterChildren)) {
                 enterChildren = false;
                 if (excludes.Contains(iterator.name)) continue;

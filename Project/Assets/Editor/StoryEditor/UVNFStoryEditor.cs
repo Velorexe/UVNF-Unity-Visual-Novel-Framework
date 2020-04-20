@@ -56,7 +56,7 @@ public class UVNFStoryEditor : EditorWindowExtended
             standardSetup = false;
         }
         
-        if(storyElementsFoldout.Count != storyContainer.StoryElements.Count)
+        if(storyContainer != null && storyElementsFoldout.Count != storyContainer.StoryElements.Count)
         {
             for (int i = 0; i < storyContainer.StoryElements.Count; i++)
             {
@@ -189,9 +189,9 @@ public class UVNFStoryEditor : EditorWindowExtended
                         {
                             if (moveUp && moveElement > 0)
                             {
-                                StoryElement shiftElement = storyContainer.StoryElements[moveElement - 1];
-                                storyContainer.StoryElements[moveElement - 1] = storyContainer.StoryElements[moveElement];
-                                storyContainer.StoryElements[moveElement] = shiftElement;
+                                StoryElement shiftElement = storyContainer.nodes[moveElement - 1] as StoryElement;
+                                storyContainer.nodes[moveElement - 1] = storyContainer.nodes[moveElement];
+                                storyContainer.nodes[moveElement] = shiftElement;
 
                                 bool shiftFoldout = storyElementsFoldout[moveElement - 1];
                                 storyElementsFoldout[moveElement - 1] = storyElementsFoldout[moveElement];
@@ -201,9 +201,9 @@ public class UVNFStoryEditor : EditorWindowExtended
                             }
                             else if (moveElement < storyContainer.StoryElements.Count - 1)
                             {
-                                StoryElement shiftElement = storyContainer.StoryElements[moveElement + 1];
-                                storyContainer.StoryElements[moveElement + 1] = storyContainer.StoryElements[moveElement];
-                                storyContainer.StoryElements[moveElement] = shiftElement;
+                                StoryElement shiftElement = storyContainer.nodes[moveElement + 1] as StoryElement;
+                                storyContainer.nodes[moveElement + 1] = storyContainer.nodes[moveElement];
+                                storyContainer.nodes[moveElement] = shiftElement;
 
                                 bool shiftFoldout = storyElementsFoldout[moveElement + 1];
                                 storyElementsFoldout[moveElement + 1] = storyElementsFoldout[moveElement];
@@ -215,9 +215,9 @@ public class UVNFStoryEditor : EditorWindowExtended
 
                         if (removeElement != -1)
                         {
-                            AssetDatabase.RemoveObjectFromAsset(storyContainer.StoryElements[removeElement]);
+                            AssetDatabase.RemoveObjectFromAsset(storyContainer.nodes[removeElement]);
                             AssetDatabase.SaveAssets();
-                            storyContainer.StoryElements.RemoveAt(removeElement);
+                            storyContainer.nodes.RemoveAt(removeElement);
                             storyElementsFoldout.RemoveAt(removeElement);
                             removeElement = -1;
                         }
@@ -239,7 +239,7 @@ public class UVNFStoryEditor : EditorWindowExtended
         AssetDatabase.AddObjectToAsset(newElement, storyContainer);
         storyElementsFoldout.Add(true);
 
-        storyContainer.StoryElements.Add(newElement);
+        storyContainer.nodes.Add(newElement);
         AssetDatabase.SaveAssets();
     }
 
