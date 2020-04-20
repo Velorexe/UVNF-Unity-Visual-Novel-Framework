@@ -272,7 +272,7 @@ MonoBehaviour:
   Canvas: {fileID: 2086034938}
   AudioManager: {fileID: 1221267970}
   CharacterManager: {fileID: 359661694}
-  CurrentStory: {fileID: 11400000, guid: 6eb5afb9c4bd8d9439468575a0a5e212, type: 2}
+  CurrentStory: {fileID: 11400000, guid: a568b090172e97a43b6b44a42783fd6c, type: 2}
   TimeoutBeforeStart: 0
 --- !u!4 &119077503
 Transform:
