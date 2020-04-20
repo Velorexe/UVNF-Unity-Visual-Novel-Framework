@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
@@ -16,8 +19,18 @@ public class StoryGraphEditor : NodeGraphEditor
 
     public override string GetNodeMenuName(Type type)
     {
-        if (type.BaseType == typeof(Node))
-            return base.GetNodeMenuName(type).Replace("Node", "");
+        if (type.BaseType == typeof(Node) || type.IsSubclassOf(typeof(Node)))
+        {
+            if (type.IsSubclassOf(typeof(StoryElement)))
+            {
+                StoryElement element = ScriptableObject.CreateInstance(type) as StoryElement;
+                string returnString = element.Type.ToString() + "/" + base.GetNodeMenuName(type).Replace(" Element", "");
+                ScriptableObject.DestroyImmediate(element);
+                return returnString;
+            }
+            else
+                return base.GetNodeMenuName(type).Replace("Node", "");
+        }
         else return null;
     }
 
@@ -26,26 +39,30 @@ public class StoryGraphEditor : NodeGraphEditor
         base.OnGUI();
         if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 2)
         {
-            CreateNode(typeof(DialogueNode), window.WindowToGridPosition(Event.current.mousePosition).OffsetY(20));
+            CreateNode(typeof(DialogueElement), window.WindowToGridPosition(Event.current.mousePosition).OffsetY(20));
         }
     }
 }
 
-[CustomNodeEditor(typeof(BranchNode))]
+[CustomNodeEditor(typeof(ChoiceElement))]
 public class BranchNodeEditor : NodeEditor
 {
-    private BranchNode branchNode;
+    private ChoiceElement branchNode;
 
     public override void OnCreate()
     {
         base.OnCreate();
-        if (branchNode == null) branchNode = target as BranchNode;
+        if (branchNode == null) branchNode = target as ChoiceElement;
         EditorUtility.SetDirty(branchNode);
+
+        for (int i = 0; i < branchNode.Choices.Count; i++)
+            branchNode.AddDynamicOutput(typeof(Empty), Node.ConnectionType.Override, Node.TypeConstraint.None, i + "");
     }
 
     public override void OnBodyGUI()
     {
-        NodeEditorGUILayout.AddPortField(branchNode.GetInputPort("Previous"));
+        NodeEditorGUILayout.AddPortField(branchNode.GetInputPort("PreviousNode"));
+        IEnumerable<NodePort> outputFields = branchNode.DynamicOutputs;
 
         int removeIndex = -1;
         for (int i = 0; i < branchNode.Choices.Count; i++)
@@ -57,7 +74,7 @@ public class BranchNodeEditor : NodeEditor
                     removeIndex = i;
             }
             GUILayout.EndHorizontal();
-            NodeEditorGUILayout.AddPortField(branchNode.ChoicePorts[i]);
+            NodeEditorGUILayout.AddPortField(outputFields.ElementAt(i));
 
             GUILayout.Space(11f);
         }
@@ -65,27 +82,30 @@ public class BranchNodeEditor : NodeEditor
         if (removeIndex != -1)
         {
             branchNode.Choices.RemoveAt(removeIndex);
-            branchNode.ChoicePorts.RemoveAt(removeIndex);
+            branchNode.RemoveDynamicPort("" + removeIndex);
+
+            for (int i = 0; i < outputFields.Count(); i++)
+                outputFields.ElementAt(i).fieldName = i + "";
         }
 
         if (GUILayout.Button("+"))
         {
             branchNode.Choices.Add("");
-            branchNode.ChoicePorts.Add(branchNode.AddDynamicOutput(typeof(Empty), Node.ConnectionType.Override));
+            NodePort debug = branchNode.AddDynamicOutput(typeof(Empty), Node.ConnectionType.Override, Node.TypeConstraint.None, "" + (branchNode.DynamicOutputs.Count() - 1));
         }
     }
 }
 
-[CustomNodeEditor(typeof(DialogueNode))]
+[CustomNodeEditor(typeof(DialogueElement))]
 public class DialogueNodeEditor : NodeEditor
 {
-    private DialogueNode dialogueNode;
+    private DialogueElement dialogueNode;
     private GUIStyle richDialogue;
 
     public override void OnCreate()
     {
         base.OnCreate();
-        if (dialogueNode == null) dialogueNode = target as DialogueNode;
+        if (dialogueNode == null) dialogueNode = target as DialogueElement;
         EditorUtility.SetDirty(dialogueNode);
 
         richDialogue = new GUIStyle("TextArea");
@@ -95,16 +115,9 @@ public class DialogueNodeEditor : NodeEditor
 
     public override void OnBodyGUI()
     {
-        NodeEditorGUILayout.AddPortField(dialogueNode.GetInputPort("Previous"));
-        NodeEditorGUILayout.AddPortField(dialogueNode.GetOutputPort("Next"));
-
-        GUILayout.BeginHorizontal();
-        {
-            GUILayout.Label("Character:", GUILayout.MaxWidth(65));
-            dialogueNode.Character = GUILayout.TextField(dialogueNode.Character);
-        }
-        GUILayout.EndHorizontal();
-        dialogueNode.Dialogue = GUILayout.TextArea(dialogueNode.Dialogue, richDialogue);
+        NodeEditorGUILayout.AddPortField(dialogueNode.GetInputPort("PreviousNode"));
+        NodeEditorGUILayout.AddPortField(dialogueNode.GetOutputPort("NextNode"));
+        dialogueNode.DisplayLayout(GUILayoutUtility.GetLastRect());
     }
 }
 

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public CanvasCharacterManager CharacterManager;
 
     [Header("Story Settings")]
-    public StoryContainer CurrentStory;
+    public StoryGraph CurrentStory;
 
     public float TimeoutBeforeStart = 0f;
     private float _timeoutTimer = 0f;
