@@ -12,5 +12,13 @@ public class StartNode : Node
     [Output(ShowBackingValue.Never, ConnectionType.Override)]
     public NodePort Next;
 
+    public override object GetValue(NodePort port)
+    {
+        if (port.IsConnected)
+            return port.Connection.node;
+        return null;
+    }
+
+    public string StoryName;
     public bool IsRoot;
 }

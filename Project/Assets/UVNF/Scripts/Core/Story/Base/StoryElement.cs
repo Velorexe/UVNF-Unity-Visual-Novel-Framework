@@ -18,7 +18,7 @@ public abstract class StoryElement : Node, IComparable
     public StoryElement Next;
 
     [HideInInspector]
-    [Input(ShowBackingValue.Never, ConnectionType.Override)] public NodePort PreviousNode;
+    [Input(ShowBackingValue.Never, ConnectionType.Multiple)] public NodePort PreviousNode;
     [HideInInspector]
     [Output(ShowBackingValue.Never, ConnectionType.Override)] public NodePort NextNode;
 
