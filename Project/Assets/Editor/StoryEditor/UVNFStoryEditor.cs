@@ -8,7 +8,9 @@ using UnityEditor;
 public class UVNFStoryEditor : EditorWindowExtended
 {
     public Texture2D backgroundTexture;
+
     public StoryGraph storyContainer;
+    public List<StoryElement> currentElements = new List<StoryElement>();
 
     public bool Exported = false;
 
@@ -19,6 +21,7 @@ public class UVNFStoryEditor : EditorWindowExtended
 
     public int removeElement = -1;
 
+    public int storyIndex = 0;
     public int selectedIndex = 0;
 
     public GUIStyle style = new GUIStyle();
@@ -56,9 +59,9 @@ public class UVNFStoryEditor : EditorWindowExtended
             standardSetup = false;
         }
         
-        if(storyContainer != null && storyElementsFoldout.Count != storyContainer.StoryElements.Count)
+        if(storyContainer != null && storyElementsFoldout.Count != currentElements.Count)
         {
-            for (int i = 0; i < storyContainer.StoryElements.Count; i++)
+            for (int i = 0; i < currentElements.Count; i++)
             {
                 storyElementsFoldout.Add(true);
             }
@@ -74,14 +77,12 @@ public class UVNFStoryEditor : EditorWindowExtended
 
             if (storyContainer != null)
             {
-                GUILayout.Label("Add Element", EditorStyles.boldLabel);
+                GUILayout.Label("Select Sub-story", EditorStyles.boldLabel);
                 GUILayout.BeginHorizontal();
                 {
-                    selectedIndex = EditorGUILayout.Popup(selectedIndex, UVNFSettings.StoryElementNames);
-                    if (GUILayout.Button("+", GUILayout.MaxWidth(40)))
-                    {
-                        AddElement(UVNFSettings.StoryElements[selectedIndex].GetType());
-                    }
+                    storyIndex = EditorGUILayout.Popup(storyIndex, storyContainer.StoryNames);
+                    storyContainer.RefreshStories();
+                    currentElements = storyContainer.ShortStory(storyIndex);
                 }
                 GUILayout.EndHorizontal();
                 {
@@ -94,11 +95,11 @@ public class UVNFStoryEditor : EditorWindowExtended
 
                 scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 100f));
                 {
-                    if (storyContainer.StoryElements.Count > 0)
+                    if (currentElements.Count > 0)
                     {
-                        for (int i = 0; i < storyContainer.StoryElements.Count; i++)
+                        for (int i = 0; i < currentElements.Count; i++)
                         {
-                            storyContainer.StoryElements[i].Active = false;
+                            currentElements[i].Active = false;
                             if (storyElementsFoldout[i])
                             {
                                 GUILayout.Space(55f);
@@ -107,12 +108,12 @@ public class UVNFStoryEditor : EditorWindowExtended
                                     GUILayout.Space(40f);
                                     GUILayout.BeginVertical(UVNFSettings.EditorSettings.DVNFSkin.box, GUILayout.MaxWidth(700));
                                     {
-                                        ChangeBackgroundStyle(storyContainer.StoryElements[i].DisplayColor);
+                                        ChangeBackgroundStyle(currentElements[i].DisplayColor);
                                         GUILayout.BeginVertical(style);
                                         {
                                             GUILayout.Space(20);
                                             Rect lastRect = GUILayoutUtility.GetLastRect();
-                                            storyContainer.StoryElements[i].DisplayLayout(GUILayoutUtility.GetLastRect());
+                                            currentElements[i].DisplayLayout(GUILayoutUtility.GetLastRect());
                                             GUILayout.Label("", GUI.skin.horizontalSlider);
 
                                             GUILayout.BeginHorizontal();
@@ -145,14 +146,14 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 GUILayout.Space(10f);
                             }
 
-                            GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetElementStyle(storyContainer.StoryElements[i].Type));
-                            if (storyContainer.StoryElements[i].Active)
+                            GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetElementStyle(currentElements[i].Type));
+                            if (currentElements[i].Active)
                                 buttonStyle.normal.textColor = UVNFSettings.EditorSettings.ActiveElementColor;
 
                             if (!storyElementsFoldout[i])
                             {
                                 GUILayout.Space(5f + (i != 0 && !storyElementsFoldout[i - 1] ? 4f : 0f));
-                                if (GUILayout.Button(storyContainer.StoryElements[i].ElementName, buttonStyle))
+                                if (GUILayout.Button(currentElements[i].ElementName, buttonStyle))
                                 {
                                     storyElementsFoldout[i] = !storyElementsFoldout[i];
                                 }
@@ -161,14 +162,14 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
-                                if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
-                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName], ScaleMode.ScaleToFit);
+                                if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(currentElements[i].ElementName))
+                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[currentElements[i].ElementName], ScaleMode.ScaleToFit);
                             }
                             else
                             {
                                 Rect lastRect = GUILayoutUtility.GetLastRect();
                                 lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y - 40f);
-                                if (GUI.Button(lastRect, storyContainer.StoryElements[i].ElementName, buttonStyle))
+                                if (GUI.Button(lastRect, currentElements[i].ElementName, buttonStyle))
                                 {
                                     storyElementsFoldout[i] = !storyElementsFoldout[i];
                                 }
@@ -176,11 +177,11 @@ public class UVNFStoryEditor : EditorWindowExtended
                                 lastRect.height = 50f;
                                 lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
-                                if(UVNFSettings.EditorSettings.ElementHints.ContainsKey(storyContainer.StoryElements[i].ElementName))
-                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[storyContainer.StoryElements[i].ElementName], ScaleMode.ScaleToFit);
+                                if(UVNFSettings.EditorSettings.ElementHints.ContainsKey(currentElements[i].ElementName))
+                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[currentElements[i].ElementName], ScaleMode.ScaleToFit);
                             }
 
-                            if (i == storyContainer.StoryElements.Count - 1)
+                            if (i == currentElements.Count - 1)
                                 GUILayout.Space(20f);
 
                         }
@@ -199,7 +200,7 @@ public class UVNFStoryEditor : EditorWindowExtended
 
                                 storyContainer.ConnectStoryElements();
                             }
-                            else if (moveElement < storyContainer.StoryElements.Count - 1)
+                            else if (moveElement < currentElements.Count - 1)
                             {
                                 StoryElement shiftElement = storyContainer.nodes[moveElement + 1] as StoryElement;
                                 storyContainer.nodes[moveElement + 1] = storyContainer.nodes[moveElement];
@@ -215,6 +216,7 @@ public class UVNFStoryEditor : EditorWindowExtended
 
                         if (removeElement != -1)
                         {
+                            storyContainer.nodes[removeElement].ClearConnections();
                             AssetDatabase.RemoveObjectFromAsset(storyContainer.nodes[removeElement]);
                             AssetDatabase.SaveAssets();
                             storyContainer.nodes.RemoveAt(removeElement);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -13,17 +14,57 @@ public class StoryGraph : NodeGraph
         {
             if (_storyElements.Count != nodes.Count)
             {
-                _storyElements.Clear();
-                for (int i = 0; i < nodes.Count; i++)
-                    _storyElements.Add((StoryElement)nodes[i]);
+                //_storyElements.Clear();
+                //for (int i = 0; i < nodes.Count; i++)
+                //    _storyElements.Add((StoryElement)nodes[i]);
+
+                RefreshStories();
             }
             return _storyElements;
         }
     }
     private List<StoryElement> _storyElements = new List<StoryElement>();
 
+    public string[] StoryNames = new string[] { };
+    private List<StoryElement>[] _shortStories = new List<StoryElement>[] { };
+
+    public void RefreshStories()
+    {
+        Node[] startNodesArray = nodes.Where(x => x.GetType() == typeof(StartNode)).ToArray();
+        StartNode[] startNodes = new StartNode[startNodesArray.Length];
+
+        for (int i = 0; i < startNodes.Length; i++)
+            startNodes[i] = startNodesArray[i] as StartNode;
+
+        StoryNames = startNodes.Select(x => x.StoryName).ToArray();
+
+        _shortStories = new List<StoryElement>[startNodes.Length];
+        for (int i = 0; i < _shortStories.Length; i++)
+        {
+            _shortStories[i] = new List<StoryElement>();
+
+            StartNode currentStartNode = startNodes[i];
+            StoryElement currentNode = startNodes[i].GetOutputPort("Next").GetOutputValue() as StoryElement;
+            while (currentNode != null && currentNode.GetOutputPort("NextNode").IsConnected && currentNode.GetOutputPort("NextNode").GetOutputValue().GetType() != typeof(StartNode))
+            {
+                _shortStories[i].Add(currentNode);
+                currentNode = currentNode.GetOutputPort("NextNode").GetOutputValue() as StoryElement;
+            }
+            if (currentNode != null && currentNode.GetType() != typeof(StartNode))
+                _shortStories[i].Add(currentNode);
+        }
+    }
+
+    public List<StoryElement> ShortStory(int storyIndex)
+    {
+        if(storyIndex < _shortStories.Length && storyIndex > -1)
+            return _shortStories[storyIndex];
+        return new List<StoryElement>();
+    }
+
     public void ConnectStoryElements()
     {
+        //TODO: switch to nodes
         for (int i = 0; i < StoryElements.Count; i++)
         {
             if (i < StoryElements.Count - 1)
