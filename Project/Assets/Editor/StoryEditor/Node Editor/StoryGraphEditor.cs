@@ -43,27 +43,3 @@ public class StoryGraphEditor : NodeGraphEditor
         }
     }
 }
-
-[CustomNodeEditor(typeof(StartNode))]
-public class StartNodeEditor : NodeEditor
-{
-    StartNode node;
-
-    public override void OnCreate()
-    {
-        if (node == null) node = target as StartNode;
-        EditorUtility.SetDirty(node);
-    }
-
-    public override void OnBodyGUI()
-    {
-        if (!node.IsRoot)
-            NodeEditorGUILayout.AddPortField(node.GetInputPort("Previous"));
-        NodeEditorGUILayout.AddPortField(node.GetOutputPort("Next"));
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Story Name:");
-        node.StoryName = EditorGUILayout.TextField(node.StoryName);
-        GUILayout.EndHorizontal();
-        node.IsRoot = GUILayout.Toggle(node.IsRoot, "Is Root");
-    }
-}

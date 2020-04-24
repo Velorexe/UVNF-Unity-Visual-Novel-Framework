@@ -1,5 +1,6 @@
 ﻿public enum VariableTypes
 {
     String,
-    Number
+    Number,
+    Boolean
 }
