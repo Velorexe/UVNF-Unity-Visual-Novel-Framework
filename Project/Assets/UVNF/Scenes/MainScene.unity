@@ -274,6 +274,7 @@ MonoBehaviour:
   CharacterManager: {fileID: 359661694}
   CurrentStory: {fileID: 11400000, guid: a568b090172e97a43b6b44a42783fd6c, type: 2}
   TimeoutBeforeStart: 0
+  Variables: {fileID: 11400000, guid: a65ee43229b4aa441befb0406558e8e2, type: 2}
 --- !u!4 &119077503
 Transform:
   m_ObjectHideFlags: 0

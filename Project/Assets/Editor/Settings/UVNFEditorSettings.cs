@@ -31,6 +31,9 @@ public class UVNFEditorSettings : ScriptableObject, ISerializationCallbackReceiv
 
     public Dictionary<string, Texture2D> ElementHints = new Dictionary<string, Texture2D>();
 
+    [Header("Variables")]
+    public VariableManager Variables;
+
     public void OnBeforeSerialize()
     {
         
