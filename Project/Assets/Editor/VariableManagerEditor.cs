@@ -65,11 +65,14 @@ public class VariableManagerEditor : EditorWindow
                         switch (Variables.Variables[selectedIndex].ValueType)
                         {
                             case VariableTypes.Number:
-                                Variables.Variables[selectedIndex].Value = EditorGUILayout.FloatField("Value", (float)Variables.Variables[selectedIndex].Value);
+                                Variables.Variables[selectedIndex].NumberValue = EditorGUILayout.FloatField("Value", Variables.Variables[selectedIndex].NumberValue);
                                 break;
                             case VariableTypes.String:
-                                Variables.Variables[selectedIndex].Value = EditorGUILayout.TextField("Value", (string)Variables.Variables[selectedIndex].Value);
+                                Variables.Variables[selectedIndex].TextValue = EditorGUILayout.TextField("Value", Variables.Variables[selectedIndex].TextValue);
                                 break;
+                            case VariableTypes.Boolean:
+                                Variables.Variables[selectedIndex].BooleanValue = Convert.ToBoolean(
+                                    EditorGUILayout.Popup("Value", Convert.ToInt32(Variables.Variables[selectedIndex].BooleanValue), new string[] { "False", "True" })); break;
                         }
 
                         if (GUILayout.Button("Remove"))
