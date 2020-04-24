@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     private StoryElement CurrentElement;
     private TaskManager.TaskState _currentTask;
 
+    [Header("Variables")]
+    public VariableManager Variables;
+
     private List<Tuple<string, string>> _storyLog = new List<Tuple<string, string>>();
 
     private Dictionary<string, object[]> _eventFlags = new Dictionary<string, object[]>();
