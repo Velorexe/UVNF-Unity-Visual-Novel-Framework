@@ -19,7 +19,9 @@ public class AffectVariableElement : StoryElement
 
     private VariableTypes previousType = VariableTypes.Number;
 
-    private MathTypes MathType = MathTypes.Add;
+    private MathAffectTypes MathType = MathAffectTypes.Add;
+    private StringAffectTypes StringType = StringAffectTypes.Replace;
+
     public object Value;
 
     public override void DisplayLayout(Rect layoutRect)
@@ -44,9 +46,10 @@ public class AffectVariableElement : StoryElement
             switch (Variables.Variables[VariableIndex].ValueType)
             {
                 case VariableTypes.Number:
-                    MathType = (MathTypes)EditorGUILayout.EnumPopup("Action", MathType);
+                    MathType = (MathAffectTypes)EditorGUILayout.EnumPopup("Action", MathType);
                     Value = EditorGUILayout.FloatField("Value", (float)Value); break;
                 case VariableTypes.String:
+                    StringType = (StringAffectTypes)EditorGUILayout.EnumPopup("Action", StringType);
                     Value = EditorGUILayout.TextField("Value", (string)Value); break;
             }
         }
@@ -55,14 +58,48 @@ public class AffectVariableElement : StoryElement
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        throw new System.NotImplementedException();
+        switch (Variables.Variables[VariableIndex].ValueType)
+        {
+            case VariableTypes.Number:
+                switch (MathType)
+                {
+                    case MathAffectTypes.Add:
+                        Variables.Variables[VariableIndex].Value = (float)Variables.Variables[VariableIndex].Value + (float)Value; break;
+                    case MathAffectTypes.Subtract:
+                        Variables.Variables[VariableIndex].Value = (float)Variables.Variables[VariableIndex].Value - (float)Value; break;
+                    case MathAffectTypes.Divide:
+                        Variables.Variables[VariableIndex].Value = (float)Variables.Variables[VariableIndex].Value / (float)Value; break;
+                    case MathAffectTypes.Multiply:
+                        Variables.Variables[VariableIndex].Value = (float)Variables.Variables[VariableIndex].Value * (float)Value; break;
+                }
+                break;
+            case VariableTypes.String:
+                switch (StringType)
+                {
+                    case StringAffectTypes.Add:
+                        Variables.Variables[VariableIndex].Value = (string)Variables.Variables[VariableIndex].Value + (string)Value; break;
+                    case StringAffectTypes.Remove:
+                        Variables.Variables[VariableIndex].Value = ((string)Variables.Variables[VariableIndex].Value).Replace((string)Value, ""); break;
+                    case StringAffectTypes.Replace:
+                        Variables.Variables[VariableIndex].Value = (string)Value; break;
+                }
+                break;
+        }
+        return null;
     }
 
-    private enum MathTypes
+    private enum MathAffectTypes
     {
         Add,
         Subtract,
         Divide,
         Multiply
+    }
+
+    private enum StringAffectTypes
+    {
+        Replace,
+        Add,
+        Remove
     }
 }
