@@ -19,12 +19,12 @@ MonoBehaviour:
     BooleanValue: 0
     TextValue: 
   - VariableName: Uvle
-    ValueType: 0
+    ValueType: 1
     NumberValue: 0
-    BooleanValue: 0
+    BooleanValue: 1
     TextValue: 
   VariableValues:
   - Type: Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     Data: '{"VariableName":"Novle_Affection","ValueType":2,"NumberValue":0.0,"BooleanValue":false,"TextValue":""}'
   - Type: Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    Data: '{"VariableName":"Uvle","ValueType":0,"NumberValue":0.0,"BooleanValue":false,"TextValue":""}'
+    Data: '{"VariableName":"Uvle","ValueType":1,"NumberValue":0.0,"BooleanValue":true,"TextValue":""}'

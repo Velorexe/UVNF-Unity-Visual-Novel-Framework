@@ -100,99 +100,99 @@ public class UVNFStoryEditor : EditorWindowExtended
                         for (int i = 0; i < currentElements.Count; i++)
                         {
                             currentElements[i].Active = false;
-                            if (storyElementsFoldout[i])
+                            if (currentElements[i].IsVisible())
                             {
-                                GUILayout.Space(55f);
-                                GUILayout.BeginHorizontal();
+                                if (storyElementsFoldout[i])
                                 {
-                                    GUILayout.Space(40f);
-                                    GUILayout.BeginVertical(UVNFSettings.EditorSettings.DVNFSkin.box, GUILayout.MaxWidth(700));
+                                    GUILayout.Space(55f);
+                                    GUILayout.BeginHorizontal();
                                     {
-                                        ChangeBackgroundStyle(currentElements[i].DisplayColor);
-                                        GUILayout.BeginVertical(style);
+                                        GUILayout.Space(40f);
+                                        GUILayout.BeginVertical(UVNFSettings.EditorSettings.DVNFSkin.box, GUILayout.MaxWidth(700));
                                         {
-                                            GUILayout.Space(20);
-                                            Rect lastRect = GUILayoutUtility.GetLastRect();
-                                            currentElements[i].DisplayLayout(GUILayoutUtility.GetLastRect());
-                                            GUILayout.Label("", GUI.skin.horizontalSlider);
+                                            ChangeBackgroundStyle(currentElements[i].DisplayColor);
+                                            GUILayout.BeginVertical(style);
+                                            {
+                                                GUILayout.Space(20);
+                                                Rect lastRect = GUILayoutUtility.GetLastRect();
+                                                currentElements[i].DisplayLayout(GUILayoutUtility.GetLastRect());
+                                                GUILayout.Label("", GUI.skin.horizontalSlider);
 
-                                            GUILayout.BeginHorizontal();
-                                            {
-                                                if (GUILayout.Button("▲"))
+                                                GUILayout.BeginHorizontal();
                                                 {
-                                                    moveElement = i;
-                                                    moveUp = true;
+                                                    if (GUILayout.Button("▲"))
+                                                    {
+                                                        moveElement = i;
+                                                        moveUp = true;
+                                                    }
+                                                    else if (GUILayout.Button("▼"))
+                                                    {
+                                                        moveElement = i;
+                                                        moveUp = false;
+                                                    }
                                                 }
-                                                else if (GUILayout.Button("▼"))
+                                                GUILayout.EndHorizontal();
+                                                if (GUILayout.Button("-"))
                                                 {
-                                                    moveElement = i;
-                                                    moveUp = false;
+                                                    removeElement = i;
                                                 }
                                             }
-                                            GUILayout.EndHorizontal();
-                                            if (GUILayout.Button("-"))
-                                            {
-                                                removeElement = i;
-                                            }
+                                            GUILayout.EndVertical();
                                         }
                                         GUILayout.EndVertical();
                                     }
-                                    GUILayout.EndVertical();
+                                    GUILayout.EndHorizontal();
                                 }
-                                GUILayout.EndHorizontal();
-                            }
-                            else
-                            {
-                                GUILayout.Space(10f);
-                            }
-
-                            GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetElementStyle(currentElements[i].Type));
-                            if (currentElements[i].Active)
-                                buttonStyle.normal.textColor = UVNFSettings.EditorSettings.ActiveElementColor;
-
-                            if (!storyElementsFoldout[i])
-                            {
-                                GUILayout.Space(5f + (i != 0 && !storyElementsFoldout[i - 1] ? 4f : 0f));
-                                if (GUILayout.Button(currentElements[i].ElementName, buttonStyle))
+                                else
                                 {
-                                    storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                    GUILayout.Space(10f);
                                 }
-                                Rect lastRect = GUILayoutUtility.GetLastRect();
-                                lastRect.width = 50f;
-                                lastRect.height = 50f;
-                                lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
-                                if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(currentElements[i].ElementName))
-                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[currentElements[i].ElementName], ScaleMode.ScaleToFit);
-                            }
-                            else
-                            {
-                                Rect lastRect = GUILayoutUtility.GetLastRect();
-                                lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y - 40f);
-                                if (GUI.Button(lastRect, currentElements[i].ElementName, buttonStyle))
+                                GUIStyle buttonStyle = new GUIStyle(UVNFSettings.GetElementStyle(currentElements[i].Type));
+                                if (currentElements[i].Active)
+                                    buttonStyle.normal.textColor = UVNFSettings.EditorSettings.ActiveElementColor;
+
+                                if (!storyElementsFoldout[i])
                                 {
-                                    storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                    GUILayout.Space(5f + (i != 0 && !storyElementsFoldout[i - 1] ? 4f : 0f));
+                                    if (GUILayout.Button(currentElements[i].ElementName, buttonStyle))
+                                    {
+                                        storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                    }
+                                    Rect lastRect = GUILayoutUtility.GetLastRect();
+                                    lastRect.width = 50f;
+                                    lastRect.height = 50f;
+                                    lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
+
+                                    if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(currentElements[i].ElementName))
+                                        GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[currentElements[i].ElementName], ScaleMode.ScaleToFit);
                                 }
-                                lastRect.width = 50f;
-                                lastRect.height = 50f;
-                                lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
+                                else
+                                {
+                                    Rect lastRect = GUILayoutUtility.GetLastRect();
+                                    lastRect.position = new Vector2(lastRect.position.x, lastRect.position.y - 40f);
+                                    if (GUI.Button(lastRect, currentElements[i].ElementName, buttonStyle))
+                                    {
+                                        storyElementsFoldout[i] = !storyElementsFoldout[i];
+                                    }
+                                    lastRect.width = 50f;
+                                    lastRect.height = 50f;
+                                    lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
-                                if(UVNFSettings.EditorSettings.ElementHints.ContainsKey(currentElements[i].ElementName))
-                                    GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[currentElements[i].ElementName], ScaleMode.ScaleToFit);
+                                    if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(currentElements[i].ElementName))
+                                        GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[currentElements[i].ElementName], ScaleMode.ScaleToFit);
+                                }
+
+                                if (i == currentElements.Count - 1)
+                                    GUILayout.Space(20f);
                             }
-
-                            if (i == currentElements.Count - 1)
-                                GUILayout.Space(20f);
-
                         }
 
                         if (moveElement != -1)
                         {
                             if (moveUp && moveElement > 0)
                             {
-                                StoryElement shiftElement = storyContainer.nodes[moveElement - 1] as StoryElement;
-                                storyContainer.nodes[moveElement - 1] = storyContainer.nodes[moveElement];
-                                storyContainer.nodes[moveElement] = shiftElement;
+                                SwitchElement(currentElements[moveElement - 1], currentElements[moveElement]);
 
                                 bool shiftFoldout = storyElementsFoldout[moveElement - 1];
                                 storyElementsFoldout[moveElement - 1] = storyElementsFoldout[moveElement];
@@ -202,9 +202,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                             }
                             else if (moveElement < currentElements.Count - 1)
                             {
-                                StoryElement shiftElement = storyContainer.nodes[moveElement + 1] as StoryElement;
-                                storyContainer.nodes[moveElement + 1] = storyContainer.nodes[moveElement];
-                                storyContainer.nodes[moveElement] = shiftElement;
+                                SwitchElement(currentElements[moveElement], currentElements[moveElement + 1]);
 
                                 bool shiftFoldout = storyElementsFoldout[moveElement + 1];
                                 storyElementsFoldout[moveElement + 1] = storyElementsFoldout[moveElement];
@@ -251,12 +249,24 @@ public class UVNFStoryEditor : EditorWindowExtended
         AssetDatabase.SaveAssets();
     }
 
-    private void ExportStory()
+    public void SwitchElement(StoryElement element1, StoryElement element2)
     {
-        if (!AssetDatabase.IsValidFolder("Assets/Story"))
-            AssetDatabase.CreateFolder("Assets", "Story");
-        AssetDatabase.CreateAsset(storyContainer, $"Assets/Story/{storyName}.asset");
-        AssetDatabase.SaveAssets();
+        StoryElement previousStory = element1.GetInputPort("PreviousNode").Connection.node as StoryElement;
+        StoryElement nextElement = null;
+        if (element2.GetOutputPort("NextNode").IsConnected)
+            nextElement = element2.GetOutputPort("NextNode").Connection.node as StoryElement;
+
+        element1.ClearConnections();
+        element2.ClearConnections();
+
+        Vector2 firstElementPosition = element1.position;
+        element1.position = element2.position;
+        element2.position = firstElementPosition;
+
+        if (nextElement != null)
+            element1.GetOutputPort("NextNode").Connect(nextElement.GetInputPort("PreviousNode"));
+        element2.GetOutputPort("NextNode").Connect(element1.GetInputPort("PreviousNode"));
+        element2.GetInputPort("PreviousNode").Connect(previousStory.GetOutputPort("NextNode"));
     }
 
     private void ChangeBackgroundStyle(Color color)

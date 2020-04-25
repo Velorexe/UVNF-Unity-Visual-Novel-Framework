@@ -28,7 +28,8 @@ public class StartElement : StoryElement
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        throw new NotImplementedException();
+        managerCallback.AdvanceStory(false);
+        return null;
     }
 
     public override void DisplayLayout(Rect layoutRect)

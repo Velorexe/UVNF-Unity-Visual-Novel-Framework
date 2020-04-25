@@ -36,6 +36,21 @@ public class ConditionElement : StoryElement
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
     {
-        throw new System.NotImplementedException();
+        bool conditionTrue = false;
+        switch (Variables.Variables[VariableIndex].ValueType)
+        {
+            case VariableTypes.Boolean:
+                conditionTrue = BooleanValue == Variables.Variables[VariableIndex].BooleanValue; break;
+            case VariableTypes.Number:
+                conditionTrue = NumberValue >= Variables.Variables[VariableIndex].NumberValue; break;
+            case VariableTypes.String:
+                conditionTrue = TextValue == Variables.Variables[VariableIndex].TextValue; break;
+        }
+
+        if (conditionTrue)
+            managerCallback.AdvanceStory(GetOutputPort("NextNode").Connection.node as StoryElement);
+        else
+            managerCallback.AdvanceStory(GetOutputPort("ConditionFails").Connection.node as StoryElement);
+        yield return null;
     }
 }

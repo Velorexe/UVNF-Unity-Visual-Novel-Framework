@@ -36,8 +36,8 @@ public abstract class StoryElement : Node, IComparable
 
     public virtual void Connect()
     {
-        if (GetInputPort("NextNode").IsConnected)
-            Next = GetInputPort("NextNode").Connection.node as StoryElement;
+        if (GetOutputPort("NextNode").IsConnected)
+            Next = GetOutputPort("NextNode").Connection.node as StoryElement;
     }
 
     public abstract IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas);

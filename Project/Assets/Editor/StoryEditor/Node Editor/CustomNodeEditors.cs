@@ -56,7 +56,6 @@ public class CustomNodeEditors : MonoBehaviour
             if(node.Variables != null)
             {
                 node.VariableIndex = EditorGUILayout.Popup(node.VariableIndex, node.Variables.VariableNames());
-                GUILayout.Label("Condition");
                 switch (node.Variables.Variables[node.VariableIndex].ValueType)
                 {
                     case VariableTypes.Number:
@@ -101,6 +100,26 @@ public class CustomNodeEditors : MonoBehaviour
         public override void OnCreate()
         {
             if (node == null) node = target as EnterSceneElement;
+            EditorUtility.SetDirty(node);
+        }
+
+        public override void OnBodyGUI()
+        {
+            NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
+            NodeEditorGUILayout.AddPortField(node.GetOutputPort("NextNode"));
+
+            node.DisplayLayout(GUILayoutUtility.GetLastRect());
+        }
+    }
+
+    [CustomNodeEditor(typeof(AffectVariableElement))]
+    public class AffectVariableNodeEditor : NodeEditor
+    {
+        AffectVariableElement node;
+
+        public override void OnCreate()
+        {
+            if (node == null) node = target as AffectVariableElement;
             EditorUtility.SetDirty(node);
         }
 

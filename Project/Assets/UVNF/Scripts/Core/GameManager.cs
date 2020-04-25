@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         _eventFlags.Add(eventFlag, eventValues);
         return true;
     }
-    
+
     public bool ReachedEventFlag(string eventFlag)
     {
         return _eventFlags.ContainsKey(eventFlag);
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     public void StartStory()
     {
         CurrentStory.ConnectStoryElements();
-        CurrentElement = CurrentStory.ShortStory(0)[0];
+        CurrentElement = CurrentStory.GetRootStory()[0];
 #if UNITY_EDITOR
         foreach (StoryElement element in CurrentStory.StoryElements)
             element.Active = false;
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (CurrentElement.Next != null)
+            if (CurrentElement.Next != null && _currentTask != null && !_currentTask.Running)
             {
 #if UNITY_EDITOR
                 CurrentElement.Active = false;
@@ -111,7 +111,24 @@ public class GameManager : MonoBehaviour
 
     public void AdvanceStory(StoryElement newStoryPoint)
     {
+        if (newStoryPoint != null)
+        {
+            _currentTask.Stop();
 
+#if UNITY_EDITOR
+            CurrentElement.Active = false;
+            CurrentElement.Next.Active = true;
+#endif
+            CurrentElement = newStoryPoint;
+
+            _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
+            _currentTask.Finished += AdvanceStory;
+            _currentTask.Start();
+        }
+        else
+        {
+            Debug.Log("Story finished.");
+        }
     }
 
     public void LogStoryEvent(string characterName, string text)
