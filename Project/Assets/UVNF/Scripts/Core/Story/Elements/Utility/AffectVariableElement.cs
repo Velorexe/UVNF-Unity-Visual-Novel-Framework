@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -14,8 +13,8 @@ public class AffectVariableElement : StoryElement
 
     public VariableManager Variables;
 
-    public int VariableIndex = -1;
-    private int previousIndex = -1;
+    public int VariableIndex = 0;
+    private int previousIndex = 0;
 
     private VariableTypes previousType = VariableTypes.Number;
 

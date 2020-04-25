@@ -42,6 +42,7 @@ public class StoryGraph : NodeGraph
         for (int i = 0; i < _shortStories.Length; i++)
         {
             _shortStories[i] = new List<StoryElement>();
+            _shortStories[i].Add(startNodes[i]);
 
             StartElement currentStartNode = startNodes[i];
             StoryElement currentNode = startNodes[i].GetOutputPort("NextNode").GetOutputValue() as StoryElement;
@@ -62,19 +63,15 @@ public class StoryGraph : NodeGraph
         return new List<StoryElement>();
     }
 
+    public List<StoryElement> GetRootStory()
+    {
+        RefreshStories();
+        return _shortStories.Where(x => (x[0] as StartElement).IsRoot).First().ToList();
+    }
+
     public void ConnectStoryElements()
     {
-        //TODO: switch to nodes
-        for (int i = 0; i < StoryElements.Count; i++)
-        {
-            if (i < StoryElements.Count - 1)
-            {
-                StoryElements[i].Next = StoryElements[i + 1];
-            }
-            else
-            {
-                StoryElements[i].Next = null;
-            }
-        }
+        foreach(Node element in nodes)
+            (element as StoryElement).Connect();
     }
 }
