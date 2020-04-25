@@ -30,11 +30,11 @@ public class StoryGraph : NodeGraph
 
     public void RefreshStories()
     {
-        Node[] startNodesArray = nodes.Where(x => x.GetType() == typeof(StartNode)).ToArray();
-        StartNode[] startNodes = new StartNode[startNodesArray.Length];
+        Node[] startNodesArray = nodes.Where(x => x.GetType() == typeof(StartElement)).ToArray();
+        StartElement[] startNodes = new StartElement[startNodesArray.Length];
 
         for (int i = 0; i < startNodes.Length; i++)
-            startNodes[i] = startNodesArray[i] as StartNode;
+            startNodes[i] = startNodesArray[i] as StartElement;
 
         StoryNames = startNodes.Select(x => x.StoryName).ToArray();
 
@@ -43,14 +43,14 @@ public class StoryGraph : NodeGraph
         {
             _shortStories[i] = new List<StoryElement>();
 
-            StartNode currentStartNode = startNodes[i];
-            StoryElement currentNode = startNodes[i].GetOutputPort("Next").GetOutputValue() as StoryElement;
-            while (currentNode != null && currentNode.GetOutputPort("NextNode").IsConnected && currentNode.GetOutputPort("NextNode").GetOutputValue().GetType() != typeof(StartNode))
+            StartElement currentStartNode = startNodes[i];
+            StoryElement currentNode = startNodes[i].GetOutputPort("NextNode").GetOutputValue() as StoryElement;
+            while (currentNode != null && currentNode.GetOutputPort("NextNode").IsConnected && currentNode.GetOutputPort("NextNode").GetOutputValue().GetType() != typeof(StartElement))
             {
                 _shortStories[i].Add(currentNode);
                 currentNode = currentNode.GetOutputPort("NextNode").GetOutputValue() as StoryElement;
             }
-            if (currentNode != null && currentNode.GetType() != typeof(StartNode))
+            if (currentNode != null && currentNode.GetType() != typeof(StartElement))
                 _shortStories[i].Add(currentNode);
         }
     }

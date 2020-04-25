@@ -7,27 +7,27 @@ using UnityEditor;
 
 public class CustomNodeEditors : MonoBehaviour
 {
-    [CustomNodeEditor(typeof(StartNode))]
+    [CustomNodeEditor(typeof(StartElement))]
     public class StartNodeEditor : NodeEditor
     {
-        StartNode node;
+        StartElement node;
 
         public override void OnCreate()
         {
-            if (node == null) node = target as StartNode;
+            if (node == null) node = target as StartElement;
             EditorUtility.SetDirty(node);
         }
 
         public override void OnBodyGUI()
         {
             if (!node.IsRoot)
-                NodeEditorGUILayout.AddPortField(node.GetInputPort("Previous"));
-            NodeEditorGUILayout.AddPortField(node.GetOutputPort("Next"));
+                NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
+            NodeEditorGUILayout.AddPortField(node.GetOutputPort("NextNode"));
 
             GUILayout.BeginHorizontal();
             {
                 GUILayout.Label("Story Name:");
-                node.StoryName = EditorGUILayout.TextField("Story Name", node.StoryName);
+                node.StoryName = EditorGUILayout.TextField(node.StoryName);
             }
             GUILayout.EndHorizontal();
 
@@ -70,6 +70,46 @@ public class CustomNodeEditors : MonoBehaviour
                 GUILayout.Label("Condition Fails", EditorStyles.boldLabel);
                 NodeEditorGUILayout.AddPortField(node.GetOutputPort("ConditionFails"));
             }
+        }
+    }
+
+    [CustomNodeEditor(typeof(AudioDialogueElement))]
+    public class AudioDialogueNodeEditor : NodeEditor
+    {
+        AudioDialogueElement node;
+
+        public override void OnCreate()
+        {
+            if (node == null) node = target as AudioDialogueElement;
+            EditorUtility.SetDirty(node);
+        }
+
+        public override void OnBodyGUI()
+        {
+            NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
+            NodeEditorGUILayout.AddPortField(node.GetOutputPort("NextNode"));
+
+            node.DisplayLayout(GUILayoutUtility.GetLastRect());
+        }
+    }
+
+    [CustomNodeEditor(typeof(EnterSceneElement))]
+    public class EnterSceneNodeEditor : NodeEditor
+    {
+        EnterSceneElement node;
+
+        public override void OnCreate()
+        {
+            if (node == null) node = target as EnterSceneElement;
+            EditorUtility.SetDirty(node);
+        }
+
+        public override void OnBodyGUI()
+        {
+            NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
+            NodeEditorGUILayout.AddPortField(node.GetOutputPort("NextNode"));
+
+            node.DisplayLayout(GUILayoutUtility.GetLastRect());
         }
     }
 }

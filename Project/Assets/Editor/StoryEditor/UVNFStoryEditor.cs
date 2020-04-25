@@ -242,6 +242,12 @@ public class UVNFStoryEditor : EditorWindowExtended
         storyElementsFoldout.Add(true);
 
         storyContainer.nodes.Add(newElement);
+
+        StoryElement previousElement = currentElements[currentElements.Count - 1];
+        previousElement.GetOutputPort("NextNode").Connect(newElement.GetInputPort("PreviousNode"));
+
+        newElement.position = previousElement.position + new Vector2(330f, 0f);
+
         AssetDatabase.SaveAssets();
     }
 
