@@ -68,7 +68,8 @@ public class GameManager : MonoBehaviour
 
     public void StartStory()
     {
-        CurrentElement = CurrentStory.StoryElements[0];
+        CurrentStory.ConnectStoryElements();
+        CurrentElement = CurrentStory.ShortStory(0)[0];
 #if UNITY_EDITOR
         foreach (StoryElement element in CurrentStory.StoryElements)
             element.Active = false;

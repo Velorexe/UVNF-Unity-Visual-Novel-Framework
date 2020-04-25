@@ -12,6 +12,8 @@ public abstract class StoryElement : Node, IComparable
     public abstract Color32 DisplayColor { get; }
     public abstract StoryElementTypes Type { get; }
 
+    public virtual bool IsVisible() { return true; }
+
     [HideInInspector]
     public bool Active = false;
     [HideInInspector]
@@ -31,6 +33,12 @@ public abstract class StoryElement : Node, IComparable
 
     public virtual void OnCreate() { }
     public virtual void OnDelete() { }
+
+    public virtual void Connect()
+    {
+        if (GetInputPort("NextNode").IsConnected)
+            Next = GetInputPort("NextNode").Connection.node as StoryElement;
+    }
 
     public abstract IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas);
 

@@ -72,18 +72,21 @@ public class UVNFStoryElements : EditorWindow
                     StoryElement[] elementByCategory = StoryElements.Where(x => x.Type == storyElementCategories[i]).ToArray();
                     for (int j = 0; j < elementByCategory.Length; j++)
                     {
-                        GUILayout.Space(5f + (i != 0 && !elementFoldouts[i] ? 4f : 0f));
-                        if (GUILayout.Button(elementByCategory[j].ElementName, UVNFSettings.GetElementStyle(storyElementCategories[i])))
-                            editor.AddElement(elementByCategory[j].GetType());
+                        if (elementByCategory[j].IsVisible())
+                        {
+                            GUILayout.Space(5f + (i != 0 && !elementFoldouts[i] ? 4f : 0f));
+                            if (GUILayout.Button(elementByCategory[j].ElementName, UVNFSettings.GetElementStyle(storyElementCategories[i])))
+                                editor.AddElement(elementByCategory[j].GetType());
 
-                        Rect lastRect = GUILayoutUtility.GetLastRect();
-                        lastRect.width = 50f;
-                        lastRect.height = 50f;
-                        lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
+                            Rect lastRect = GUILayoutUtility.GetLastRect();
+                            lastRect.width = 50f;
+                            lastRect.height = 50f;
+                            lastRect.position = new Vector2(lastRect.position.x + 5f, lastRect.position.y + 3f);
 
-                        if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(elementByCategory[j].ElementName))
-                            GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[elementByCategory[j].ElementName], ScaleMode.ScaleToFit);
-                        GUILayout.Space(10f);
+                            if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(elementByCategory[j].ElementName))
+                                GUI.DrawTexture(lastRect, UVNFSettings.EditorSettings.ElementHints[elementByCategory[j].ElementName], ScaleMode.ScaleToFit);
+                            GUILayout.Space(10f);
+                        }
                     }
                 }
             }
