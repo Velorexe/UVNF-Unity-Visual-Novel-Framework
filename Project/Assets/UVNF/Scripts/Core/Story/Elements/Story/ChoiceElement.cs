@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using XNode;
 
 public class ChoiceElement : StoryElement
 {
@@ -12,7 +14,8 @@ public class ChoiceElement : StoryElement
 
     public override StoryElementTypes Type => StoryElementTypes.Story;
 
-    public List<string> Choices = new List<string>(3) { "", "", "" };
+    public List<string> Choices = new List<string>();
+
     public bool ShuffleChocies = true;
     public bool HideDialogue = false;
 
@@ -24,18 +27,28 @@ public class ChoiceElement : StoryElement
             Choices[i] = GUILayout.TextField(Choices[i]);
             if (GUILayout.Button("-"))
             {
-                Choices.RemoveAt(i);
+                RemoveChoice(i);
                 return;
             }
         }
 
         if (GUILayout.Button("+"))
-        {
-            Choices.Add(string.Empty);
-        }
+            AddChoice();
 
         ShuffleChocies = GUILayout.Toggle(ShuffleChocies, "Shuffle Choices");
         HideDialogue = GUILayout.Toggle(HideDialogue, "Hide Dialogue");
+    }
+
+    public void AddChoice()
+    {
+        Choices.Add(string.Empty);
+        AddDynamicOutput(typeof(NodePort), ConnectionType.Override, TypeConstraint.Inherited, "Choice" + (Choices.Count - 1));
+    }
+
+    public void RemoveChoice(int index)
+    {
+        Choices.RemoveAt(index);
+        RemoveDynamicPort(DynamicPorts.ElementAt(index));
     }
 
     public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
@@ -48,6 +61,8 @@ public class ChoiceElement : StoryElement
 
         canvas.DisplayChoice(choiceList.ToArray(), HideDialogue);
         while (canvas.ChoiceCallback == -1) yield return null;
-        Debug.Log("Picked a chose.");
+
+        if (DynamicPorts.ElementAt(canvas.ChoiceCallback).IsConnected)
+            managerCallback.AdvanceStory(DynamicPorts.ElementAt(canvas.ChoiceCallback).Connection.node as StoryElement);
     }
 }

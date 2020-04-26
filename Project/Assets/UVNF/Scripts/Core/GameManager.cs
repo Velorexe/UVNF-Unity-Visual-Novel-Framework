@@ -70,12 +70,6 @@ public class GameManager : MonoBehaviour
     {
         CurrentStory.ConnectStoryElements();
         CurrentElement = CurrentStory.GetRootStory()[0];
-#if UNITY_EDITOR
-        foreach (StoryElement element in CurrentStory.StoryElements)
-            element.Active = false;
-
-        CurrentElement.Active = true;
-#endif
 
         _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
         _currentTask.Finished += AdvanceStory;
@@ -84,18 +78,10 @@ public class GameManager : MonoBehaviour
 
     public void AdvanceStory(bool manual)
     {
-        if (manual)
-        {
-            Debug.Log("Story Element cancelled manually.");
-        }
-        else
+        if(!manual)
         {
             if (CurrentElement.Next != null && _currentTask != null && !_currentTask.Running)
             {
-#if UNITY_EDITOR
-                CurrentElement.Active = false;
-                CurrentElement.Next.Active = true;
-#endif
                 CurrentElement = CurrentElement.Next;
 
                 _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));
@@ -114,11 +100,6 @@ public class GameManager : MonoBehaviour
         if (newStoryPoint != null)
         {
             _currentTask.Stop();
-
-#if UNITY_EDITOR
-            CurrentElement.Active = false;
-            CurrentElement.Next.Active = true;
-#endif
             CurrentElement = newStoryPoint;
 
             _currentTask = TaskManager.CreateTask(CurrentElement.Execute(this, Canvas));

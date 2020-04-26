@@ -30,17 +30,8 @@ public class UVNFCanvas : MonoBehaviour
     public Image BackgroundImage;
     public Image BackgroundFade;
 
-    public int ChoiceCallback
-    {
-        get
-        {
-            int tempReturn = _choiceCallback;
-            _choiceCallback = -1;
-            return tempReturn;
-        }
-        set { _choiceCallback = value; }
-    }
-    private int _choiceCallback = -1;
+    public int ChoiceCallback = -1;
+    public void ResetChoice() => ChoiceCallback = -1;
 
     public bool BottomPanelEnabled => BottomCanvasGroup.gameObject.activeSelf;
     public bool ChoiceCanvasEnabled => ChoiceCanvasGroup.gameObject.activeSelf;
@@ -225,7 +216,7 @@ public class UVNFCanvas : MonoBehaviour
             button.Display(options[i], i, this);
         }
 
-        while (_choiceCallback == -1) yield return null;
+        while (ChoiceCallback == -1) yield return null;
 
         ChoiceCanvasGroup.gameObject.SetActive(false);
 

@@ -131,4 +131,38 @@ public class CustomNodeEditors : MonoBehaviour
             node.DisplayLayout(GUILayoutUtility.GetLastRect());
         }
     }
+
+    [CustomNodeEditor(typeof(ChoiceElement))]
+    public class ChoiceNodeEditor : NodeEditor
+    {
+        ChoiceElement node;
+
+        public override void OnCreate()
+        {
+            if (node == null) node = target as ChoiceElement;
+            EditorUtility.SetDirty(node);
+        }
+
+        public override void OnBodyGUI()
+        {
+            NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
+
+            for (int i = 0; i < node.Choices.Count; i++)
+            {
+                node.Choices[i] = GUILayout.TextField(node.Choices[i]);
+                NodeEditorGUILayout.AddPortField(node.GetOutputPort("Choice" + i));
+
+                if (GUILayout.Button("-"))
+                    node.RemoveChoice(i);
+
+                GUILayout.Space(7.5f);
+            }
+
+            if (GUILayout.Button("+"))
+                node.AddChoice();
+
+            node.ShuffleChocies = GUILayout.Toggle(node.ShuffleChocies, "Shuffle Choices");
+            node.HideDialogue = GUILayout.Toggle(node.HideDialogue, "Hide Dialogue");
+        }
+    }
 }
