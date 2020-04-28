@@ -23,8 +23,13 @@ public class DialogueElement : StoryElement
 #if UNITY_EDITOR
         if(textAreaStyle == null)
         {
+            Texture2D areaBackground = new Texture2D(1, 1);
+            areaBackground.SetPixel(0, 0, Color.white);
+            areaBackground.Apply();
+
             textAreaStyle = new GUIStyle("TextArea");
             textAreaStyle.richText = true;
+            textAreaStyle.normal.background = areaBackground;
         }
 
         CharacterName = EditorGUILayout.TextField("Character", CharacterName);

@@ -424,7 +424,4 @@ namespace XNode
         }
 
     }
-
-    [Serializable]
-    public class Empty { }
 }

@@ -63,6 +63,12 @@ namespace XNodeEditor {
             else return Color.white;
         }
 
+        public virtual void ReplaceTint(Color color)
+        {
+            Type type = target.GetType();
+            NodeEditorWindow.ReplaceTint(type, color);
+        }
+
         public virtual GUIStyle GetBodyStyle() {
             return NodeEditorResources.styles.nodeBody;
         }

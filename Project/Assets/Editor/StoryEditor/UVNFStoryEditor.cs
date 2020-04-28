@@ -93,7 +93,7 @@ public class UVNFStoryEditor : EditorWindowExtended
                     EditorGUI.DrawRect(lastRect, Color.grey);
                 }
 
-                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 100f));
+                scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(position.height - 90f));
                 {
                     if (currentElements.Count > 0)
                     {
