@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using XNode;
 
 [NodeTint("#CCFCC3"), Serializable]
@@ -37,4 +38,15 @@ public class StartElement : StoryElement
         throw new NotImplementedException();
     }
 
+    public override void DisplayNodeLayout(Rect layoutRect)
+    {
+        GUILayout.BeginHorizontal();
+        {
+            GUILayout.Label("Story Name:");
+            StoryName = EditorGUILayout.TextField(StoryName);
+        }
+        GUILayout.EndHorizontal();
+
+        IsRoot = GUILayout.Toggle(IsRoot, "Is Root");
+    }
 }

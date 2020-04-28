@@ -18,11 +18,15 @@ namespace XNodeEditor {
         public static Styles _styles = null;
         public static GUIStyle OutputPort { get { return new GUIStyle(EditorStyles.label) { alignment = TextAnchor.UpperRight }; } }
         public class Styles {
-            public GUIStyle inputPort, nodeHeader, nodeBody, tooltip, nodeHighlight;
+            public GUIStyle inputPort, nodeHeader, nodeBody, tooltip, nodeHighlight, transparent;
 
             public Styles() {
                 GUIStyle baseStyle = new GUIStyle("Label");
                 baseStyle.fixedHeight = 18;
+
+                Texture2D trans = new Texture2D(1, 1);
+                trans.SetPixel(0, 0, new Color(0f, 0f, 0f, 0f));
+                trans.Apply();
 
                 inputPort = new GUIStyle(baseStyle);
                 inputPort.alignment = TextAnchor.UpperLeft;
@@ -32,6 +36,7 @@ namespace XNodeEditor {
                 nodeHeader.alignment = TextAnchor.MiddleCenter;
                 nodeHeader.fontStyle = FontStyle.Bold;
                 nodeHeader.normal.textColor = Color.white;
+                nodeHeader.normal.background = trans;
 
                 nodeBody = new GUIStyle();
                 nodeBody.normal.background = NodeEditorResources.nodeBody;
@@ -41,6 +46,9 @@ namespace XNodeEditor {
                 nodeHighlight = new GUIStyle();
                 nodeHighlight.normal.background = NodeEditorResources.nodeHighlight;
                 nodeHighlight.border = new RectOffset(32, 32, 32, 32);
+
+                transparent = new GUIStyle();
+                transparent.normal.background = trans;
 
                 tooltip = new GUIStyle("helpBox");
                 tooltip.alignment = TextAnchor.MiddleCenter;

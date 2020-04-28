@@ -44,6 +44,8 @@ public abstract class StoryElement : Node, IComparable
 
     public abstract void DisplayLayout(Rect layoutRect);
 
+    public virtual void DisplayNodeLayout(Rect layoutRect) { DisplayLayout(layoutRect); }
+
     public int CompareTo(object obj)
     {
         if (obj == null) return 1;
