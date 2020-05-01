@@ -1,4 +1,5 @@
 ![UVNF_Logo](https://raw.githubusercontent.com/Velorexe/UDSF/develop/Project/Assets/Resources/UI/Sprites/FullLogo.png)
+![Discord](https://img.shields.io/discord/699894743756439562?label=Discord)
 # UVNF - Unity Visual Novel Framework
 UVNF is a free Unity framework for creating Visual Novels in Unity.
 This repository provides a set of examples, tools, workflows and other resources to help you get started on your project.
@@ -6,16 +7,14 @@ This repository provides a set of examples, tools, workflows and other resources
 Several ways of writing your own visual novels without any programming. Using a writer-friendly node based dialogue editor and a more in depth story editor, you can view your story visually without having to dive into a pogramming language or complex settings.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Velorexe/UDSF/develop/Documentation/Preview%20Images/Preview%20Image.png">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/705557180207857694/unknown.png">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/705557343701827604/unknown.png" width="400">
+    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701391595349737472/NewMenu.gif" width="400">
 </p>
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/445299422012637204/700819498977984533/StoryEditorSecondFinished2.gif" width="400">
     <img src="https://cdn.discordapp.com/attachments/415114612086931456/701163713650229268/EnterScene.gif" width="400">
-</p>
-<p align="center">
-    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701391595349737472/NewMenu.gif" width="400">
-    <img src="https://cdn.discordapp.com/attachments/415114612086931456/701392160460767252/ShowOff.gif" width="400">
 </p>
 
 ## Installation
