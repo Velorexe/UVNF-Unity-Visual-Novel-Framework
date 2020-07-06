@@ -10,6 +10,7 @@
 /Project/[Ll]ogs/
 /Project/[Mm]emoryCaptures/
 /Project/[Ll]ibrary
+/Documents/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
