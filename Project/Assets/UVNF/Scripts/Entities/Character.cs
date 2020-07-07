@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
     public string Name;
+
     public RectTransform Transform;
     public RectTransform Parent;
 
     public ScenePositions CurrentPosition;
+
+    public Image SpriteRenderer;
 
     public bool CurrentlyMoving
     {
@@ -40,5 +44,12 @@ public class Character : MonoBehaviour
             Transform.anchoredPosition = Vector2.Lerp(startPosition, endPosition, t);
             yield return null;
         }
+    }
+
+    public void ChangeSprite(Sprite newSprite)
+    {
+        SpriteRenderer.sprite = newSprite;
+        float multiplier = newSprite.rect.height / Transform.rect.height;
+        Transform.sizeDelta = new Vector2(newSprite.rect.width / multiplier, Transform.sizeDelta.y);
     }
 }

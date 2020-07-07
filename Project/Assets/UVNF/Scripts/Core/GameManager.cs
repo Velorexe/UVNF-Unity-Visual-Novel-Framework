@@ -48,15 +48,6 @@ public class GameManager : MonoBehaviour
         return _eventFlags[eventFlag];
     }
 
-#if UNITY_EDITOR
-    public void Update()
-    {
-
-        foreach (StoryElement element in CurrentStory.StoryElements)
-            element.Active = false;
-    }
-#endif
-
     #region StoryElements
     public void Awake()
     {
