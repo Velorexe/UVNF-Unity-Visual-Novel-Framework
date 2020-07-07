@@ -19,9 +19,9 @@ public class CanvasCharacterManager : MonoBehaviour
         GameObject obj = new GameObject(characterSprite.name, typeof(RectTransform));
         RectTransform parentTransform = null;
 
-        Image spriteShower = obj.AddComponent<Image>();
-        spriteShower.sprite = characterSprite;
-        spriteShower.preserveAspect = true;
+        Image spriteRenderer = obj.AddComponent<Image>();
+        spriteRenderer.sprite = characterSprite;
+        spriteRenderer.preserveAspect = true;
 
         RectTransform spriteTransform = obj.GetComponent<RectTransform>();
         obj.transform.SetParent(MainCharacterStack);
@@ -38,6 +38,7 @@ public class CanvasCharacterManager : MonoBehaviour
         character.Transform = spriteTransform;
         character.Parent = parentTransform;
         character.CurrentPosition = position;
+        character.SpriteRenderer = spriteRenderer;
 
         float multiplier = characterSprite.rect.height / spriteTransform.rect.height;
         spriteTransform.sizeDelta = new Vector2(characterSprite.rect.width / multiplier, spriteTransform.sizeDelta.y);
@@ -57,13 +58,13 @@ public class CanvasCharacterManager : MonoBehaviour
         }
 
         spriteTransform.anchoredPosition = startPosition;
+        CharactersOnScreen.Add(character);
         
         Vector2 endPosition = new Vector2();     
         switch (position)
         {
             case ScenePositions.Left:
                 endPosition = new Vector2(-(parentTransform.sizeDelta.x / 2), 0);
-                CharactersOnScreen.Add(character);
 
                 Character[] leftCharacters = LeftSideCharacters.Reverse().ToArray();
                 if (leftCharacters.Length > 1)
@@ -83,10 +84,14 @@ public class CanvasCharacterManager : MonoBehaviour
                 break;
             case ScenePositions.Top:
                 endPosition = new Vector2(0, 0);
+                character.MoveCharacter(endPosition, enterTime);
+                break;
+            case ScenePositions.Middle:
+                endPosition = new Vector2(0f, 0f);
+                character.MoveCharacter(endPosition, enterTime);
                 break;
             case ScenePositions.Right:
                 endPosition = new Vector2(parentTransform.sizeDelta.x / 2, 0);
-                CharactersOnScreen.Add(character);
 
                 Character[] rightCharacters = RightSideCharacters;
                 if (rightCharacters.Length > 1)
@@ -137,5 +142,11 @@ public class CanvasCharacterManager : MonoBehaviour
         Character moveToCharacter = CharactersOnScreen.Find(x => x.Name == characterToMoveTo);
 
         mainCharacter.MoveCharacter(moveToCharacter.Transform.anchoredPosition, moveTime);
+    }
+
+    public void ChangeCharacterSprite(string characterName, Sprite characterSprite)
+    {
+        Character character = CharactersOnScreen.Find(x => x.Name == characterName);
+        character.ChangeSprite(characterSprite);
     }
 }

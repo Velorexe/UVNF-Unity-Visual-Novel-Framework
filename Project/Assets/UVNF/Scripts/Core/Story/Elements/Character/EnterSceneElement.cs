@@ -34,8 +34,10 @@ public class EnterSceneElement : StoryElement
         CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Character Sprite", GUILayout.MaxWidth(147));
-        Character = EditorGUILayout.ObjectField(Character, typeof(Sprite), true) as Sprite;
+        {
+            GUILayout.Label("Character Sprite", GUILayout.MaxWidth(147));
+            Character = EditorGUILayout.ObjectField(Character, typeof(Sprite), false) as Sprite;
+        }
         GUILayout.EndHorizontal();
 
         Flip = GUILayout.Toggle(Flip, "Flip");
@@ -52,7 +54,7 @@ public class EnterSceneElement : StoryElement
                 layoutRect.width = Character.rect.width / (Character.rect.height / 500);
                 //if (Flip) layoutRect.width = -layoutRect.width * 2;
                 layoutRect.height = 500;
-                
+
                 GUI.DrawTexture(layoutRect, Character.texture, ScaleMode.ScaleToFit);
                 GUILayout.Space(500);
             }
