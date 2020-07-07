@@ -1,4 +1,4 @@
-![UVNF_Logo](https://raw.githubusercontent.com/Velorexe/UVNF/master/Project/Assets/Resources/UI/Sprites/FullLogo.png)
+![UVNF_Logo](https://raw.githubusercontent.com/Velorexe/UVNF/0.1/Project/Assets/UVNF/Sprites/UI/FullLogo.png)
 # UVNF - Unity Visual Novel Framework
 UVNF is a free Unity framework for creating Visual Novels in Unity.
 This repository provides a set of examples, tools, workflows and other resources to help you get started on your project.
