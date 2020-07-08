@@ -32,7 +32,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 > Velorexe (Project lead/Front-Backend Developer)
 
 > Jocelyn (Art/Character Designer)
-* [Instagram](https://www.instagram.com/jade.lynxx/)
+* [Instagram](https://www.instagram.com/p/CBbMZp0pxkO/)
 
 ## Credits
 > [Siccity](https://github.com/Siccity)
