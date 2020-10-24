@@ -284,7 +284,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  - component: {fileID: 963194227}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -300,37 +299,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
---- !u!114 &963194227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!4 &963194228
 Transform:
   m_ObjectHideFlags: 0
@@ -730,6 +698,18 @@ PrefabInstance:
       propertyPath: CharacterManager
       value: 
       objectReference: {fileID: 359661694}
+    - target: {fileID: 1492045211013053232, guid: 19e2e4406c5853a498865440543889a5,
+        type: 3}
+      propertyPath: CurrentStory
+      value: 
+      objectReference: {fileID: 11400000, guid: 437a849d7bb6c8e478f40eef873a0736,
+        type: 2}
+    - target: {fileID: 1492045211013053232, guid: 19e2e4406c5853a498865440543889a5,
+        type: 3}
+      propertyPath: Variables
+      value: 
+      objectReference: {fileID: 11400000, guid: ab7beb5060f7eeb46b799c3cd9963f4c,
+        type: 2}
     - target: {fileID: 1492045211013053233, guid: 19e2e4406c5853a498865440543889a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -993,6 +973,12 @@ PrefabInstance:
       propertyPath: BackgroundFade
       value: 
       objectReference: {fileID: 683399404}
+    - target: {fileID: 4784810313972785027, guid: 795e0092d39ea594fbea9f7958d8fbbe,
+        type: 3}
+      propertyPath: ChoiceButton
+      value: 
+      objectReference: {fileID: 9188443421959378659, guid: 464260446288b4c4f8009482169ccf35,
+        type: 3}
     - target: {fileID: 4784810313972785036, guid: 795e0092d39ea594fbea9f7958d8fbbe,
         type: 3}
       propertyPath: m_Name

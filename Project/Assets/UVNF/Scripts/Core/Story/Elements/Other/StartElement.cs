@@ -12,7 +12,7 @@ namespace UVNF.Core.Story.Other
     [NodeTint("#CCFCC3"), Serializable]
     public class StartElement : StoryElement
     {
-        public override string ElementName => "Start Element";
+        public override string ElementName => "Start";
 
         public override Color32 DisplayColor => _displayColor;
         private Color32 _displayColor = new Color32().Other();
