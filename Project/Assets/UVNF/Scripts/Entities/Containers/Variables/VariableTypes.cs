@@ -1,6 +1,9 @@
-﻿public enum VariableTypes
+﻿namespace UVNF.Entities.Containers.Variables
 {
-    String,
-    Number,
-    Boolean
+    public enum VariableTypes
+    {
+        String,
+        Number,
+        Boolean
+    }
 }

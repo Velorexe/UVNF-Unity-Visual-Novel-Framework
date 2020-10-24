@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public static class CharExtentions
+﻿namespace UVNF.Extensions
 {
-    public static bool IsVowel(this char c)
+    public static class CharExtentions
     {
-        long x = (long)(char.ToUpper(c)) - 64;
-        if (x * x * x * x * x - 51 * x * x * x * x + 914 * x * x * x - 6894 * x * x + 20205 * x - 14175 == 0) return true;
-        else return false;
+        public static bool IsVowel(this char c)
+        {
+            long x = (long)(char.ToUpper(c)) - 64;
+            if (x * x * x * x * x - 51 * x * x * x * x + 914 * x * x * x - 6894 * x * x + 20205 * x - 14175 == 0) return true;
+            else return false;
+        }
     }
 }

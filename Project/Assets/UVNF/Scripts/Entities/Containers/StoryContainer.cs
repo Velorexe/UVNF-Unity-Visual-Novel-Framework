@@ -1,23 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UVNF.Core.Story;
 
-[CreateAssetMenu()]
-public class StoryContainer : ScriptableObject
+namespace UVNF.Entities.Containers
 {
-    public List<StoryElement> StoryElements = new List<StoryElement>();
-
-    public void ConnectStoryElements()
+    [CreateAssetMenu()]
+    public class StoryContainer : ScriptableObject
     {
-        for (int i = 0; i < StoryElements.Count; i++)
+        public List<StoryElement> StoryElements = new List<StoryElement>();
+
+        public void ConnectStoryElements()
         {
-            if (i < StoryElements.Count - 1)
+            for (int i = 0; i < StoryElements.Count; i++)
             {
-                StoryElements[i].Next = StoryElements[i + 1];
-            }
-            else
-            {
-                StoryElements[i].Next = null;
+                if (i < StoryElements.Count - 1)
+                {
+                    StoryElements[i].Next = StoryElements[i + 1];
+                }
+                else
+                {
+                    StoryElements[i].Next = null;
+                }
             }
         }
     }

@@ -1,10 +1,12 @@
-﻿
-public enum StoryElementTypes
+﻿namespace UVNF.Core.Story
 {
-    Story,
-    Character,
-    Scenery,
-    Audio,
-    Utility,
-    Other
+    public enum StoryElementTypes
+    {
+        Story,
+        Character,
+        Scenery,
+        Audio,
+        Utility,
+        Other
+    }
 }
