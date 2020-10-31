@@ -20,14 +20,14 @@ namespace UVNF.Core.Story.Audio
         public bool Fade = true;
         public float FadeTime = 1f;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             PauseBackgroundMusic = GUILayout.Toggle(PauseBackgroundMusic, "Pause Background Music");
             Fade = GUILayout.Toggle(Fade, "Fade Background Music");
             if (Fade) EditorGUILayout.FloatField("Fade Time", FadeTime);
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

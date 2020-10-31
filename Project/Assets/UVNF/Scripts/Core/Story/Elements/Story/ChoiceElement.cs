@@ -22,6 +22,7 @@ namespace UVNF.Core.Story.Dialogue
         public bool ShuffleChocies = true;
         public bool HideDialogue = false;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
             for (int i = 0; i < Choices.Count; i++)
@@ -53,6 +54,7 @@ namespace UVNF.Core.Story.Dialogue
             Choices.RemoveAt(index);
             RemoveDynamicPort(DynamicPorts.ElementAt(index));
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

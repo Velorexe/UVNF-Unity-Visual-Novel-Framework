@@ -17,13 +17,13 @@ namespace UVNF.Core.Story.Utility
 
         public float WaitTime = 1f;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             WaitTime = EditorGUILayout.FloatField("Wait Time", WaitTime);
             WaitTime = EditorGUILayout.Slider("Wait Time", WaitTime, 0.1f, WaitTime > 10f ? WaitTime : 10f);
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

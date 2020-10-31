@@ -46,9 +46,12 @@ namespace UVNF.Core.Story
 
         public abstract IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas);
 
+#if UNITY_EDITOR
         public abstract void DisplayLayout(Rect layoutRect, GUIStyle label = null);
 
         public virtual void DisplayNodeLayout(Rect layoutRect) { DisplayLayout(layoutRect); }
+
+#endif
 
         public int CompareTo(object obj)
         {

@@ -20,6 +20,9 @@ namespace UVNF.Core
         public AudioManager AudioManager;
         public CanvasCharacterManager CharacterManager;
 
+        [Header("Story Graph")]
+        public StoryGraph StartingStory;
+        
         [Header("Variables")]
         public VariableManager Variables;
 
@@ -27,6 +30,12 @@ namespace UVNF.Core
 
         private Queue<StoryGraph> _graphQueue = new Queue<StoryGraph>();
 
+
+        private void Awake()
+        {
+            if (StartingStory != null)
+                StartStory(StartingStory);
+        }
         /// <summary>
         /// Starts a provided StoryGraph
         /// </summary>

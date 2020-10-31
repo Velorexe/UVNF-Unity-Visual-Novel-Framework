@@ -27,14 +27,9 @@ namespace UVNF.Core.Story.Character
 
         public float EnterTime = 2f;
 
-        public override void OnCreate()
-        {
-            base.OnCreate();
-        }
-
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
 
             GUILayout.BeginHorizontal();
@@ -68,8 +63,8 @@ namespace UVNF.Core.Story.Character
             FinalPosition = (ScenePositions)EditorGUILayout.EnumPopup("Final Position", FinalPosition);
 
             EnterTime = EditorGUILayout.Slider("Enter Time", EnterTime, 1f, 10f);
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

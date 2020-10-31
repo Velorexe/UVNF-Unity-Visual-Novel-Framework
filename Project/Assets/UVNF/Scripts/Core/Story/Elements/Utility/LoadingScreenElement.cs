@@ -22,9 +22,9 @@ namespace UVNF.Core.Story.Utility
 
         public bool WaitToFinish = true;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             ShowLoadScreen = GUILayout.Toggle(ShowLoadScreen, "Show Load Screen");
             if (ShowLoadScreen)
                 GUILayout.Label("Load screen will show.");
@@ -33,8 +33,8 @@ namespace UVNF.Core.Story.Utility
             FadeOutTime = EditorGUILayout.Slider(FadeOutTime, 0, 10f);
             FadeOtherElements = GUILayout.Toggle(FadeOtherElements, $"Fade {(ShowLoadScreen ? "Out" : "In")} Other Elements");
             WaitToFinish = GUILayout.Toggle(WaitToFinish, "Wait To Finish Before Proceeding");
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

@@ -18,13 +18,13 @@ namespace UVNF.Core.Story.Utility
         public GameObject ObjectToSpawn;
         private GameObject _spawnedObject;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             GUILayout.Label("Object To Spawn", EditorStyles.boldLabel);
             ObjectToSpawn = EditorGUILayout.ObjectField(ObjectToSpawn, typeof(GameObject), false) as GameObject;
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

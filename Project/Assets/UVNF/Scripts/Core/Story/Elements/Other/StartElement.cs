@@ -33,6 +33,7 @@ namespace UVNF.Core.Story.Other
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas) { return null; }
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label) { }
 
         public override void DisplayNodeLayout(Rect layoutRect)
@@ -47,4 +48,5 @@ namespace UVNF.Core.Story.Other
             IsRoot = GUILayout.Toggle(IsRoot, "Is Root");
         }
     }
+#endif
 }

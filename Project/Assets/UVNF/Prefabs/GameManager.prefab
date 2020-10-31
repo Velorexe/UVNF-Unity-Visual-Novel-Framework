@@ -40,12 +40,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1492045211013053235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f826f994f31b958419e3d4db69f0e587, type: 3}
+  m_Script: {fileID: 11500000, guid: 15b16b8d1586fbe4bbdbbb1bebc268f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 0}
   AudioManager: {fileID: 0}
   CharacterManager: {fileID: 0}
-  CurrentStory: {fileID: 0}
-  TimeoutBeforeStart: 0
   Variables: {fileID: 0}

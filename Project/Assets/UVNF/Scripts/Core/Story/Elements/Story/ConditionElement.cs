@@ -28,16 +28,16 @@ namespace UVNF.Core.Story.Dialogue
         public string TextValue = string.Empty;
         public bool BooleanValue = false;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             Variables = EditorGUILayout.ObjectField("Variables", Variables, typeof(VariableManager), false) as VariableManager;
             if (Variables != null && Variables.Variables.Count > 0)
             {
                 VariableIndex = EditorGUILayout.Popup(VariableIndex, Variables.VariableNames());
             }
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

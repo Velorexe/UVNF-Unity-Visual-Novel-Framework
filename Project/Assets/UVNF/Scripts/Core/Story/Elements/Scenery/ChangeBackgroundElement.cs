@@ -19,17 +19,17 @@ namespace UVNF.Core.Story.Scenery
         public bool Fade = true;
         public float FadeTime = 1f;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             GUILayout.Label("New Background");
             NewBackground = EditorGUILayout.ObjectField(NewBackground, typeof(Sprite), false) as Sprite;
 
             Fade = GUILayout.Toggle(Fade, "Fade");
             if (Fade)
                 FadeTime = EditorGUILayout.FloatField("Fade out time", FadeTime);
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

@@ -19,14 +19,14 @@ namespace UVNF.Core.Story.Character
         public ScenePositions ExitPosition;
         public float ExitTime;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
             ExitPosition = (ScenePositions)EditorGUILayout.EnumPopup("Exit Position", ExitPosition);
             ExitTime = EditorGUILayout.Slider("Exit Time", ExitTime, 1f, 10f);
-#endif
         }
+#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
