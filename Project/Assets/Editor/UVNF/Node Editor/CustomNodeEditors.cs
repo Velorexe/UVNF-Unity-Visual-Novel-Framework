@@ -27,8 +27,7 @@ namespace UVNF.Editor.Story.Nodes
 
             public override void OnHeaderGUI()
             {
-                if (DisplayElementType(node.Type, node.ElementName, GetWidth()))
-                    foldout = !foldout;
+                DisplayElementType(node.Type, node.ElementName, GetWidth());
             }
 
             public override void OnBodyGUI()
@@ -87,8 +86,7 @@ namespace UVNF.Editor.Story.Nodes
 
             public override void OnHeaderGUI()
             {
-                if (DisplayElementType(node.Type, node.ElementName, GetWidth()))
-                    foldout = !foldout;
+                DisplayElementType(node.Type, node.ElementName, GetWidth());
             }
 
             public override void OnBodyGUI()
@@ -109,18 +107,30 @@ namespace UVNF.Editor.Story.Nodes
                 {
                     node.DisplayNodeLayout(lastRect);
                 }
+
+                GUIContent arrow;
+                if (foldout) arrow = EditorGUIUtility.IconContent("d_Toolbar Minus");
+                else arrow = EditorGUIUtility.IconContent("d_Toolbar Plus");
+
+                if (GUILayout.Button(arrow))
+                    foldout = !foldout;
             }
         }
 
-        public static bool DisplayElementType(StoryElementTypes type, string elementName, int width)
+        public static void DisplayElementType(StoryElementTypes type, string elementName, int width)
         {
-            bool result = GUI.Button(new Rect(0f, 0f, width + 50f, 60f), elementName, UVNFSettings.GetElementStyle(type));
+            GUI.DrawTexture(new Rect(5f, 5f, width - 10f, 36f), UVNFSettings.GetElementStyle(type).normal.background);
+
+            GUILayout.Space(5f);
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.Space(23f);
+                GUILayout.Label(elementName, UVNFSettings.GetLabelStyle(type));
+            }
+            GUILayout.EndHorizontal();
 
             if (UVNFSettings.EditorSettings.ElementHints.ContainsKey(elementName))
-                GUI.DrawTexture(new Rect(5f, 5f, 50f, 50f), UVNFSettings.EditorSettings.ElementHints[elementName]);
-
-            GUILayout.Space(60f);
-            return result;
+                GUI.DrawTexture(new Rect(5f, 7f, 32f, 32f), UVNFSettings.EditorSettings.ElementHints[elementName]);
         }
     }
 }

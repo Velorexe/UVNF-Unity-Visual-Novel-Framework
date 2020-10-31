@@ -54,7 +54,7 @@ namespace UVNF.Core.Story.Dialogue
             RemoveDynamicPort(DynamicPorts.ElementAt(index));
         }
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             List<string> choiceList = Choices;
             if (ShuffleChocies)
@@ -69,7 +69,7 @@ namespace UVNF.Core.Story.Dialogue
             {
                 int choice = canvas.ChoiceCallback;
                 canvas.ResetChoice();
-                managerCallback.AdvanceStory(DynamicPorts.ElementAt(choice).Connection.node as StoryElement);
+                managerCallback.AdvanceStoryGraph(DynamicPorts.ElementAt(choice).Connection.node as StoryElement);
             }
         }
     }

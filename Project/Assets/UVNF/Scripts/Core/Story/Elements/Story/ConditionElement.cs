@@ -39,7 +39,7 @@ namespace UVNF.Core.Story.Dialogue
 #endif
         }
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             bool conditionTrue = false;
             switch (Variables.Variables[VariableIndex].ValueType)
@@ -53,9 +53,9 @@ namespace UVNF.Core.Story.Dialogue
             }
 
             if (conditionTrue)
-                managerCallback.AdvanceStory(GetOutputPort("NextNode").Connection.node as StoryElement);
+                managerCallback.AdvanceStoryGraph(GetOutputPort("NextNode").Connection.node as StoryElement);
             else
-                managerCallback.AdvanceStory(GetOutputPort("ConditionFails").Connection.node as StoryElement);
+                managerCallback.AdvanceStoryGraph(GetOutputPort("ConditionFails").Connection.node as StoryElement);
             yield return null;
         }
     }

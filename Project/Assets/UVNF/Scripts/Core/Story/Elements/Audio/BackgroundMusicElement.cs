@@ -36,7 +36,7 @@ namespace UVNF.Core.Story.Audio
 #endif
         }
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             if (Crossfade)
                 managerCallback.AudioManager.CrossfadeBackgroundMusic(BackgroundMusic, CrossfadeTime);

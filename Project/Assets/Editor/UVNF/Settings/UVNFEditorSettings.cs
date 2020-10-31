@@ -10,7 +10,7 @@ namespace UVNF.Editor.Settings
 {
     public class UVNFEditorSettings : ScriptableObject, ISerializationCallbackReceiver
     {
-        [Header("UVNF GUI Skin")]
+        [Header("DVNF GUI Skin")]
         public GUISkin UVNFSkin;
         public Color32 ActiveElementColor = new Color32(0xf1, 0xd1, 0xff, 0xff);
 

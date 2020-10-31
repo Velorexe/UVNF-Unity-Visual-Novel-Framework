@@ -57,7 +57,7 @@ namespace UVNF.Core.Story.Utility
 #endif
         }
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             switch (Variables.Variables[VariableIndex].ValueType)
             {

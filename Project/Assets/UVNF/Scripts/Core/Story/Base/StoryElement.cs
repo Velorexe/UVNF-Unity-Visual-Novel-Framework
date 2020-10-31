@@ -44,7 +44,7 @@ namespace UVNF.Core.Story
                 Next = GetOutputPort("NextNode").Connection.node as StoryElement;
         }
 
-        public abstract IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas);
+        public abstract IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas);
 
         public abstract void DisplayLayout(Rect layoutRect, GUIStyle label = null);
 

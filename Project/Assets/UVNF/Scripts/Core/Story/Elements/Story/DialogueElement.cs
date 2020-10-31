@@ -42,7 +42,7 @@ namespace UVNF.Core.Story.Dialogue
 #endif
         }
 
-        public override IEnumerator Execute(GameManager gameManager, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager gameManager, UVNFCanvas canvas)
         {
             return canvas.DisplayText(Dialogue, CharacterName);
         }

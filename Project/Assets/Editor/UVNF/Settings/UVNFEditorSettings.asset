@@ -35,38 +35,42 @@ MonoBehaviour:
   - Background Music
   - Sound Effect
   - Stop Audio
-  - Move To Character
-  - Exit Scene
-  - Enter Scene
   - Change Sprite
+  - Enter Scene
+  - Exit Scene
+  - Move To Character
   - Log
   - Start
   - Change Background
-  - Dialogue
-  - Condition
-  - Choice
   - Audio Dialogue
-  - Wait
-  - Spawn Object
-  - Loading Screen
+  - Choice
+  - Condition
+  - Dialogue
   - Affect Variable
+  - Loading Screen
+  - Spawn Object
+  - Wait
+  - Chain Story
+  - Event Camera
   ElementHintTextures:
   - {fileID: 2800000, guid: c7239c855f4eb7e49a8a1cd1b45b1a94, type: 3}
   - {fileID: 2800000, guid: b41343c389cb88e499c348ca95581e40, type: 3}
   - {fileID: 2800000, guid: 2ca2a2263b4d4f945947409212feb24e, type: 3}
-  - {fileID: 2800000, guid: 34118a3ddd9e38f4eb9a85772ba2888b, type: 3}
-  - {fileID: 2800000, guid: a047021fd3dc9784c930f45ca49beed8, type: 3}
-  - {fileID: 2800000, guid: da93028a6eeeeaf428a0abd2c84f3d15, type: 3}
   - {fileID: 2800000, guid: dab1e3bee17f4b34bb982ad221c1f765, type: 3}
+  - {fileID: 2800000, guid: da93028a6eeeeaf428a0abd2c84f3d15, type: 3}
+  - {fileID: 2800000, guid: a047021fd3dc9784c930f45ca49beed8, type: 3}
+  - {fileID: 2800000, guid: 34118a3ddd9e38f4eb9a85772ba2888b, type: 3}
   - {fileID: 2800000, guid: 4a6abdc9248806b4980ea7d61068de3a, type: 3}
   - {fileID: 2800000, guid: 71062d4c6daf18c489b0fb28bb78b7b2, type: 3}
   - {fileID: 2800000, guid: 0bb5ccb19c9368046944cfa61e48dc0f, type: 3}
-  - {fileID: 2800000, guid: 7c498dbc138baf44792c284fe051c30d, type: 3}
-  - {fileID: 2800000, guid: 6ccaaaafc77c658469eee18360da4f6e, type: 3}
-  - {fileID: 2800000, guid: 5f28d73bccf84c343b563a37c6ef8a0c, type: 3}
   - {fileID: 2800000, guid: 17940bd642e7b6842b0eb7fbdd9e90ba, type: 3}
-  - {fileID: 2800000, guid: 2aa84ad199972614993b9d90300748ad, type: 3}
-  - {fileID: 2800000, guid: 50d610759fa0f67448967de11544c48e, type: 3}
-  - {fileID: 2800000, guid: ac1eacac6edacd5499b6eebd9aa7b3de, type: 3}
+  - {fileID: 2800000, guid: 5f28d73bccf84c343b563a37c6ef8a0c, type: 3}
+  - {fileID: 2800000, guid: 6ccaaaafc77c658469eee18360da4f6e, type: 3}
+  - {fileID: 2800000, guid: 7c498dbc138baf44792c284fe051c30d, type: 3}
   - {fileID: 2800000, guid: 7d532c143ae8eb642bc1fd40b2ec50c2, type: 3}
+  - {fileID: 2800000, guid: ac1eacac6edacd5499b6eebd9aa7b3de, type: 3}
+  - {fileID: 2800000, guid: 50d610759fa0f67448967de11544c48e, type: 3}
+  - {fileID: 2800000, guid: 2aa84ad199972614993b9d90300748ad, type: 3}
+  - {fileID: 2800000, guid: 999474cf869963b4cad2726f2eae0bab, type: 3}
+  - {fileID: 2800000, guid: e3302b2c055f99c4a9e05703729bb807, type: 3}
   Variables: {fileID: 0}

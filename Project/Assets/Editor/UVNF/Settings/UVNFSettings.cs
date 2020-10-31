@@ -42,6 +42,7 @@ namespace UVNF.Editor.Settings
         }
         private static List<StoryElement> _storyElements;
 
+        private static Dictionary<StoryElementTypes, GUISkin> _elementStyles = new Dictionary<StoryElementTypes, GUISkin>();
 
         private static UVNFEditorSettings GetEditorSettings()
         {
@@ -67,29 +68,14 @@ namespace UVNF.Editor.Settings
 
         public static GUIStyle GetElementStyle(StoryElementTypes type)
         {
-            GUIStyle newStyle = EditorSettings.UVNFSkin.button;
-            switch (type)
-            {
-                case StoryElementTypes.Audio:
-                    newStyle.normal.background = EditorSettings.AudioElementTexture;
-                    break;
-                case StoryElementTypes.Scenery:
-                    newStyle.normal.background = EditorSettings.SceneryElementTexture;
-                    break;
-                case StoryElementTypes.Character:
-                    newStyle.normal.background = EditorSettings.CharacterElementTexture;
-                    break;
-                case StoryElementTypes.Other:
-                    newStyle.normal.background = EditorSettings.OtherElementTexture;
-                    break;
-                case StoryElementTypes.Story:
-                    newStyle.normal.background = EditorSettings.StoryElementTexture;
-                    break;
-                case StoryElementTypes.Utility:
-                    newStyle.normal.background = EditorSettings.UtilityElementTexture;
-                    break;
-            }
-            return newStyle;
+            SetupElements();
+            return _elementStyles[type].button;
+        }
+
+        public static GUIStyle GetLabelStyle(StoryElementTypes type)
+        {
+            SetupElements();
+            return _elementStyles[type].label;
         }
 
         public static GUIStyle GetColorByElement(StoryElementTypes type)
@@ -123,6 +109,66 @@ namespace UVNF.Editor.Settings
 
             newStyle.normal.background.Apply();
             return newStyle;
+        }
+
+        private static void SetupElements()
+        {
+            if(_elementStyles.Count == 0)
+            {
+                #region Audio
+                GUISkin style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
+                
+                style.button.normal.background = EditorSettings.AudioElementTexture;
+                style.label.normal.textColor = new Color32(88, 106, 84, 255);
+
+                _elementStyles.Add(StoryElementTypes.Audio, style);
+                #endregion
+
+                #region Character
+                style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
+
+                style.button.normal.background = EditorSettings.CharacterElementTexture;
+                style.label.normal.textColor = new Color32(63, 58, 51, 255);
+
+                _elementStyles.Add(StoryElementTypes.Character, style);
+                #endregion
+
+                #region Scenery
+                style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
+
+                style.button.normal.background = EditorSettings.SceneryElementTexture;
+                style.label.normal.textColor = new Color32(63, 60, 48, 255);
+
+                _elementStyles.Add(StoryElementTypes.Scenery, style);
+                #endregion
+
+                #region Story
+                style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
+
+                style.button.normal.background = EditorSettings.StoryElementTexture;
+                style.label.normal.textColor = new Color32(63, 48, 48, 255);
+
+                _elementStyles.Add(StoryElementTypes.Story, style);
+                #endregion
+
+                #region Utility
+                style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
+
+                style.button.normal.background = EditorSettings.UtilityElementTexture;
+                style.label.normal.textColor = new Color32(83, 87, 110, 255);
+
+                _elementStyles.Add(StoryElementTypes.Utility, style);
+                #endregion
+
+                #region Other
+                style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
+
+                style.button.normal.background = EditorSettings.OtherElementTexture;
+                style.label.normal.textColor = new Color32(56, 56, 56, 255);
+
+                _elementStyles.Add(StoryElementTypes.Other, style);
+                #endregion
+            }
         }
     }
 }

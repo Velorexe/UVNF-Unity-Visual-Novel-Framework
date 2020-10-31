@@ -28,7 +28,7 @@ namespace UVNF.Core.Story.Character
 #endif
         }
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             managerCallback.CharacterManager.RemoveCharacter(CharacterName, ExitPosition, ExitTime);
             return null;
