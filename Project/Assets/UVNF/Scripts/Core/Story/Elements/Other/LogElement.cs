@@ -18,14 +18,14 @@ namespace UVNF.Core.Story.Other
 
         public string LogText;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             LogText = EditorGUILayout.TextField("Log Text", LogText);
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             Debug.Log(LogText);
             return null;

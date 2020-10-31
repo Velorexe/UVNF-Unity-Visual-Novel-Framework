@@ -21,17 +21,17 @@ namespace UVNF.Core.Story.Character
 
         public float MoveTime = 1f;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             Character = EditorGUILayout.TextField("Character", Character);
             CharacterToMoveTo = EditorGUILayout.TextField("Character To Move To", CharacterToMoveTo);
 
             MoveTime = EditorGUILayout.FloatField("Move Time", MoveTime);
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             managerCallback.CharacterManager.MoveCharacterTo(Character, CharacterToMoveTo, MoveTime);
             return null;

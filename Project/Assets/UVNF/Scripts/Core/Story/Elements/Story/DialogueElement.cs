@@ -22,9 +22,9 @@ namespace UVNF.Core.Story.Dialogue
 
         private GUIStyle textAreaStyle;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             if (textAreaStyle == null)
             {
                 Texture2D areaBackground = new Texture2D(1, 1);
@@ -39,10 +39,10 @@ namespace UVNF.Core.Story.Dialogue
             CharacterName = EditorGUILayout.TextField("Character", CharacterName);
             GUILayout.Label("Dialogue");
             Dialogue = EditorGUILayout.TextArea(Dialogue, textAreaStyle, GUILayout.MinHeight(50));
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager gameManager, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager gameManager, UVNFCanvas canvas)
         {
             return canvas.DisplayText(Dialogue, CharacterName);
         }

@@ -22,9 +22,9 @@ namespace UVNF.Core.Story.Audio
 
         public float Volume;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             BackgroundMusic = EditorGUILayout.ObjectField(BackgroundMusic, typeof(AudioClip), false) as AudioClip;
 
             Crossfade = GUILayout.Toggle(Crossfade, "Crossfade");
@@ -33,10 +33,10 @@ namespace UVNF.Core.Story.Audio
 
             if (CrossfadeTime < 0) CrossfadeTime = 0;
             Volume = EditorGUILayout.Slider("Volume", Volume, 0f, 1f);
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             if (Crossfade)
                 managerCallback.AudioManager.CrossfadeBackgroundMusic(BackgroundMusic, CrossfadeTime);

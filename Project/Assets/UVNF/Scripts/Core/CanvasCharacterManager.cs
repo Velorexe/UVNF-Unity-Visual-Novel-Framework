@@ -20,8 +20,10 @@ namespace UVNF.Core
 
         public void AddCharacter(string characterName, Sprite characterSprite, bool flip, ScenePositions enter, ScenePositions position, float enterTime)
         {
+            MainCharacterStack.gameObject.SetActive(true);
+
             GameObject obj = new GameObject(characterSprite.name, typeof(RectTransform));
-            RectTransform parentTransform = null;
+            RectTransform parentTransform;
 
             Image spriteRenderer = obj.AddComponent<Image>();
             spriteRenderer.sprite = characterSprite;
@@ -29,8 +31,8 @@ namespace UVNF.Core
 
             RectTransform spriteTransform = obj.GetComponent<RectTransform>();
             obj.transform.SetParent(MainCharacterStack);
-            parentTransform = MainCharacterStack.GetComponent<RectTransform>();
-            spriteTransform.sizeDelta = MainCharacterStack.GetComponent<RectTransform>().sizeDelta;
+            parentTransform = MainCharacterStack;
+            spriteTransform.sizeDelta = MainCharacterStack.sizeDelta;
 
             if (flip)
                 spriteTransform.localScale = new Vector3(-1, 1, 1);
@@ -152,6 +154,11 @@ namespace UVNF.Core
         {
             Character character = CharactersOnScreen.Find(x => x.Name == characterName);
             character.ChangeSprite(characterSprite);
+        }
+
+        public void Hide()
+        {
+            MainCharacterStack.gameObject.SetActive(false);
         }
     }
 }
