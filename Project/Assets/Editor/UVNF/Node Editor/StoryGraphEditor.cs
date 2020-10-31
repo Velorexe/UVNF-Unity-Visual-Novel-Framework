@@ -21,7 +21,6 @@ namespace UVNF.Editor.Story.Nodes
         public override void OnOpen()
         {
             base.OnOpen();
-            window.name = "Story Graph Editor";
         }
 
         public override string GetNodeMenuName(Type type)
@@ -32,7 +31,7 @@ namespace UVNF.Editor.Story.Nodes
                 {
                     StoryElement element = ScriptableObject.CreateInstance(type) as StoryElement;
                     string returnString = element.Type.ToString() + "/" + type.Name.Replace("Element", "");
-                    ScriptableObject.DestroyImmediate(element);
+                    UnityEngine.Object.DestroyImmediate(element);
                     return returnString;
                 }
                 else
@@ -47,6 +46,12 @@ namespace UVNF.Editor.Story.Nodes
             if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 2)
             {
                 CreateNode(typeof(DialogueElement), window.WindowToGridPosition(Event.current.mousePosition).OffsetY(20));
+            }
+            else if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Space)
+            {
+                GenericMenu menu = new GenericMenu();
+                AddContextMenuItems(menu);
+                menu.DropDown(new Rect(Event.current.mousePosition, Vector2.zero));
             }
         }
     }

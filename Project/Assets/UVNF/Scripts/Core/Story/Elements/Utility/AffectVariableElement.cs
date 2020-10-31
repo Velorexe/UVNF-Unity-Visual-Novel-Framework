@@ -34,9 +34,9 @@ namespace UVNF.Core.Story.Utility
 
         private string[] booleanOptions = new string[] { "False", "True" };
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             Variables = EditorGUILayout.ObjectField("Variables", Variables, typeof(VariableManager), false) as VariableManager;
             if (Variables != null && Variables.Variables.Count > 0)
             {
@@ -54,10 +54,10 @@ namespace UVNF.Core.Story.Utility
                         BooleanValue = System.Convert.ToBoolean(EditorGUILayout.Popup("Value", System.Convert.ToInt32(BooleanValue), booleanOptions)); break;
                 }
             }
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             switch (Variables.Variables[VariableIndex].ValueType)
             {

@@ -77,7 +77,7 @@ namespace UVNF.Core
             AudioSource source = sfxPlayer.AddComponent<AudioSource>();
             source.clip = clip;
 
-            //TODO volume * GameManager.UserSettings.Volume;
+            //TODO volume * UVNFManager.UserSettings.Volume;
             source.volume = volume;
             source.Play();
 
@@ -95,7 +95,7 @@ namespace UVNF.Core
             source.clip = clip;
             source.pitch += extraPitch;
 
-            //TODO volume * GameManager.UserSettings.Volume;
+            //TODO volume * UVNFManager.UserSettings.Volume;
             source.volume = volume;
             source.Play();
 
@@ -106,7 +106,7 @@ namespace UVNF.Core
 
         private IEnumerator CrossfadeAudioSourceUp(AudioSource source, float crossfadeTime = 1f)
         {
-            //TODO get the max volume set by the GameManager
+            //TODO get the max volume set by the UVNFManager
             while (source.volume != 1f) { source.volume += Time.deltaTime / crossfadeTime; yield return null; }
         }
 

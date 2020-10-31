@@ -698,18 +698,6 @@ PrefabInstance:
       propertyPath: CharacterManager
       value: 
       objectReference: {fileID: 359661694}
-    - target: {fileID: 1492045211013053232, guid: 19e2e4406c5853a498865440543889a5,
-        type: 3}
-      propertyPath: CurrentStory
-      value: 
-      objectReference: {fileID: 11400000, guid: 437a849d7bb6c8e478f40eef873a0736,
-        type: 2}
-    - target: {fileID: 1492045211013053232, guid: 19e2e4406c5853a498865440543889a5,
-        type: 3}
-      propertyPath: Variables
-      value: 
-      objectReference: {fileID: 11400000, guid: ab7beb5060f7eeb46b799c3cd9963f4c,
-        type: 2}
     - target: {fileID: 1492045211013053233, guid: 19e2e4406c5853a498865440543889a5,
         type: 3}
       propertyPath: m_LocalPosition.x

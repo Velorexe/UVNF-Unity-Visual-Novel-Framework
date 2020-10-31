@@ -21,10 +21,10 @@ namespace UVNF.Core.Story.Dialogue
         public AudioClip BoopSoundEffect;
         public AudioClip DialogueClip;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
             base.DisplayLayout(layoutRect, label);
-#if UNITY_EDITOR
             Beep = GUILayout.Toggle(Beep, "Beep");
             if (Beep)
             {
@@ -37,10 +37,10 @@ namespace UVNF.Core.Story.Dialogue
             }
             else
                 DialogueClip = EditorGUILayout.ObjectField("Dialogue", DialogueClip, typeof(AudioClip), false) as AudioClip;
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             if (Beep)
                 return canvas.DisplayText(Dialogue, CharacterName, BoopSoundEffect, managerCallback.AudioManager, MaxPitch, BeepOnVowel);

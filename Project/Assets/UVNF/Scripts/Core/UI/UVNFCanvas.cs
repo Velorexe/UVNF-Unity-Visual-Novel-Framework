@@ -378,5 +378,23 @@ namespace UVNF.Core.UI
             }
             else return text[textIndex].ToString();
         }
+
+        public void Hide()
+        {
+            if (BackgroundCanvasGroup != null)
+                BackgroundCanvasGroup.gameObject.SetActive(false);
+            if (ChoiceCanvasGroup != null)
+                ChoiceCanvasGroup.gameObject.SetActive(false);
+            if (BottomCanvasGroup != null)
+                BottomCanvasGroup.gameObject.SetActive(false);
+            if (CharacterNamePlate != null)
+                CharacterNamePlate.gameObject.SetActive(false);
+        }
+
+        public void Show()
+        {
+            if (BackgroundCanvasGroup != null)
+                BackgroundCanvasGroup.gameObject.SetActive(true);
+        }
     }
 }

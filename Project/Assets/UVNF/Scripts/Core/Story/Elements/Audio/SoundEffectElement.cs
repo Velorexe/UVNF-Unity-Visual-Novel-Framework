@@ -22,16 +22,16 @@ namespace UVNF.Core.Story.Audio
 
         public bool WaitForAudio = false;
 
+#if UNITY_EDITOR
         public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-#if UNITY_EDITOR
             AudioClip = EditorGUILayout.ObjectField("Audio Clip", AudioClip, typeof(AudioClip), false) as AudioClip;
             Volume = EditorGUILayout.Slider("Volume", Volume, 0f, 1f);
             WaitForAudio = GUILayout.Toggle(WaitForAudio, "Wait For Audio");
-#endif
         }
+#endif
 
-        public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             if (WaitForAudio)
             {
