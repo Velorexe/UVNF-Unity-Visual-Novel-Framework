@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Project/Assets/UVNF/Sprites/UI.meta
 guid: 2fad8c497fc25d04a8f698a20c293d33
+=======
+guid: ed2651ef6f3346f42bf895230fec757e
+>>>>>>> master:Project/Assets/UVNF - ExampleResources/Prefabs/UI.meta
+=======
+guid: 2fad8c497fc25d04a8f698a20c293d33
+>>>>>>> master
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

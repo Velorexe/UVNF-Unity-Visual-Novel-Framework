@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UVNF/Scenes/MainMenu.unity
-    guid: 046632eac3246af46a1b0df122c19128
-  - enabled: 1
-    path: Assets/UVNF/Scenes/MainScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/UVNF - ExampleResources/Scenes/ExampleScene.unity
+    guid: f23814da02f177c438c919f4a1128b7e
   m_configObjects: {}

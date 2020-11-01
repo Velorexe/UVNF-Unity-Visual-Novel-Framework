@@ -14,7 +14,6 @@ namespace UVNF.Entities
         public RectTransform Parent;
 
         public ScenePositions CurrentPosition;
-
         public Image SpriteRenderer;
 
         public bool CurrentlyMoving
