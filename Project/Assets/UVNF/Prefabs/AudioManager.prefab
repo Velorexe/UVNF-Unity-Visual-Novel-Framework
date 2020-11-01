@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1968594072633747256
+--- !u!1 &3204410157899809887
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1968594072633747239}
+  - component: {fileID: 3204410157899809856}
   m_Layer: 0
   m_Name: SFXParent
   m_TagString: Untagged
@@ -16,21 +16,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1968594072633747239
+--- !u!4 &3204410157899809856
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968594072633747256}
+  m_GameObject: {fileID: 3204410157899809887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1968594074604578036}
+  m_Father: {fileID: 3204410159199487891}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1968594073553077306
+--- !u!1 &3204410158080960349
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38,8 +38,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1968594073553077304}
-  - component: {fileID: 1968594073553077305}
+  - component: {fileID: 3204410158080960351}
+  - component: {fileID: 3204410158080960350}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -47,27 +47,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1968594073553077304
+--- !u!4 &3204410158080960351
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968594073553077306}
+  m_GameObject: {fileID: 3204410158080960349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1968594074604578036}
+  m_Father: {fileID: 3204410159199487891}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1968594073553077305
+--- !u!82 &3204410158080960350
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968594073553077306}
+  m_GameObject: {fileID: 3204410158080960349}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -157,7 +157,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1968594074604578038
+--- !u!1 &3204410159199487889
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,8 +165,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1968594074604578036}
-  - component: {fileID: 1968594074604578037}
+  - component: {fileID: 3204410159199487891}
+  - component: {fileID: 3204410159199487890}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -174,34 +174,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1968594074604578036
+--- !u!4 &3204410159199487891
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968594074604578038}
+  m_GameObject: {fileID: 3204410159199487889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1248.0128, y: 954.0033, z: -959.1914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1968594073553077304}
-  - {fileID: 1968594072633747239}
+  - {fileID: 3204410158080960351}
+  - {fileID: 3204410157899809856}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1968594074604578037
+--- !u!114 &3204410159199487890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968594074604578038}
+  m_GameObject: {fileID: 3204410159199487889}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b9e3b92f7f45b24196abf52d3564819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundMusic: {fileID: 1968594073553077305}
+  BackgroundMusic: {fileID: 3204410158080960350}
   CurrentlyPlayingBackgroundMusic: 0
-  SFXParent: {fileID: 1968594072633747239}
+  SFXParent: {fileID: 3204410157899809856}

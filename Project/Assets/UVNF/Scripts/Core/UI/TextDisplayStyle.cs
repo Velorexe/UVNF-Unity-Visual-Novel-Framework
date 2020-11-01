@@ -1,10 +1,13 @@
-﻿public enum TextDisplayStyle
+﻿namespace UVNF.Core.UI
 {
-    Small,
-    Big,
-    Italic,
-    Bold,
-    Fast,
-    Slow,
-    Gigantic
+    public enum TextDisplayStyle
+    {
+        Small,
+        Big,
+        Italic,
+        Bold,
+        Fast,
+        Slow,
+        Gigantic
+    }
 }

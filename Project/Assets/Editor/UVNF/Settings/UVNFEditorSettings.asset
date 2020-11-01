@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06c8a24dbdc7f14a986ba93631864f2, type: 3}
+  m_Name: UVNFEditorSettings
+  m_EditorClassIdentifier: 
+  UVNFSkin: {fileID: 11400000, guid: 16fab56623a7b294e935d328318a8613, type: 2}
+  ActiveElementColor:
+    serializedVersion: 2
+    rgba: 4294955505
+  StoryElementTexture: {fileID: 2800000, guid: fd1e95d5c573fe549b74bc8473fc43eb, type: 3}
+  CharacterElementTexture: {fileID: 2800000, guid: 8007769594dfe454986c790e450f28a4,
+    type: 3}
+  SceneryElementTexture: {fileID: 2800000, guid: dfc2a929c0b54624cb397da31309a8ff,
+    type: 3}
+  AudioElementTexture: {fileID: 2800000, guid: 3a796b2db7690f24b854a3a2a7fdb32c, type: 3}
+  UtilityElementTexture: {fileID: 2800000, guid: f90c382e60a6bce4eaccd55dc05444f3,
+    type: 3}
+  OtherElementTexture: {fileID: 2800000, guid: ed79adc4558e1f440b1277d245c63de4, type: 3}
+  StoryElementColor: {r: 0.99607843, g: 0.76862746, b: 0.76862746, a: 1}
+  CharacterElementColor: {r: 0.99607843, g: 0.9254902, b: 0.80784315, a: 1}
+  SceneryElementColor: {r: 1, g: 0.9411765, b: 0.6666667, a: 1}
+  AudioElementColor: {r: 0.7607843, g: 0.91764706, b: 0.7254902, a: 1}
+  UtilityElementColor: {r: 0.7019608, g: 0.7411765, b: 0.92941177, a: 1}
+  OtherElementColor: {r: 0.7176471, g: 0.7176471, b: 0.7176471, a: 1}
+  ElementHintTexturesName:
+  - Background Music
+  - Sound Effect
+  - Stop Audio
+  - Change Sprite
+  - Enter Scene
+  - Exit Scene
+  - Move To Character
+  - Log
+  - Start
+  - Change Background
+  - Audio Dialogue
+  - Choice
+  - Condition
+  - Dialogue
+  - Affect Variable
+  - Loading Screen
+  - Spawn Object
+  - Wait
+  - Chain Story
+  - Event Camera
+  ElementHintTextures:
+  - {fileID: 2800000, guid: c7239c855f4eb7e49a8a1cd1b45b1a94, type: 3}
+  - {fileID: 2800000, guid: b41343c389cb88e499c348ca95581e40, type: 3}
+  - {fileID: 2800000, guid: 2ca2a2263b4d4f945947409212feb24e, type: 3}
+  - {fileID: 2800000, guid: dab1e3bee17f4b34bb982ad221c1f765, type: 3}
+  - {fileID: 2800000, guid: da93028a6eeeeaf428a0abd2c84f3d15, type: 3}
+  - {fileID: 2800000, guid: a047021fd3dc9784c930f45ca49beed8, type: 3}
+  - {fileID: 2800000, guid: 34118a3ddd9e38f4eb9a85772ba2888b, type: 3}
+  - {fileID: 2800000, guid: 4a6abdc9248806b4980ea7d61068de3a, type: 3}
+  - {fileID: 2800000, guid: 71062d4c6daf18c489b0fb28bb78b7b2, type: 3}
+  - {fileID: 2800000, guid: 0bb5ccb19c9368046944cfa61e48dc0f, type: 3}
+  - {fileID: 2800000, guid: 17940bd642e7b6842b0eb7fbdd9e90ba, type: 3}
+  - {fileID: 2800000, guid: 5f28d73bccf84c343b563a37c6ef8a0c, type: 3}
+  - {fileID: 2800000, guid: 6ccaaaafc77c658469eee18360da4f6e, type: 3}
+  - {fileID: 2800000, guid: 7c498dbc138baf44792c284fe051c30d, type: 3}
+  - {fileID: 2800000, guid: 7d532c143ae8eb642bc1fd40b2ec50c2, type: 3}
+  - {fileID: 2800000, guid: ac1eacac6edacd5499b6eebd9aa7b3de, type: 3}
+  - {fileID: 2800000, guid: 50d610759fa0f67448967de11544c48e, type: 3}
+  - {fileID: 2800000, guid: 2aa84ad199972614993b9d90300748ad, type: 3}
+  - {fileID: 2800000, guid: 999474cf869963b4cad2726f2eae0bab, type: 3}
+  - {fileID: 2800000, guid: e3302b2c055f99c4a9e05703729bb807, type: 3}
+  Variables: {fileID: 0}

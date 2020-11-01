@@ -5,51 +5,59 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 
-[NodeWidth(300)]
-public abstract class StoryElement : Node, IComparable
+using UVNF.Core.UI;
+
+namespace UVNF.Core.Story
 {
-    public abstract string ElementName { get; }
-    public abstract Color32 DisplayColor { get; }
-    public abstract StoryElementTypes Type { get; }
-
-    public virtual bool IsVisible() { return true; }
-
-    [HideInInspector]
-    public bool Active = false;
-    [HideInInspector]
-    public StoryElement Next;
-
-    [HideInInspector]
-    [Input(ShowBackingValue.Never, ConnectionType.Multiple)] public NodePort PreviousNode;
-    [HideInInspector]
-    [Output(ShowBackingValue.Never, ConnectionType.Override)] public NodePort NextNode;
-
-    public override object GetValue(NodePort port)
+    [NodeWidth(300)]
+    public abstract class StoryElement : Node, IComparable
     {
-        if(port.IsConnected)
-            return port.Connection.node;
-        return null;
-    }
+        public abstract string ElementName { get; }
+        public abstract Color32 DisplayColor { get; }
+        public abstract StoryElementTypes Type { get; }
 
-    public virtual void OnCreate() { }
-    public virtual void OnDelete() { }
+        public virtual bool IsVisible() { return true; }
 
-    public virtual void Connect()
-    {
-        if (GetOutputPort("NextNode").IsConnected)
-            Next = GetOutputPort("NextNode").Connection.node as StoryElement;
-    }
+        [HideInInspector]
+        public bool Active = false;
+        [HideInInspector]
+        public StoryElement Next;
 
-    public abstract IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas);
+        [HideInInspector]
+        [Input(ShowBackingValue.Never, ConnectionType.Multiple)] public NodePort PreviousNode;
+        [HideInInspector]
+        [Output(ShowBackingValue.Never, ConnectionType.Override)] public NodePort NextNode;
 
-    public abstract void DisplayLayout(Rect layoutRect);
+        public override object GetValue(NodePort port)
+        {
+            if (port.IsConnected)
+                return port.Connection.node;
+            return null;
+        }
 
-    public virtual void DisplayNodeLayout(Rect layoutRect) { DisplayLayout(layoutRect); }
+        public virtual void OnCreate() { }
+        public virtual void OnDelete() { }
 
-    public int CompareTo(object obj)
-    {
-        if (obj == null) return 1;
-        if (!(obj is StoryElement)) return 1;
-        return string.Compare(ElementName, ((StoryElement)obj).ElementName);
+        public virtual void Connect()
+        {
+            if (GetOutputPort("NextNode").IsConnected)
+                Next = GetOutputPort("NextNode").Connection.node as StoryElement;
+        }
+
+        public abstract IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas);
+
+#if UNITY_EDITOR
+        public abstract void DisplayLayout(Rect layoutRect, GUIStyle label = null);
+
+        public virtual void DisplayNodeLayout(Rect layoutRect) { DisplayLayout(layoutRect); }
+
+#endif
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            if (!(obj is StoryElement)) return 1;
+            return string.Compare(ElementName, ((StoryElement)obj).ElementName);
+        }
     }
 }

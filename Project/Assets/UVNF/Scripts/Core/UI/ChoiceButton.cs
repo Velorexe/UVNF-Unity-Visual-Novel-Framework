@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class ChoiceButton : MonoBehaviour
+namespace UVNF.Core.UI
 {
-    public TextMeshProUGUI Text;
-    
-    private UVNFCanvas CanvasCallback;
-    private int ChoiceIndex;
-    
-    public void Display(string choiceText, int choiceIndex, UVNFCanvas callback)
+    public class ChoiceButton : MonoBehaviour
     {
-        CanvasCallback = callback;
-        ChoiceIndex = choiceIndex;
+        public TextMeshProUGUI Text;
 
-        Text.text = choiceText;
-    }
+        private UVNFCanvas CanvasCallback;
+        private int ChoiceIndex;
 
-    public void Chosen()
-    {
-        CanvasCallback.ChoiceCallback = ChoiceIndex;
+        public void Display(string choiceText, int choiceIndex, UVNFCanvas callback)
+        {
+            CanvasCallback = callback;
+            ChoiceIndex = choiceIndex;
+
+            Text.text = choiceText;
+        }
+
+        public void Chosen()
+        {
+            CanvasCallback.ChoiceCallback = ChoiceIndex;
+        }
     }
 }

@@ -2,115 +2,118 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace UVNF.Core
 {
-    [Header("Background Music")]
-    public AudioSource BackgroundMusic;
-    public bool CurrentlyPlayingBackgroundMusic = false;
-
-    [Header("SFX")]
-    public Transform SFXParent;
-
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        BackgroundMusic.loop = true;
-    }
+        [Header("Background Music")]
+        public AudioSource BackgroundMusic;
+        public bool CurrentlyPlayingBackgroundMusic = false;
 
-    public void PlayBackgroundMusic(AudioClip clip, float volume = 1f)
-    {
-        BackgroundMusic.clip = clip;
-        BackgroundMusic.Play();
+        [Header("SFX")]
+        public Transform SFXParent;
 
-        CurrentlyPlayingBackgroundMusic = true;
-    }
+        private void Awake()
+        {
+            BackgroundMusic.loop = true;
+        }
 
-    public void StopBackgroundMusic()
-    {
-        BackgroundMusic.Stop();
-    }
+        public void PlayBackgroundMusic(AudioClip clip, float volume = 1f)
+        {
+            BackgroundMusic.clip = clip;
+            BackgroundMusic.Play();
 
-    public void StopBackgroundMusic(float fadeOutTime = 1f, bool destroy = true)
-    {
-        CrossfadeAudioSourceDown(BackgroundMusic, fadeOutTime, destroy);
-    }
+            CurrentlyPlayingBackgroundMusic = true;
+        }
 
-    public void PauseBackgroundMusic()
-    {
-        BackgroundMusic.Pause();
-    }
+        public void StopBackgroundMusic()
+        {
+            BackgroundMusic.Stop();
+        }
 
-    public void CrossfadeBackgroundMusic(AudioClip clip, float crossfadeTime = 1f)
-    {
-        AudioSource newBGSource = Instantiate(BackgroundMusic.gameObject, transform).GetComponent<AudioSource>();
-        newBGSource.gameObject.name = BackgroundMusic.gameObject.name;
-        BackgroundMusic.gameObject.name = BackgroundMusic.gameObject.name + " [OLD]";
+        public void StopBackgroundMusic(float fadeOutTime = 1f, bool destroy = true)
+        {
+            CrossfadeAudioSourceDown(BackgroundMusic, fadeOutTime, destroy);
+        }
 
-        newBGSource.clip = clip;
-        newBGSource.volume = 0f;
+        public void PauseBackgroundMusic()
+        {
+            BackgroundMusic.Pause();
+        }
 
-        AudioSource oldBGSource = BackgroundMusic;
-        
-        BackgroundMusic = newBGSource;
-        BackgroundMusic.Play();
-        
-        StartCoroutine(CrossfadeAudioSourceDown(oldBGSource, crossfadeTime));
-        StartCoroutine(CrossfadeAudioSourceUp(BackgroundMusic, crossfadeTime));
-    }
+        public void CrossfadeBackgroundMusic(AudioClip clip, float crossfadeTime = 1f)
+        {
+            AudioSource newBGSource = Instantiate(BackgroundMusic.gameObject, transform).GetComponent<AudioSource>();
+            newBGSource.gameObject.name = BackgroundMusic.gameObject.name;
+            BackgroundMusic.gameObject.name = BackgroundMusic.gameObject.name + " [OLD]";
 
-    public void PlaySound(AudioClip clip, float volume)
-    {
-        StartCoroutine(PlaySoundCoroutine(clip, volume));
-    }
+            newBGSource.clip = clip;
+            newBGSource.volume = 0f;
 
-    public void PlaySound(AudioClip clip, float volume, float extraPitch)
-    {
-        StartCoroutine(PlaySoundCoroutine(clip, volume, extraPitch));
-    }
+            AudioSource oldBGSource = BackgroundMusic;
 
-    public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume)
-    {
-        GameObject sfxPlayer = new GameObject(clip.name);
-        sfxPlayer.transform.SetParent(SFXParent);
+            BackgroundMusic = newBGSource;
+            BackgroundMusic.Play();
 
-        AudioSource source = sfxPlayer.AddComponent<AudioSource>();
-        source.clip = clip;
+            StartCoroutine(CrossfadeAudioSourceDown(oldBGSource, crossfadeTime));
+            StartCoroutine(CrossfadeAudioSourceUp(BackgroundMusic, crossfadeTime));
+        }
 
-        //TODO volume * GameManager.UserSettings.Volume;
-        source.volume = volume;
-        source.Play();
+        public void PlaySound(AudioClip clip, float volume)
+        {
+            StartCoroutine(PlaySoundCoroutine(clip, volume));
+        }
 
-        while (source.isPlaying) yield return null;
+        public void PlaySound(AudioClip clip, float volume, float extraPitch)
+        {
+            StartCoroutine(PlaySoundCoroutine(clip, volume, extraPitch));
+        }
 
-        Destroy(sfxPlayer);
-    }
+        public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume)
+        {
+            GameObject sfxPlayer = new GameObject(clip.name);
+            sfxPlayer.transform.SetParent(SFXParent);
 
-    public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume, float extraPitch)
-    {
-        GameObject sfxPlayer = new GameObject(clip.name);
-        sfxPlayer.transform.SetParent(SFXParent);
+            AudioSource source = sfxPlayer.AddComponent<AudioSource>();
+            source.clip = clip;
 
-        AudioSource source = sfxPlayer.AddComponent<AudioSource>();
-        source.clip = clip;
-        source.pitch += extraPitch;
+            //TODO volume * UVNFManager.UserSettings.Volume;
+            source.volume = volume;
+            source.Play();
 
-        //TODO volume * GameManager.UserSettings.Volume;
-        source.volume = volume;
-        source.Play();
+            while (source.isPlaying) yield return null;
 
-        while (source.isPlaying) yield return null;
+            Destroy(sfxPlayer);
+        }
 
-        Destroy(sfxPlayer);
-    }
+        public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume, float extraPitch)
+        {
+            GameObject sfxPlayer = new GameObject(clip.name);
+            sfxPlayer.transform.SetParent(SFXParent);
 
-    private IEnumerator CrossfadeAudioSourceUp(AudioSource source, float crossfadeTime = 1f)
-    {
-        //TODO get the max volume set by the GameManager
-        while(source.volume != 1f) { source.volume += Time.deltaTime / crossfadeTime; yield return null; }
-    }
+            AudioSource source = sfxPlayer.AddComponent<AudioSource>();
+            source.clip = clip;
+            source.pitch += extraPitch;
 
-    private IEnumerator CrossfadeAudioSourceDown(AudioSource source, float crossfadeTime = 1f, bool deleteOnDone = true)
-    {
-        while (source.volume != 0f) { source.volume -= Time.deltaTime / crossfadeTime; yield return null; }
-        if (deleteOnDone) Destroy(source.gameObject);
+            //TODO volume * UVNFManager.UserSettings.Volume;
+            source.volume = volume;
+            source.Play();
+
+            while (source.isPlaying) yield return null;
+
+            Destroy(sfxPlayer);
+        }
+
+        private IEnumerator CrossfadeAudioSourceUp(AudioSource source, float crossfadeTime = 1f)
+        {
+            //TODO get the max volume set by the UVNFManager
+            while (source.volume != 1f) { source.volume += Time.deltaTime / crossfadeTime; yield return null; }
+        }
+
+        private IEnumerator CrossfadeAudioSourceDown(AudioSource source, float crossfadeTime = 1f, bool deleteOnDone = true)
+        {
+            while (source.volume != 0f) { source.volume -= Time.deltaTime / crossfadeTime; yield return null; }
+            if (deleteOnDone) Destroy(source.gameObject);
+        }
     }
 }

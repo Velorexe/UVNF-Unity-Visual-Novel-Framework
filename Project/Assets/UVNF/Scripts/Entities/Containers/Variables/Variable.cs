@@ -1,21 +1,24 @@
 ﻿using System;
 
-[Serializable]
-public class Variable
+namespace UVNF.Entities.Containers.Variables
 {
-    public string VariableName = "New Variable";
-    public VariableTypes ValueType;
-
-    public float NumberValue = 0f;
-
-    public bool BooleanValue = false;
-
-    public string TextValue = string.Empty;
-
-    public Variable(string name)
+    [Serializable]
+    public class Variable
     {
-        VariableName = name;
+        public string VariableName = "New Variable";
+        public VariableTypes ValueType;
 
-        ValueType = VariableTypes.String;
+        public float NumberValue = 0f;
+
+        public bool BooleanValue = false;
+
+        public string TextValue = string.Empty;
+
+        public Variable(string name)
+        {
+            VariableName = name;
+
+            ValueType = VariableTypes.String;
+        }
     }
 }

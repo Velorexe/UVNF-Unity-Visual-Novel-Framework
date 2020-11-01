@@ -2,67 +2,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using XNode;
+using UVNF.Core.UI;
+using UVNF.Extensions;
 
-public class ChoiceElement : StoryElement
+namespace UVNF.Core.Story.Dialogue
 {
-    public override string ElementName => "Choice";
-
-    public override Color32 DisplayColor => _displayColor;
-    private Color32 _displayColor = new Color32().Story();
-
-    public override StoryElementTypes Type => StoryElementTypes.Story;
-
-    public List<string> Choices = new List<string>();
-
-    public bool ShuffleChocies = true;
-    public bool HideDialogue = false;
-
-    public override void DisplayLayout(Rect layoutRect)
+    public class ChoiceElement : StoryElement
     {
-        for (int i = 0; i < Choices.Count; i++)
+        public override string ElementName => "Choice";
+
+        public override Color32 DisplayColor => _displayColor;
+        private Color32 _displayColor = new Color32().Story();
+
+        public override StoryElementTypes Type => StoryElementTypes.Story;
+
+        public List<string> Choices = new List<string>();
+
+        public bool ShuffleChocies = true;
+        public bool HideDialogue = false;
+
+#if UNITY_EDITOR
+        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
         {
-            GUILayout.Label("Choice " + (i + 1));
-            Choices[i] = GUILayout.TextField(Choices[i]);
-            if (GUILayout.Button("-"))
+            for (int i = 0; i < Choices.Count; i++)
             {
-                RemoveChoice(i);
-                return;
+                GUILayout.Label("Choice " + (i + 1), label);
+                Choices[i] = GUILayout.TextField(Choices[i]);
+                if (GUILayout.Button("-"))
+                {
+                    RemoveChoice(i);
+                    return;
+                }
+            }
+
+            if (GUILayout.Button("+"))
+                AddChoice();
+
+            ShuffleChocies = GUILayout.Toggle(ShuffleChocies, "Shuffle Choices");
+            HideDialogue = GUILayout.Toggle(HideDialogue, "Hide Dialogue");
+        }
+
+        public void AddChoice()
+        {
+            Choices.Add(string.Empty);
+            AddDynamicOutput(typeof(NodePort), ConnectionType.Override, TypeConstraint.Inherited, "Choice" + (Choices.Count - 1));
+        }
+
+        public void RemoveChoice(int index)
+        {
+            Choices.RemoveAt(index);
+            RemoveDynamicPort(DynamicPorts.ElementAt(index));
+        }
+#endif
+
+        public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
+        {
+            List<string> choiceList = Choices;
+            if (ShuffleChocies)
+            {
+                choiceList.Shuffle();
+            }
+
+            canvas.DisplayChoice(choiceList.ToArray(), HideDialogue);
+            while (canvas.ChoiceCallback == -1) yield return null;
+
+            if (DynamicPorts.ElementAt(canvas.ChoiceCallback).IsConnected)
+            {
+                int choice = canvas.ChoiceCallback;
+                canvas.ResetChoice();
+                managerCallback.AdvanceStoryGraph(DynamicPorts.ElementAt(choice).Connection.node as StoryElement);
             }
         }
-
-        if (GUILayout.Button("+"))
-            AddChoice();
-
-        ShuffleChocies = GUILayout.Toggle(ShuffleChocies, "Shuffle Choices");
-        HideDialogue = GUILayout.Toggle(HideDialogue, "Hide Dialogue");
-    }
-
-    public void AddChoice()
-    {
-        Choices.Add(string.Empty);
-        AddDynamicOutput(typeof(NodePort), ConnectionType.Override, TypeConstraint.Inherited, "Choice" + (Choices.Count - 1));
-    }
-
-    public void RemoveChoice(int index)
-    {
-        Choices.RemoveAt(index);
-        RemoveDynamicPort(DynamicPorts.ElementAt(index));
-    }
-
-    public override IEnumerator Execute(GameManager managerCallback, UVNFCanvas canvas)
-    {
-        List<string> choiceList = Choices;
-        if (ShuffleChocies)
-        {
-            choiceList.Shuffle();
-        }
-
-        canvas.DisplayChoice(choiceList.ToArray(), HideDialogue);
-        while (canvas.ChoiceCallback == -1) yield return null;
-
-        if (DynamicPorts.ElementAt(canvas.ChoiceCallback).IsConnected)
-            managerCallback.AdvanceStory(DynamicPorts.ElementAt(canvas.ChoiceCallback).Connection.node as StoryElement);
     }
 }
