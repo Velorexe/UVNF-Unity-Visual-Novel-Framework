@@ -6,7 +6,6 @@ using UnityEditor;
 using XNode;
 using UVNF.Core.Story;
 using UVNF.Core.Story.Other;
-
 namespace UVNF.Entities.Containers
 {
     [CreateAssetMenu()]
@@ -75,6 +74,7 @@ namespace UVNF.Entities.Containers
 
         public void ConnectStoryElements()
         {
+            nodes = nodes.Where(x => x != null).ToList();
             foreach (Node element in nodes)
                 (element as StoryElement).Connect();
         }
