@@ -110,7 +110,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: 7815111530212063091}
   PreviousNode:
     _fieldName: 
     _node: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: -7925866276808309983}
   PreviousNode:
     _fieldName: 
     _node: {fileID: 0}
@@ -1211,7 +1211,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: -7543352829120350252}
   PreviousNode:
     _fieldName: 
     _node: {fileID: 0}
@@ -1448,7 +1448,6 @@ MonoBehaviour:
   m_Name: ExampleStory
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: -4202814567086290832}
   - {fileID: -2959676496126754392}
   - {fileID: 2759896806774999601}
   - {fileID: 5142048429619549042}
@@ -1489,8 +1488,9 @@ MonoBehaviour:
   - {fileID: -7925866276808309983}
   - {fileID: 7815111530212063091}
   - {fileID: 3964138587138135276}
+  - {fileID: 5270346473795117227}
   StoryNames:
-  - OpeningSequence
+  - ExampleStory
 --- !u!114 &299300065002464599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,7 +1541,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: 7384384192375087222}
   PreviousNode:
     _fieldName: 
     _node: {fileID: 0}
@@ -1860,7 +1860,10 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: NextNode
-        node: {fileID: -4202814567086290832}
+        node: {fileID: 0}
+        reroutePoints: []
+      - fieldName: NextNode
+        node: {fileID: 5270346473795117227}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -2230,7 +2233,7 @@ MonoBehaviour:
     _dynamic: 0
   CharacterName: Velorexe
   Dialogue: It took me quite some time to make this whole framework, so I would love
-    some feedback on either the GitHub page or to me privately on DIscord (Velorexe#8403).
+    some feedback on either the GitHub page or to me privately on Discord (Velorexe#8403).
   Beep: 1
   BeepOnVowel: 1
   PitchShift: 1
@@ -2375,6 +2378,68 @@ MonoBehaviour:
   MaxPitch: 0.2
   BoopSoundEffect: {fileID: 8300000, guid: c8fa33de6006b874dbe76170f373dc23, type: 3}
   DialogueClip: {fileID: 8300000, guid: c8fa33de6006b874dbe76170f373dc23, type: 3}
+--- !u!114 &5270346473795117227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28096adb5a549224d872e6b42438827f, type: 3}
+  m_Name: Start Element
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -632, y: -8}
+  ports:
+    keys:
+    - PreviousNode
+    - NextNode
+    values:
+    - _fieldName: PreviousNode
+      _node: {fileID: 5270346473795117227}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: NextNode
+      _node: {fileID: 5270346473795117227}
+      _typeQualifiedName: XNode.NodePort, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: PreviousNode
+        node: {fileID: 2759896806774999601}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Active: 0
+  Next: {fileID: 2759896806774999601}
+  PreviousNode:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  NextNode:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  StoryName: ExampleStory
+  IsRoot: 1
 --- !u!114 &5640366496711102671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2439,7 +2504,7 @@ MonoBehaviour:
     _typeConstraint: 0
     _dynamic: 0
   CharacterName: Velorexe
-  NewSprite: {fileID: 21300000, guid: 73683e6458bceec42aacbd9f95dd4b8a, type: 3}
+  NewSprite: {fileID: 21300000, guid: 54da592a2023b7d49b6eaa575b7aa54f, type: 3}
 --- !u!114 &5783836291669240587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2691,7 +2756,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: -1398034605684631682}
   PreviousNode:
     _fieldName: 
     _node: {fileID: 0}
@@ -2821,7 +2886,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   Active: 0
-  Next: {fileID: 0}
+  Next: {fileID: 3964138587138135276}
   PreviousNode:
     _fieldName: 
     _node: {fileID: 0}
