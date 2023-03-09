@@ -11,7 +11,8 @@ namespace UVNF.Core.Story.Dialogue
         public override StoryElementTypes Type => StoryElementTypes.Story;
 
         public string CharacterName;
-        [TextArea(3, 5)]
+
+        [TextArea(8, 10)]
         public string Dialogue;
 
         public override IEnumerator Execute(UVNFManager gameManager, UVNFCanvas canvas)
