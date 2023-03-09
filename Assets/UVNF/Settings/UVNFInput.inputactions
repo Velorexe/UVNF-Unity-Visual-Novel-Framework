@@ -1,0 +1,66 @@
+{
+    "name": "UVNFInput",
+    "maps": [
+        {
+            "name": "Main",
+            "id": "8485857a-7fc6-4d94-95ac-c3aa0a8f5207",
+            "actions": [
+                {
+                    "name": "Next",
+                    "type": "Button",
+                    "id": "be3cafb6-be78-47a8-8dc0-645d5b1a61bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ba0f6f0b-6575-434a-a58b-f1a319a9b288",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2672c92-b92a-4068-aeb2-1d46e5fbdda4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d10586c-9177-4d9b-a6e1-aa9b622e7d2c",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bd3f405-d078-4ced-8af5-93e4183f5226",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

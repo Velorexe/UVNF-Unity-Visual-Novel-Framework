@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System;
-using System.Linq;
+﻿using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.InputSystem;
 using UVNF.Extensions;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace UVNF.Core.UI
 {
@@ -42,10 +41,22 @@ namespace UVNF.Core.UI
         public bool ChoiceCanvasEnabled => ChoiceCanvasGroup.gameObject.activeSelf;
         public bool LoadingCanvasEnabled => LoadingCanvasGroup.gameObject.activeSelf;
 
-        //TODO: Support more input systems
-        private Mouse _currentMouse = Mouse.current;
+        private bool HasInput
+        {
+            get
+            {
+                if (_hasInput)
+                {
+                    _hasInput = false;
+                    return true;
+                }
 
-        private bool HasInput => _currentMouse.leftButton.wasPressedThisFrame;
+                return false;
+            }
+            set { _hasInput = value; }
+        }
+
+        private bool _hasInput;
 
         private void Awake()
         {
@@ -55,6 +66,11 @@ namespace UVNF.Core.UI
                 ChoiceCanvasGroup.gameObject.SetActive(false);
             if (BottomCanvasGroup != null)
                 BottomCanvasGroup.gameObject.SetActive(false);
+        }
+
+        public void ProcessInput(CallbackContext ctx)
+        {
+            HasInput = ctx.performed;
         }
 
         #region Dialogue

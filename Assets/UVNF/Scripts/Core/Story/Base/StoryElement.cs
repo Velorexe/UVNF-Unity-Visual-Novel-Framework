@@ -21,7 +21,7 @@ namespace UVNF.Core.Story
         public StoryElement Next;
 
         [HideInInspector]
-        [Input(ShowBackingValue.Never, ConnectionType.Override)]
+        [Input(ShowBackingValue.Never, ConnectionType.Multiple)]
         public NodePort PreviousNode;
 
         [HideInInspector]

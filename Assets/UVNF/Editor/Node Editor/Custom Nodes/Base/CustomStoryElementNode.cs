@@ -7,50 +7,66 @@ using XNodeEditor;
 namespace UVNF.Editor.Story.Nodes
 {
     [CustomNodeEditor(typeof(StoryElement))]
-    public class StoryElementNodeEditor : NodeEditor
+    public class CustomStoryElementNode : NodeEditor
     {
-        StoryElement node;
-        bool foldout = true;
+        internal StoryElement Node;
+        internal bool Foldout = true;
 
         public override void OnCreate()
         {
-            if (node == null) node = target as StoryElement;
-            EditorUtility.SetDirty(node);
+            if (Node == null) Node = target as StoryElement;
+            EditorUtility.SetDirty(Node);
         }
 
         public override void OnHeaderGUI()
         {
-            DisplayElementType(node.Type, node.ElementName, GetWidth());
+            DisplayElementType(Node.Type, Node.ElementName, GetWidth());
         }
 
         public override void OnBodyGUI()
         {
-            GUILayout.BeginHorizontal();
-            {
-                GUILayout.Label("Previous", EditorStyles.boldLabel);
-                NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
+            RenderNodeConnections();
 
-                GUILayout.Space(170f);
-
-                GUILayout.Label("Next", EditorStyles.boldLabel);
-                NodeEditorGUILayout.AddPortField(node.GetOutputPort("NextNode"));
-            }
-            GUILayout.EndHorizontal();
-
-            if (foldout)
+            if (Foldout)
             {
                 GUILayout.Space(EditorGUIUtility.singleLineHeight);
                 base.OnBodyGUI();
                 GUILayout.Space(EditorGUIUtility.singleLineHeight);
             }
 
-            GUIContent arrow = foldout ? EditorGUIUtility.IconContent("d_Toolbar Minus") : EditorGUIUtility.IconContent("d_Toolbar Plus");
-
-            if (GUILayout.Button(arrow))
-                foldout = !foldout;
+            RenderFoldout();
         }
 
-        public void DisplayElementType(StoryElementTypes type, string elementName, int width)
+        internal void RenderNodeConnections(bool renderPrevious = true, bool renderNext = true)
+        {
+            GUILayout.BeginHorizontal();
+            {
+                if (renderPrevious)
+                {
+                    GUILayout.Label("Previous", EditorStyles.boldLabel);
+                    NodeEditorGUILayout.AddPortField(Node.GetInputPort("PreviousNode"));
+                }
+
+                GUILayout.Space(170f);
+
+                if (renderNext)
+                {
+                    GUILayout.Label("Next", EditorStyles.boldLabel);
+                    NodeEditorGUILayout.AddPortField(Node.GetOutputPort("NextNode"));
+                }
+            }
+            GUILayout.EndHorizontal();
+        }
+
+        internal void RenderFoldout()
+        {
+            GUIContent arrow = Foldout ? EditorGUIUtility.IconContent("d_Toolbar Minus") : EditorGUIUtility.IconContent("d_Toolbar Plus");
+
+            if (GUILayout.Button(arrow))
+                Foldout = !Foldout;
+        }
+
+        internal void DisplayElementType(StoryElementTypes type, string elementName, int width)
         {
             GUI.DrawTexture(new Rect(5f, 5f, width - 10f, 36f), UVNFSettings.GetElementStyle(type).normal.background);
 
