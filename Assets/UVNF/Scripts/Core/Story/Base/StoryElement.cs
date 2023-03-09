@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using XNode;
-
 using UVNF.Core.UI;
+using XNode;
 
 namespace UVNF.Core.Story
 {
@@ -24,9 +21,12 @@ namespace UVNF.Core.Story
         public StoryElement Next;
 
         [HideInInspector]
-        [Input(ShowBackingValue.Never, ConnectionType.Multiple)] public NodePort PreviousNode;
+        [Input(ShowBackingValue.Never, ConnectionType.Override)]
+        public NodePort PreviousNode;
+
         [HideInInspector]
-        [Output(ShowBackingValue.Never, ConnectionType.Override)] public NodePort NextNode;
+        [Output(ShowBackingValue.Never, ConnectionType.Override)]
+        public NodePort NextNode;
 
         public override object GetValue(NodePort port)
         {

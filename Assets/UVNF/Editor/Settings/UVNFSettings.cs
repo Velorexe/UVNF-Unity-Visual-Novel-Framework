@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UVNF.Core.Story;
@@ -46,12 +46,12 @@ namespace UVNF.Editor.Settings
 
         private static UVNFEditorSettings GetEditorSettings()
         {
-            if (AssetDatabase.LoadAssetAtPath<UVNFEditorSettings>("Assets/Editor/UVNF/Settings/UVNFEditorSettings.asset") == null)
+            if (AssetDatabase.LoadAssetAtPath<UVNFEditorSettings>("Assets/UVNF/Editor/Settings/UVNFEditorSettings.asset") == null)
             {
-                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<UVNFEditorSettings>(), "Assets/Editor/UVNF/Settings/UVNFEditorSettings.asset");
+                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<UVNFEditorSettings>(), "Assets/UVNF/Editor/Settings/UVNFEditorSettings.asset");
                 AssetDatabase.SaveAssets();
             }
-            return AssetDatabase.LoadAssetAtPath<UVNFEditorSettings>("Assets/Editor/UVNF/Settings/UVNFEditorSettings.asset");
+            return AssetDatabase.LoadAssetAtPath<UVNFEditorSettings>("Assets/UVNF/Editor/Settings/UVNFEditorSettings.asset");
         }
 
         private static void InitializeStoryElements()
@@ -113,11 +113,11 @@ namespace UVNF.Editor.Settings
 
         private static void SetupElements()
         {
-            if(_elementStyles.Count == 0)
+            if (_elementStyles.Count == 0)
             {
                 #region Audio
                 GUISkin style = GUISkin.Instantiate(EditorSettings.UVNFSkin);
-                
+
                 style.button.normal.background = EditorSettings.AudioElementTexture;
                 style.label.normal.textColor = new Color32(88, 106, 84, 255);
 

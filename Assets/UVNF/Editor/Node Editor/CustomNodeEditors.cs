@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
-using XNode;
-using XNodeEditor;
-using UnityEditor;
 using UVNF.Core.Story;
 using UVNF.Core.Story.Dialogue;
 using UVNF.Editor.Settings;
+using XNodeEditor;
 
 namespace UVNF.Editor.Story.Nodes
 {
@@ -22,7 +19,6 @@ namespace UVNF.Editor.Story.Nodes
             {
                 if (node == null) node = target as ChoiceElement;
                 EditorUtility.SetDirty(node);
-                ReplaceTint(node.DisplayColor);
             }
 
             public override void OnHeaderGUI()
@@ -70,52 +66,7 @@ namespace UVNF.Editor.Story.Nodes
             }
         }
 
-        [CustomNodeEditor(typeof(StoryElement))]
-        public class StoryElementNodeEditor : NodeEditor
-        {
-            StoryElement node;
-            bool foldout = true;
 
-            public override void OnCreate()
-            {
-                if (node == null) node = target as StoryElement;
-                EditorUtility.SetDirty(node);
-
-                ReplaceTint(node.DisplayColor);
-            }
-
-            public override void OnHeaderGUI()
-            {
-                DisplayElementType(node.Type, node.ElementName, GetWidth());
-            }
-
-            public override void OnBodyGUI()
-            {
-                Rect lastRect;
-                GUILayout.BeginHorizontal();
-                {
-                    GUILayout.Label("Previous", EditorStyles.boldLabel);
-                    NodeEditorGUILayout.AddPortField(node.GetInputPort("PreviousNode"));
-                    GUILayout.Space(170f);
-                    GUILayout.Label("Next", EditorStyles.boldLabel);
-                    NodeEditorGUILayout.AddPortField(node.GetOutputPort("NextNode"));
-                    lastRect = GUILayoutUtility.GetLastRect();
-                }
-                GUILayout.EndHorizontal();
-
-                if (foldout)
-                {
-                    node.DisplayNodeLayout(lastRect);
-                }
-
-                GUIContent arrow;
-                if (foldout) arrow = EditorGUIUtility.IconContent("d_Toolbar Minus");
-                else arrow = EditorGUIUtility.IconContent("d_Toolbar Plus");
-
-                if (GUILayout.Button(arrow))
-                    foldout = !foldout;
-            }
-        }
 
         public static void DisplayElementType(StoryElementTypes type, string elementName, int width)
         {
