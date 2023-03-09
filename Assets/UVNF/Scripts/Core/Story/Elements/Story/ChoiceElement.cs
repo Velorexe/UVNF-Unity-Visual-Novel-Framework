@@ -1,19 +1,15 @@
-﻿using System.Linq;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using XNode;
+using System.Linq;
 using UVNF.Core.UI;
 using UVNF.Extensions;
+using XNode;
 
 namespace UVNF.Core.Story.Dialogue
 {
     public class ChoiceElement : StoryElement
     {
         public override string ElementName => "Choice";
-
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Story();
 
         public override StoryElementTypes Type => StoryElementTypes.Story;
 
@@ -23,26 +19,6 @@ namespace UVNF.Core.Story.Dialogue
         public bool HideDialogue = false;
 
 #if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            for (int i = 0; i < Choices.Count; i++)
-            {
-                GUILayout.Label("Choice " + (i + 1), label);
-                Choices[i] = GUILayout.TextField(Choices[i]);
-                if (GUILayout.Button("-"))
-                {
-                    RemoveChoice(i);
-                    return;
-                }
-            }
-
-            if (GUILayout.Button("+"))
-                AddChoice();
-
-            ShuffleChocies = GUILayout.Toggle(ShuffleChocies, "Shuffle Choices");
-            HideDialogue = GUILayout.Toggle(HideDialogue, "Hide Dialogue");
-        }
-
         public void AddChoice()
         {
             Choices.Add(string.Empty);
@@ -59,13 +35,18 @@ namespace UVNF.Core.Story.Dialogue
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             List<string> choiceList = Choices;
+
             if (ShuffleChocies)
             {
                 choiceList.Shuffle();
             }
 
             canvas.DisplayChoice(choiceList.ToArray(), HideDialogue);
-            while (canvas.ChoiceCallback == -1) yield return null;
+
+            while (canvas.ChoiceCallback == -1)
+            {
+                yield return null;
+            }
 
             if (DynamicPorts.ElementAt(canvas.ChoiceCallback).IsConnected)
             {

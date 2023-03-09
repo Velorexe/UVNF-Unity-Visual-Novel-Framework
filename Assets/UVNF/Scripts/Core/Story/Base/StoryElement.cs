@@ -31,7 +31,10 @@ namespace UVNF.Core.Story
         public override object GetValue(NodePort port)
         {
             if (port.IsConnected)
+            {
                 return port.Connection.node;
+            }
+
             return null;
         }
 
@@ -41,7 +44,9 @@ namespace UVNF.Core.Story
         public virtual void Connect()
         {
             if (GetOutputPort("NextNode").IsConnected)
+            {
                 Next = GetOutputPort("NextNode").Connection.node as StoryElement;
+            }
         }
 
         public abstract IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas);
@@ -49,9 +54,14 @@ namespace UVNF.Core.Story
         public int CompareTo(object obj)
         {
             if (obj == null)
+            {
                 return 1;
+            }
+
             if (!(obj is StoryElement))
+            {
                 return 1;
+            }
 
             return string.Compare(ElementName, ((StoryElement)obj).ElementName);
         }

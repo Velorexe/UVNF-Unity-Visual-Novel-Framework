@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
 using UnityEditor;
-
-using XNodeEditor;
-using XNode;
-
+using UnityEngine;
 using UVNF.Core.Story;
 using UVNF.Core.Story.Dialogue;
 using UVNF.Entities.Containers;
 using UVNF.Extensions;
+using XNode;
+using XNodeEditor;
 
 namespace UVNF.Editor.Story.Nodes
 {
@@ -35,7 +30,9 @@ namespace UVNF.Editor.Story.Nodes
                     return returnString;
                 }
                 else
+                {
                     return base.GetNodeMenuName(type).Replace("Node", "");
+                }
             }
             else return null;
         }

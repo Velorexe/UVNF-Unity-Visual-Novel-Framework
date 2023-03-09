@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using CoroutineManager;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using CoroutineManager;
-
-using UVNF.Core.UI;
 using UVNF.Core.Story;
-
+using UVNF.Core.UI;
 using UVNF.Entities.Containers;
 using UVNF.Entities.Containers.Variables;
 
@@ -22,7 +18,7 @@ namespace UVNF.Core
 
         [Header("Story Graph")]
         public StoryGraph StartingStory;
-        
+
         [Header("Variables")]
         public VariableManager Variables;
 
@@ -34,7 +30,9 @@ namespace UVNF.Core
         private void Awake()
         {
             if (StartingStory != null)
+            {
                 StartStory(StartingStory);
+            }
         }
         /// <summary>
         /// Starts a provided StoryGraph
@@ -47,10 +45,12 @@ namespace UVNF.Core
             {
                 Canvas.Show();
                 _currentStoryManager = new UVNFStoryManager(graph, this, Canvas, FinishStory);
+
                 return true;
             }
 
             QueueStory(graph);
+
             return false;
         }
 
@@ -79,7 +79,9 @@ namespace UVNF.Core
             _currentStoryManager = null;
             //Story still left in the Queue
             if (_graphQueue.Count > 0)
+            {
                 StartStory(_graphQueue.Dequeue());
+            }
             //Story if finished
             else
             {
@@ -123,8 +125,10 @@ namespace UVNF.Core
             _manager = manager;
             _canvas = canvas;
 
-            if(_storyGraph != null)
+            if (_storyGraph != null)
+            {
                 StartStory();
+            }
 
             _afterSubgraphHandler += afterStoryHandler;
         }
@@ -177,17 +181,21 @@ namespace UVNF.Core
                     _currentTask.Start();
                 }
                 else
+                {
                     _afterSubgraphHandler?.Invoke();
+                }
             }
         }
 
         public void AdvanceStory(StoryElement newStoryPoint, bool continueToRun = false)
         {
             if (_handlingSubgraph)
+            {
                 _subgraphHandler.AdvanceStory(false);
+            }
             else if (newStoryPoint != null)
             {
-                if(!continueToRun)
+                if (!continueToRun)
                     _currentTask.Stop();
 
                 _currentElement = newStoryPoint;
@@ -197,7 +205,9 @@ namespace UVNF.Core
                 _currentTask.Start();
             }
             else
+            {
                 _afterSubgraphHandler?.Invoke();
+            }
         }
         #endregion
     }

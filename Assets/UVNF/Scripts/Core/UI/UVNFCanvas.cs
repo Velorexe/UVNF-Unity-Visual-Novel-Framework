@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UVNF.Extensions;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace UVNF.Core.UI
@@ -61,11 +60,18 @@ namespace UVNF.Core.UI
         private void Awake()
         {
             if (BackgroundCanvasGroup != null)
+            {
                 BackgroundCanvasGroup.gameObject.SetActive(true);
+            }
+
             if (ChoiceCanvasGroup != null)
+            {
                 ChoiceCanvasGroup.gameObject.SetActive(false);
+            }
+
             if (BottomCanvasGroup != null)
-                BottomCanvasGroup.gameObject.SetActive(false);
+            {
+            }
         }
 
         public void ProcessInput(CallbackContext ctx)
@@ -96,25 +102,35 @@ namespace UVNF.Core.UI
                     displayIntervalTimer = 0f;
                 }
                 else
+                {
                     displayIntervalTimer += Time.deltaTime;
+                }
+
                 yield return null;
             }
 
-            while (!HasInput) yield return null;
+            while (!HasInput)
+            {
+                yield return null;
+            }
         }
 
         public IEnumerator DisplayText(string text, string characterName, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
         {
             ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
             if (useStylesForCharacterField)
+            {
                 ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+            }
 
             CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
             BottomCanvasGroup.gameObject.SetActive(true);
 
             if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
+            {
                 CharacterTMP.text = characterName;
+            }
 
             int textIndex = 0;
             while (textIndex < text.Length)
@@ -131,25 +147,35 @@ namespace UVNF.Core.UI
                     displayIntervalTimer = 0f;
                 }
                 else
+                {
                     displayIntervalTimer += Time.deltaTime;
+                }
+
                 yield return null;
             }
 
-            while (!HasInput) yield return null;
+            while (!HasInput)
+            {
+                yield return null;
+            }
         }
 
         public IEnumerator DisplayText(string text, string characterName, AudioClip dialogue, AudioManager audio, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
         {
             ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
             if (useStylesForCharacterField)
+            {
                 ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+            }
 
             CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
             BottomCanvasGroup.gameObject.SetActive(true);
 
             if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
+            {
                 CharacterTMP.text = characterName;
+            }
 
             audio.PlaySound(dialogue, 1f);
 
@@ -168,58 +194,18 @@ namespace UVNF.Core.UI
                     displayIntervalTimer = 0f;
                 }
                 else
+                {
                     displayIntervalTimer += Time.deltaTime;
+                }
+
                 yield return null;
             }
 
-            while (!HasInput) yield return null;
-        }
-
-        public IEnumerator DisplayText(string text, string characterName, AudioClip boop, AudioManager audio, float pitchShift, bool beepOnVowel = false, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
-        {
-            ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
-            if (useStylesForCharacterField)
-                ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
-
-            CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
-
-            BottomCanvasGroup.gameObject.SetActive(true);
-
-            if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
-                CharacterTMP.text = characterName;
-
-            int textIndex = 0;
-            while (textIndex < text.Length)
+            while (!HasInput)
             {
-                if (HasInput)
-                {
-                    DialogueTMP.text = text;
-                    textIndex = text.Length - 1;
-                }
-                else if (displayIntervalTimer >= tempDisplayInterval)
-                {
-                    DialogueTMP.text += ApplyTypography(text, ref textIndex);
-
-                    if (text[textIndex] != ' ')
-                    {
-                        if (beepOnVowel && text[textIndex].IsVowel())
-                            audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
-                        else if (!beepOnVowel)
-                            audio.PlaySound(boop, 1f, UnityEngine.Random.Range(0, pitchShift));
-                    }
-
-                    textIndex++;
-                    displayIntervalTimer = 0f;
-
-                }
-                else
-                    displayIntervalTimer += Time.deltaTime;
                 yield return null;
             }
-
-            while (!HasInput) yield return null;
         }
-
         #endregion
 
         #region Choice
@@ -234,7 +220,9 @@ namespace UVNF.Core.UI
             ChoiceCanvasGroup.gameObject.SetActive(true);
 
             foreach (Transform child in ChoicePanelTransform)
+            {
                 Destroy(child.gameObject);
+            }
 
             for (int i = 0; i < options.Length; i++)
             {
@@ -242,12 +230,17 @@ namespace UVNF.Core.UI
                 button.Display(options[i], i, this);
             }
 
-            while (ChoiceCallback == -1) yield return null;
+            while (ChoiceCallback == -1)
+            {
+                yield return null;
+            }
 
             ChoiceCanvasGroup.gameObject.SetActive(false);
 
             foreach (Transform child in ChoicePanelTransform)
+            {
                 Destroy(child.gameObject);
+            }
         }
         #endregion
 
@@ -265,6 +258,7 @@ namespace UVNF.Core.UI
                 canvasGroup.alpha -= Time.deltaTime / time;
                 yield return null;
             }
+
             canvasGroup.gameObject.SetActive(false);
         }
 
@@ -328,8 +322,10 @@ namespace UVNF.Core.UI
         public void ChangeBackground(Sprite newBackground, float transitionTime)
         {
             BackgroundCanvasGroup.gameObject.SetActive(true);
+
             Color32 alpha = BackgroundFade.color;
             alpha.a = 255;
+
             BackgroundFade.color = alpha;
 
             BackgroundFade.sprite = BackgroundImage.sprite;
@@ -387,9 +383,14 @@ namespace UVNF.Core.UI
             {
                 string subString = text.Substring(textIndex);
                 int endMark = subString.IndexOf('>');
+
                 if (endMark < 0)
+                {
                     return text[textIndex].ToString();
+                }
+
                 textIndex += endMark;
+
                 return subString.Substring(0, endMark + 1);
             }
             else return text[textIndex].ToString();
@@ -398,19 +399,32 @@ namespace UVNF.Core.UI
         public void Hide()
         {
             if (BackgroundCanvasGroup != null)
+            {
                 BackgroundCanvasGroup.gameObject.SetActive(false);
+            }
+
             if (ChoiceCanvasGroup != null)
+            {
                 ChoiceCanvasGroup.gameObject.SetActive(false);
+            }
+
             if (BottomCanvasGroup != null)
+            {
                 BottomCanvasGroup.gameObject.SetActive(false);
+            }
+
             if (CharacterNamePlate != null)
-                CharacterNamePlate.gameObject.SetActive(false);
+            {
+                CharacterNamePlate.SetActive(false);
+            }
         }
 
         public void Show()
         {
             if (BackgroundCanvasGroup != null)
+            {
                 BackgroundCanvasGroup.gameObject.SetActive(true);
+            }
         }
     }
 }

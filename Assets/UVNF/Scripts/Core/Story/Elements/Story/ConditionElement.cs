@@ -1,20 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using XNode;
 using UVNF.Core.UI;
 using UVNF.Entities.Containers.Variables;
-using UVNF.Extensions;
+using XNode;
 
 namespace UVNF.Core.Story.Dialogue
 {
     public class ConditionElement : StoryElement
     {
         public override string ElementName => "Condition";
-
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Story();
 
         public override StoryElementTypes Type => StoryElementTypes.Story;
 
@@ -25,22 +19,15 @@ namespace UVNF.Core.Story.Dialogue
         public int VariableIndex = 0;
 
         public float NumberValue = 0f;
-        public string TextValue = string.Empty;
-        public bool BooleanValue = false;
 
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            Variables = EditorGUILayout.ObjectField("Variables", Variables, typeof(VariableManager), false) as VariableManager;
-            if (Variables != null && Variables.Variables.Count > 0)
-            {
-                VariableIndex = EditorGUILayout.Popup(VariableIndex, Variables.VariableNames());
-            }
-        }
-#endif
+        public string TextValue = string.Empty;
+
+        public bool BooleanValue = false;
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
+            // TODO: Refactor, variables are confusing in their current state
+
             bool conditionTrue = false;
             switch (Variables.Variables[VariableIndex].ValueType)
             {
@@ -53,9 +40,14 @@ namespace UVNF.Core.Story.Dialogue
             }
 
             if (conditionTrue)
+            {
                 managerCallback.AdvanceStoryGraph(GetOutputPort("NextNode").Connection.node as StoryElement);
+            }
             else
+            {
                 managerCallback.AdvanceStoryGraph(GetOutputPort("ConditionFails").Connection.node as StoryElement);
+            }
+
             yield return null;
         }
     }

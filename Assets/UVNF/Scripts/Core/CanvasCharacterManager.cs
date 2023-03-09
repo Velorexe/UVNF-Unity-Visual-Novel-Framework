@@ -1,10 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UVNF.Core.Story.Character;
 using UVNF.Entities;
 
 namespace UVNF.Core
@@ -35,11 +32,16 @@ namespace UVNF.Core
             spriteTransform.sizeDelta = MainCharacterStack.sizeDelta;
 
             if (flip)
+            {
                 spriteTransform.localScale = new Vector3(-1, 1, 1);
+            }
             else
+            {
                 spriteTransform.localScale = new Vector3(1, 1, 1);
+            }
 
             Character character = obj.AddComponent<Character>();
+
             character.Name = characterName;
             character.Transform = spriteTransform;
             character.Parent = parentTransform;
@@ -100,10 +102,12 @@ namespace UVNF.Core
                     endPosition = new Vector2(parentTransform.sizeDelta.x / 2, 0);
 
                     Character[] rightCharacters = RightSideCharacters;
+
                     if (rightCharacters.Length > 1)
                     {
                         float rightPosition = Mathf.Abs(parentTransform.sizeDelta.x);
                         float offset = rightPosition / (rightCharacters.Length + 1);
+
                         for (int i = 0; i < rightCharacters.Length; i++)
                         {
                             Vector2 newPosition = new Vector2(offset * (i + 1), 0);

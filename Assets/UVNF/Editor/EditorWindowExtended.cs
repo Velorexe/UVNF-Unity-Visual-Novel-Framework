@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace UVNF.Editor
@@ -16,7 +11,7 @@ namespace UVNF.Editor
         static GUIStyle selectedStyle;
         static GUIStyle boldFoldoutStyle;
 
-        #region convenience UI layout shortcuts
+        #region Convenient UI layout shortcuts
         protected void BoxVertical(params GUILayoutOption[] options)
         {
             GUILayout.BeginVertical("box", options);

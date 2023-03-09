@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UVNF.Core
@@ -107,12 +106,21 @@ namespace UVNF.Core
         private IEnumerator CrossfadeAudioSourceUp(AudioSource source, float crossfadeTime = 1f)
         {
             //TODO get the max volume set by the UVNFManager
-            while (source.volume != 1f) { source.volume += Time.deltaTime / crossfadeTime; yield return null; }
+            while (source.volume != 1f)
+            {
+                source.volume += Time.deltaTime / crossfadeTime;
+                yield return null;
+            }
         }
 
         private IEnumerator CrossfadeAudioSourceDown(AudioSource source, float crossfadeTime = 1f, bool deleteOnDone = true)
         {
-            while (source.volume != 0f) { source.volume -= Time.deltaTime / crossfadeTime; yield return null; }
+            while (source.volume != 0f)
+            {
+                source.volume -= Time.deltaTime / crossfadeTime;
+                yield return null;
+            }
+
             if (deleteOnDone) Destroy(source.gameObject);
         }
     }

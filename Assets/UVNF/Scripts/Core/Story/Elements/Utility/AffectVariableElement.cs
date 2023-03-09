@@ -1,18 +1,12 @@
 ﻿using System.Collections;
-using UnityEngine;
-using UnityEditor;
 using UVNF.Core.UI;
 using UVNF.Entities.Containers.Variables;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Utility
 {
     public class AffectVariableElement : StoryElement
     {
         public override string ElementName => "Affect Variable";
-
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Utility();
 
         public override StoryElementTypes Type => StoryElementTypes.Utility;
 
@@ -34,31 +28,9 @@ namespace UVNF.Core.Story.Utility
 
         private string[] booleanOptions = new string[] { "False", "True" };
 
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            Variables = EditorGUILayout.ObjectField("Variables", Variables, typeof(VariableManager), false) as VariableManager;
-            if (Variables != null && Variables.Variables.Count > 0)
-            {
-                VariableIndex = EditorGUILayout.Popup("Variable", VariableIndex, Variables.VariableNames());
-
-                switch (Variables.Variables[VariableIndex].ValueType)
-                {
-                    case VariableTypes.Number:
-                        MathType = (MathAffectTypes)EditorGUILayout.EnumPopup("Action", MathType);
-                        NumberValue = EditorGUILayout.FloatField("Value", NumberValue); break;
-                    case VariableTypes.String:
-                        StringType = (StringAffectTypes)EditorGUILayout.EnumPopup("Action", StringType);
-                        TextValue = EditorGUILayout.TextField("Value", TextValue); break;
-                    case VariableTypes.Boolean:
-                        BooleanValue = System.Convert.ToBoolean(EditorGUILayout.Popup("Value", System.Convert.ToInt32(BooleanValue), booleanOptions)); break;
-                }
-            }
-        }
-#endif
-
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
+            //TODO: Refactor variables, they're confusing in their current state
             switch (Variables.Variables[VariableIndex].ValueType)
             {
                 case VariableTypes.Number:
