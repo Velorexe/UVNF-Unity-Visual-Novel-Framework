@@ -10,7 +10,7 @@ namespace UVNF.Core.Story
     public abstract class StoryElement : Node, IComparable
     {
         public abstract string ElementName { get; }
-        public abstract Color32 DisplayColor { get; }
+
         public abstract StoryElementTypes Type { get; }
 
         public virtual bool IsVisible() { return true; }
@@ -46,17 +46,13 @@ namespace UVNF.Core.Story
 
         public abstract IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas);
 
-#if UNITY_EDITOR
-        public abstract void DisplayLayout(Rect layoutRect, GUIStyle label = null);
-
-        public virtual void DisplayNodeLayout(Rect layoutRect) { DisplayLayout(layoutRect); }
-
-#endif
-
         public int CompareTo(object obj)
         {
-            if (obj == null) return 1;
-            if (!(obj is StoryElement)) return 1;
+            if (obj == null)
+                return 1;
+            if (!(obj is StoryElement))
+                return 1;
+
             return string.Compare(ElementName, ((StoryElement)obj).ElementName);
         }
     }
