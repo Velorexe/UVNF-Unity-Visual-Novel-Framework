@@ -6,8 +6,13 @@ using UVNF.Entities;
 
 namespace UVNF.Core
 {
+    /// <summary>
+    /// Manages characters being shown on the screen, including their position on a name / key basis
+    /// </summary>
     public class CanvasCharacterManager : MonoBehaviour
     {
+        // TODO: replace all of this with a float system (a character should be placed on { x: 0.1f, y: 0.5f }
+
         public List<Character> CharactersOnScreen;
         public RectTransform MainCharacterStack;
 

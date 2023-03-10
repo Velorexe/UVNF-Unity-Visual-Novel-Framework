@@ -3,12 +3,18 @@ using UnityEngine;
 
 namespace UVNF.Core
 {
+    /// <summary>
+    /// A manager class that handles audio, such as background music and SFX's
+    /// </summary>
     public class AudioManager : MonoBehaviour
     {
+        // TODO: rework this entire class (including the use of Volume Mixers)
+
         [Header("Background Music")]
         public AudioSource BackgroundMusic;
         public bool CurrentlyPlayingBackgroundMusic = false;
 
+        // All new AudioComponents playing SFX will be a child of SFXParent
         [Header("SFX")]
         public Transform SFXParent;
 
@@ -17,14 +23,24 @@ namespace UVNF.Core
             BackgroundMusic.loop = true;
         }
 
+        /// <summary>
+        /// Replaces the current background <see cref="AudioClip"/> with given one
+        /// </summary>
+        /// <param name="clip">The new background music clip that should be played</param>
+        /// <param name="volume">The volume at which the clip should play at</param>
         public void PlayBackgroundMusic(AudioClip clip, float volume = 1f)
         {
             BackgroundMusic.clip = clip;
             BackgroundMusic.Play();
 
+            BackgroundMusic.volume = volume;
+
             CurrentlyPlayingBackgroundMusic = true;
         }
 
+        /// <summary>
+        /// Instantly stops the currently playing background music
+        /// </summary>
         public void StopBackgroundMusic()
         {
             BackgroundMusic.Stop();

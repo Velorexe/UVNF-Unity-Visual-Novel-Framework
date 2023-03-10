@@ -4,6 +4,7 @@ using UnityEngine;
 using UVNF.Core.Story;
 using UVNF.Core.Story.Other;
 using XNode;
+
 namespace UVNF.Entities.Containers
 {
     [CreateAssetMenu()]

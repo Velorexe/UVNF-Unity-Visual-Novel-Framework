@@ -9,6 +9,9 @@ using UVNF.Entities.Containers.Variables;
 
 namespace UVNF.Core
 {
+    /// <summary>
+    /// The core manager of UVNF, handles the <see cref="StoryGraph"/> and references all other Managers
+    /// </summary>
     public class UVNFManager : MonoBehaviour
     {
         [Header("UDSF Components")]
@@ -26,7 +29,6 @@ namespace UVNF.Core
 
         private Queue<StoryGraph> _graphQueue = new Queue<StoryGraph>();
 
-
         private void Awake()
         {
             if (StartingStory != null)
@@ -34,11 +36,12 @@ namespace UVNF.Core
                 StartStory(StartingStory);
             }
         }
+
         /// <summary>
         /// Starts a provided StoryGraph
         /// </summary>
         /// <param name="graph"></param>
-        /// <returns>True if the Story is started directly. False if the provided Graph is Queued.</returns>
+        /// <returns><see langword="true"/> if the Story is started directly. <see langword="false"/> if the provided Graph is Queued.</returns>
         public bool StartStory(StoryGraph graph)
         {
             if (_currentStoryManager == null)
@@ -59,11 +62,19 @@ namespace UVNF.Core
             _graphQueue.Enqueue(graph);
         }
 
+        /// <summary>
+        /// Starts a story inside the current graph
+        /// </summary>
+        /// <param name="subGraph"></param>
         public void StartSubStory(StoryGraph subGraph)
         {
             _currentStoryManager.CreateSubStory(subGraph, this, Canvas);
         }
 
+        /// <summary>
+        /// Moves to the next <see cref="StoryElement"/> on the <see cref="StartingStory"/>
+        /// </summary>
+        /// <param name="element">The <see cref="StoryElement"/> the Graph should move to</param>
         public void AdvanceStoryGraph(StoryElement element)
         {
             _currentStoryManager.AdvanceStory(element);

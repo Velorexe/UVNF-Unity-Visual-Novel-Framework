@@ -523,7 +523,7 @@ MonoBehaviour:
     _typeConstraint: 0
     _dynamic: 0
   CharacterName: Dummy_02
-  Character: {fileID: 21300000, guid: 4bedf33a50e1cb049b6c13d6026399e1, type: 3}
+  Character: {fileID: 21300000, guid: 8a358a64f225d2f42bf52e99f0700c1c, type: 3}
   Flip: 0
   EnterFromDirection: 3
   FinalPosition: 1
