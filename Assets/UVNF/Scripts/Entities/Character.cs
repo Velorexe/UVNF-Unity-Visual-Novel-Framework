@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UVNF.Core.Story.Character;
 
 namespace UVNF.Entities
 {
@@ -25,7 +23,9 @@ namespace UVNF.Entities
         public void MoveCharacter(Vector2 endPosition, float moveTime)
         {
             if (CurrentlyMoving)
+            {
                 StopCoroutine(movingCoroutine);
+            }
 
             movingCoroutine = StartCoroutine(MoveCharacterCoroutine(Transform.anchoredPosition, endPosition, moveTime));
         }
@@ -43,7 +43,9 @@ namespace UVNF.Entities
 
                 float t = currentLerpTime / moveTime;
                 t = t * t * t * (t * (6f * t - 15f) + 10f);
+
                 Transform.anchoredPosition = Vector2.Lerp(startPosition, endPosition, t);
+
                 yield return null;
             }
         }

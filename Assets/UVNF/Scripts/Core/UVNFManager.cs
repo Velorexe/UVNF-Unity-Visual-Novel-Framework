@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using CoroutineManager;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using CoroutineManager;
-
-using UVNF.Core.UI;
 using UVNF.Core.Story;
-
+using UVNF.Core.UI;
 using UVNF.Entities.Containers;
 using UVNF.Entities.Containers.Variables;
 
 namespace UVNF.Core
 {
+    /// <summary>
+    /// The core manager of UVNF, handles the <see cref="StoryGraph"/> and references all other Managers
+    /// </summary>
     public class UVNFManager : MonoBehaviour
     {
         [Header("UDSF Components")]
@@ -22,7 +21,7 @@ namespace UVNF.Core
 
         [Header("Story Graph")]
         public StoryGraph StartingStory;
-        
+
         [Header("Variables")]
         public VariableManager Variables;
 
@@ -30,27 +29,31 @@ namespace UVNF.Core
 
         private Queue<StoryGraph> _graphQueue = new Queue<StoryGraph>();
 
-
         private void Awake()
         {
             if (StartingStory != null)
+            {
                 StartStory(StartingStory);
+            }
         }
+
         /// <summary>
         /// Starts a provided StoryGraph
         /// </summary>
         /// <param name="graph"></param>
-        /// <returns>True if the Story is started directly. False if the provided Graph is Queued.</returns>
+        /// <returns><see langword="true"/> if the Story is started directly. <see langword="false"/> if the provided Graph is Queued.</returns>
         public bool StartStory(StoryGraph graph)
         {
             if (_currentStoryManager == null)
             {
                 Canvas.Show();
                 _currentStoryManager = new UVNFStoryManager(graph, this, Canvas, FinishStory);
+
                 return true;
             }
 
             QueueStory(graph);
+
             return false;
         }
 
@@ -59,11 +62,19 @@ namespace UVNF.Core
             _graphQueue.Enqueue(graph);
         }
 
+        /// <summary>
+        /// Starts a story inside the current graph
+        /// </summary>
+        /// <param name="subGraph"></param>
         public void StartSubStory(StoryGraph subGraph)
         {
             _currentStoryManager.CreateSubStory(subGraph, this, Canvas);
         }
 
+        /// <summary>
+        /// Moves to the next <see cref="StoryElement"/> on the <see cref="StartingStory"/>
+        /// </summary>
+        /// <param name="element">The <see cref="StoryElement"/> the Graph should move to</param>
         public void AdvanceStoryGraph(StoryElement element)
         {
             _currentStoryManager.AdvanceStory(element);
@@ -79,7 +90,9 @@ namespace UVNF.Core
             _currentStoryManager = null;
             //Story still left in the Queue
             if (_graphQueue.Count > 0)
+            {
                 StartStory(_graphQueue.Dequeue());
+            }
             //Story if finished
             else
             {
@@ -123,8 +136,10 @@ namespace UVNF.Core
             _manager = manager;
             _canvas = canvas;
 
-            if(_storyGraph != null)
+            if (_storyGraph != null)
+            {
                 StartStory();
+            }
 
             _afterSubgraphHandler += afterStoryHandler;
         }
@@ -177,17 +192,21 @@ namespace UVNF.Core
                     _currentTask.Start();
                 }
                 else
+                {
                     _afterSubgraphHandler?.Invoke();
+                }
             }
         }
 
         public void AdvanceStory(StoryElement newStoryPoint, bool continueToRun = false)
         {
             if (_handlingSubgraph)
+            {
                 _subgraphHandler.AdvanceStory(false);
+            }
             else if (newStoryPoint != null)
             {
-                if(!continueToRun)
+                if (!continueToRun)
                     _currentTask.Stop();
 
                 _currentElement = newStoryPoint;
@@ -197,7 +216,9 @@ namespace UVNF.Core
                 _currentTask.Start();
             }
             else
+            {
                 _afterSubgraphHandler?.Invoke();
+            }
         }
         #endregion
     }

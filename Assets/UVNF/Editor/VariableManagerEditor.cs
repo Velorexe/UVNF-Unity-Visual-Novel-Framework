@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 using UVNF.Entities.Containers.Variables;
 
 namespace UVNF.Editor
@@ -52,7 +49,9 @@ namespace UVNF.Editor
                             GUILayout.BeginHorizontal();
                             {
                                 if (GUILayout.Button("+"))
+                                {
                                     Variables.AddVariable();
+                                }
                             }
                             GUILayout.EndHorizontal();
                         }
@@ -85,7 +84,9 @@ namespace UVNF.Editor
                             }
                         }
                         else
+                        {
                             selectedIndex = -1;
+                        }
                     }
                     GUILayout.EndVertical();
                 }

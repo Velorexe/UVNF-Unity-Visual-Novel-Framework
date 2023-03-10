@@ -1,32 +1,27 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UVNF.Core.UI;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Character
 {
+    /// <summary>
+    /// A <see cref="StoryElement"/> that changes the sprite of a <see cref="Entities.Character"/> on screen
+    /// </summary>
     public class ChangeSpriteElement : StoryElement
     {
         public override string ElementName => "Change Sprite";
 
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Character();
-
         public override StoryElementTypes Type => StoryElementTypes.Character;
 
+        /// <summary>
+        /// The name / key of the character on screen
+        /// </summary>
         public string CharacterName;
+
+        /// <summary>
+        /// The new sprite that the character should display
+        /// </summary>
         public Sprite NewSprite;
-
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
-
-            GUILayout.Label("New Character Sprite", EditorStyles.boldLabel);
-            NewSprite = EditorGUILayout.ObjectField(NewSprite, typeof(Sprite), false) as Sprite;
-        }
-#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

@@ -1,43 +1,45 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEditor;
 using UVNF.Core.UI;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Scenery
 {
+    /// <summary>
+    /// A <see cref="StoryElement"/> that changes the background of the UI
+    /// </summary>
     public class ChangeBackgroundElement : StoryElement
     {
         public override string ElementName => "Change Background";
 
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Scene();
-
         public override StoryElementTypes Type => StoryElementTypes.Scenery;
 
+        /// <summary>
+        /// The new background that should be shown
+        /// </summary>
         public Sprite NewBackground;
+
+        /// <summary>
+        /// Set to <see langword="true"/> if the background should crossfade with the current background
+        /// </summary>
         public bool Fade = true;
+
+        /// <summary>
+        /// The time it'll take for the backgrounds to crossfade
+        /// </summary>
         public float FadeTime = 1f;
-
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            GUILayout.Label("New Background");
-            NewBackground = EditorGUILayout.ObjectField(NewBackground, typeof(Sprite), false) as Sprite;
-
-            Fade = GUILayout.Toggle(Fade, "Fade");
-            if (Fade)
-                FadeTime = EditorGUILayout.FloatField("Fade out time", FadeTime);
-        }
-#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             if (Fade)
+            {
                 canvas.ChangeBackground(NewBackground, FadeTime);
+            }
             else
+            {
                 canvas.ChangeBackground(NewBackground);
-            return null;
+            }
+
+            yield return null;
         }
     }
 }

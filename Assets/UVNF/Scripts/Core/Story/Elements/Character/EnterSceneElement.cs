@@ -1,70 +1,48 @@
 ﻿using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UVNF.Core.UI;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Character
 {
+    /// <summary>
+    /// A <see cref="StoryElement"/> that lets a character enter the <see cref="CanvasCharacterManager"/> stack
+    /// and show it on screen
+    /// </summary>
     public class EnterSceneElement : StoryElement
     {
         public override string ElementName => "Enter Scene";
 
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Character();
-
         public override StoryElementTypes Type => StoryElementTypes.Character;
 
+        /// <summary>
+        /// The name / key of the character
+        /// </summary>
         public string CharacterName;
 
+        /// <summary>
+        /// The first sprite that the character should show on screen
+        /// </summary>
         public Sprite Character;
-        private bool foldOut = false;
 
+        /// <summary>
+        /// Set to <see langword="true"/> if the character should have their sprite flipped
+        /// </summary>
         public bool Flip = false;
 
+        /// <summary>
+        /// The direction from which the character enters the screen
+        /// </summary>
         public ScenePositions EnterFromDirection = ScenePositions.Left;
+
+        /// <summary>
+        /// The position at which the character will end up on screen
+        /// </summary>
         public ScenePositions FinalPosition = ScenePositions.Left;
 
+        /// <summary>
+        /// The time it'll take for the character to end up on the <see cref="FinalPosition"/>
+        /// </summary>
         public float EnterTime = 2f;
-
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
-
-            GUILayout.BeginHorizontal();
-            {
-                GUILayout.Label("Character Sprite", GUILayout.MaxWidth(147));
-                Character = EditorGUILayout.ObjectField(Character, typeof(Sprite), false) as Sprite;
-            }
-            GUILayout.EndHorizontal();
-
-            Flip = GUILayout.Toggle(Flip, "Flip");
-
-            if (Character != null)
-            {
-                foldOut = EditorGUILayout.Foldout(foldOut, "Preview", true);
-                if (foldOut)
-                {
-                    layoutRect.position = new Vector2(layoutRect.x, layoutRect.y + 70);
-                    layoutRect.width = 1000;
-                    layoutRect.height = 500;
-
-                    layoutRect.width = Character.rect.width / (Character.rect.height / 500);
-                    //if (Flip) layoutRect.width = -layoutRect.width * 2;
-                    layoutRect.height = 500;
-
-                    GUI.DrawTexture(layoutRect, Character.texture, ScaleMode.ScaleToFit);
-                    GUILayout.Space(500);
-                }
-            }
-
-            EnterFromDirection = (ScenePositions)EditorGUILayout.EnumPopup("Enter From", EnterFromDirection);
-            FinalPosition = (ScenePositions)EditorGUILayout.EnumPopup("Final Position", FinalPosition);
-
-            EnterTime = EditorGUILayout.Slider("Enter Time", EnterTime, 1f, 10f);
-        }
-#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

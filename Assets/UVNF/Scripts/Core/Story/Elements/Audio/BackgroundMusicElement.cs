@@ -1,47 +1,51 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEditor;
 using UVNF.Core.UI;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Audio
 {
+    /// <summary>
+    /// A <see cref="StoryElement"/> that plays Background Music through the <see cref="AudioManager"/>
+    /// </summary>
     public class BackgroundMusicElement : StoryElement
     {
         public override string ElementName => "Background Music";
 
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Audio();
-
         public override StoryElementTypes Type => StoryElementTypes.Audio;
 
+        /// <summary>
+        /// The background music <see cref="AudioClip"/>
+        /// </summary>
         public AudioClip BackgroundMusic;
 
+        /// <summary>
+        /// Set to <see langword="true"/> if the <see cref="AudioManager"/> should crossfade the 
+        /// new <see cref="AudioClip"/> with the one that's currently playing
+        /// </summary>
         public bool Crossfade = true;
+
+        /// <summary>
+        /// Defines the time that the <see cref="AudioManager"/> should crossfade between
+        /// music clips
+        /// </summary>
         public float CrossfadeTime = 1f;
 
+        /// <summary>
+        /// The volume at which the background music should play at
+        /// </summary>
         public float Volume;
-
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            BackgroundMusic = EditorGUILayout.ObjectField(BackgroundMusic, typeof(AudioClip), false) as AudioClip;
-
-            Crossfade = GUILayout.Toggle(Crossfade, "Crossfade");
-            if (Crossfade)
-                CrossfadeTime = EditorGUILayout.FloatField("Crossfade Time", CrossfadeTime);
-
-            if (CrossfadeTime < 0) CrossfadeTime = 0;
-            Volume = EditorGUILayout.Slider("Volume", Volume, 0f, 1f);
-        }
-#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
             if (Crossfade)
+            {
                 managerCallback.AudioManager.CrossfadeBackgroundMusic(BackgroundMusic, CrossfadeTime);
+            }
             else
+            {
                 managerCallback.AudioManager.PlayBackgroundMusic(BackgroundMusic);
+            }
+
             yield return null;
         }
     }

@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEditor;
-using XNode;
 using UVNF.Core.Story;
 using UVNF.Core.Story.Other;
+using XNode;
+
 namespace UVNF.Entities.Containers
 {
     [CreateAssetMenu()]
@@ -37,7 +36,9 @@ namespace UVNF.Entities.Containers
             StartElement[] startNodes = new StartElement[startNodesArray.Length];
 
             for (int i = 0; i < startNodes.Length; i++)
+            {
                 startNodes[i] = startNodesArray[i] as StartElement;
+            }
 
             StoryNames = startNodes.Select(x => x.StoryName).ToArray();
 
@@ -55,14 +56,19 @@ namespace UVNF.Entities.Containers
                     currentNode = currentNode.GetOutputPort("NextNode").GetOutputValue() as StoryElement;
                 }
                 if (currentNode != null && currentNode.GetType() != typeof(StartElement))
+                {
                     _shortStories[i].Add(currentNode);
+                }
             }
         }
 
         public List<StoryElement> ShortStory(int storyIndex)
         {
             if (storyIndex < _shortStories.Length && storyIndex > -1)
+            {
                 return _shortStories[storyIndex];
+            }
+
             return new List<StoryElement>();
         }
 
@@ -76,7 +82,9 @@ namespace UVNF.Entities.Containers
         {
             nodes = nodes.Where(x => x != null).ToList();
             foreach (Node element in nodes)
+            {
                 (element as StoryElement).Connect();
+            }
         }
     }
 }

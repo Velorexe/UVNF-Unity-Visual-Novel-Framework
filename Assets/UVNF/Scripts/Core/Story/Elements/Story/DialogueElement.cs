@@ -1,46 +1,28 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UVNF.Core.UI;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Dialogue
 {
+    /// <summary>
+    /// A <see cref="StoryElement"/> that displays dialogue on the UI
+    /// </summary>
     public class DialogueElement : StoryElement
     {
         public override string ElementName => "Dialogue";
 
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Story();
-
         public override StoryElementTypes Type => StoryElementTypes.Story;
 
+        /// <summary>
+        /// The text that should appear in the dialogue's name panel
+        /// </summary>
         public string CharacterName;
-        [TextArea(3, 5)]
+
+        /// <summary>
+        /// The dialogue that should be displayed on the UI
+        /// </summary>
+        [TextArea(8, 10)]
         public string Dialogue;
-
-        private GUIStyle textAreaStyle;
-
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            if (textAreaStyle == null)
-            {
-                Texture2D areaBackground = new Texture2D(1, 1);
-                areaBackground.SetPixel(0, 0, Color.white);
-                areaBackground.Apply();
-
-                textAreaStyle = new GUIStyle("TextArea");
-                textAreaStyle.richText = true;
-                textAreaStyle.normal.background = areaBackground;
-            }
-
-            CharacterName = EditorGUILayout.TextField("Character", CharacterName);
-            GUILayout.Label("Dialogue");
-            Dialogue = EditorGUILayout.TextArea(Dialogue, textAreaStyle, GUILayout.MinHeight(50));
-        }
-#endif
 
         public override IEnumerator Execute(UVNFManager gameManager, UVNFCanvas canvas)
         {

@@ -1,32 +1,31 @@
 ﻿using System.Collections;
-using UnityEditor;
-using UnityEngine;
 using UVNF.Core.UI;
-using UVNF.Extensions;
 
 namespace UVNF.Core.Story.Character
 {
+    /// <summary>
+    /// A <see cref="StoryElement"/> that removes a character from the screen
+    /// </summary>
     public class ExitSceneElement : StoryElement
     {
         public override string ElementName => "Exit Scene";
 
-        public override Color32 DisplayColor => _displayColor;
-        private Color32 _displayColor = new Color32().Character();
-
         public override StoryElementTypes Type => StoryElementTypes.Character;
 
+        /// <summary>
+        /// The name / key of the character on screen
+        /// </summary>
         public string CharacterName;
-        public ScenePositions ExitPosition;
-        public float ExitTime;
 
-#if UNITY_EDITOR
-        public override void DisplayLayout(Rect layoutRect, GUIStyle label)
-        {
-            CharacterName = EditorGUILayout.TextField("Character Name", CharacterName);
-            ExitPosition = (ScenePositions)EditorGUILayout.EnumPopup("Exit Position", ExitPosition);
-            ExitTime = EditorGUILayout.Slider("Exit Time", ExitTime, 1f, 10f);
-        }
-#endif
+        /// <summary>
+        /// The direction at which the character should exit the screen
+        /// </summary>
+        public ScenePositions ExitPosition;
+
+        /// <summary>
+        /// The time it'll take for the character to exit the screen
+        /// </summary>
+        public float ExitTime = 2f;
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
