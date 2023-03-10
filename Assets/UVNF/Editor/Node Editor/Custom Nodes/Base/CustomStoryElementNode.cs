@@ -29,7 +29,6 @@ namespace UVNF.Editor.Story.Nodes
 
             if (Foldout)
             {
-                GUILayout.Space(EditorGUIUtility.singleLineHeight);
                 base.OnBodyGUI();
                 GUILayout.Space(EditorGUIUtility.singleLineHeight);
             }

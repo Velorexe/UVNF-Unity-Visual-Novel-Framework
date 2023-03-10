@@ -18,9 +18,15 @@ namespace UVNF.Core.Story.Dialogue
         /// </summary>
         public AudioClip DialogueClip;
 
+        /// <summary>
+        /// The volume at which the <see cref="DialogueClip"/> should play at
+        /// </summary>
+        [Range(0f, 1f)]
+        public float DialogueVolume;
+
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
-            return canvas.DisplayText(Dialogue, CharacterName, DialogueClip, managerCallback.AudioManager);
+            return canvas.DisplayText(Dialogue, CharacterName, DialogueClip, DialogueVolume, managerCallback.AudioManager);
         }
     }
 }
