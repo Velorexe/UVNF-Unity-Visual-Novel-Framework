@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace UVNF.Core
 {
@@ -8,136 +9,209 @@ namespace UVNF.Core
     /// </summary>
     public class AudioManager : MonoBehaviour
     {
-        // TODO: rework this entire class (including the use of Volume Mixers)
+        public AudioSource Music;
+        public AudioSource Dialogue;
 
-        [Header("Background Music")]
-        public AudioSource BackgroundMusic;
-        public bool CurrentlyPlayingBackgroundMusic = false;
+        [Space]
+        public AudioMixerGroup SfxGroup;
+        public Transform SfxParent;
 
-        // All new AudioComponents playing SFX will be a child of SFXParent
-        [Header("SFX")]
-        public Transform SFXParent;
+        private bool _currentlyPlayingMusic = false;
 
-        private void Awake()
-        {
-            BackgroundMusic.loop = true;
-        }
+        #region Music
 
         /// <summary>
-        /// Replaces the current background <see cref="AudioClip"/> with given one
+        /// Instantly plays the given <see cref="AudioClip"/> as music
         /// </summary>
-        /// <param name="clip">The new background music clip that should be played</param>
-        /// <param name="volume">The volume at which the clip should play at</param>
-        public void PlayBackgroundMusic(AudioClip clip, float volume = 1f)
+        /// <param name="musicClip">The clip of music that should be played</param>
+        /// <param name="volume">The volume at which the music should play at</param>
+        /// <param name="loop">Set to <see langword="true"/> if the music should loop when it ends</param>
+        public void PlayMusic(AudioClip musicClip, float volume = 1f, bool loop = true)
         {
-            BackgroundMusic.clip = clip;
-            BackgroundMusic.Play();
-
-            BackgroundMusic.volume = volume;
-
-            CurrentlyPlayingBackgroundMusic = true;
-        }
-
-        /// <summary>
-        /// Instantly stops the currently playing background music
-        /// </summary>
-        public void StopBackgroundMusic()
-        {
-            BackgroundMusic.Stop();
-        }
-
-        public void StopBackgroundMusic(float fadeOutTime = 1f, bool destroy = true)
-        {
-            CrossfadeAudioSourceDown(BackgroundMusic, fadeOutTime, destroy);
-        }
-
-        public void PauseBackgroundMusic()
-        {
-            BackgroundMusic.Pause();
-        }
-
-        public void CrossfadeBackgroundMusic(AudioClip clip, float crossfadeTime = 1f)
-        {
-            AudioSource newBGSource = Instantiate(BackgroundMusic.gameObject, transform).GetComponent<AudioSource>();
-            newBGSource.gameObject.name = BackgroundMusic.gameObject.name;
-            BackgroundMusic.gameObject.name = BackgroundMusic.gameObject.name + " [OLD]";
-
-            newBGSource.clip = clip;
-            newBGSource.volume = 0f;
-
-            AudioSource oldBGSource = BackgroundMusic;
-
-            BackgroundMusic = newBGSource;
-            BackgroundMusic.Play();
-
-            StartCoroutine(CrossfadeAudioSourceDown(oldBGSource, crossfadeTime));
-            StartCoroutine(CrossfadeAudioSourceUp(BackgroundMusic, crossfadeTime));
-        }
-
-        public void PlaySound(AudioClip clip, float volume)
-        {
-            StartCoroutine(PlaySoundCoroutine(clip, volume));
-        }
-
-        public void PlaySound(AudioClip clip, float volume, float extraPitch)
-        {
-            StartCoroutine(PlaySoundCoroutine(clip, volume, extraPitch));
-        }
-
-        public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume)
-        {
-            GameObject sfxPlayer = new GameObject(clip.name);
-            sfxPlayer.transform.SetParent(SFXParent);
-
-            AudioSource source = sfxPlayer.AddComponent<AudioSource>();
-            source.clip = clip;
-
-            //TODO volume * UVNFManager.UserSettings.Volume;
-            source.volume = volume;
-            source.Play();
-
-            while (source.isPlaying) yield return null;
-
-            Destroy(sfxPlayer);
-        }
-
-        public IEnumerator PlaySoundCoroutine(AudioClip clip, float volume, float extraPitch)
-        {
-            GameObject sfxPlayer = new GameObject(clip.name);
-            sfxPlayer.transform.SetParent(SFXParent);
-
-            AudioSource source = sfxPlayer.AddComponent<AudioSource>();
-            source.clip = clip;
-            source.pitch += extraPitch;
-
-            //TODO volume * UVNFManager.UserSettings.Volume;
-            source.volume = volume;
-            source.Play();
-
-            while (source.isPlaying) yield return null;
-
-            Destroy(sfxPlayer);
-        }
-
-        private IEnumerator CrossfadeAudioSourceUp(AudioSource source, float crossfadeTime = 1f)
-        {
-            //TODO get the max volume set by the UVNFManager
-            while (source.volume != 1f)
+            if (musicClip == null)
             {
-                source.volume += Time.deltaTime / crossfadeTime;
+                Debug.LogError("Parameter musicClip was null, can't play music");
+                return;
+            }
+
+            if (volume < 0f || volume > 1f)
+            {
+                Debug.LogWarning("Parameter volume was not between 0f and 1f, clamping given volume");
+                volume = Mathf.Clamp(volume, 0f, 1f);
+            }
+
+            Music.Stop();
+
+            Music.volume = volume;
+            Music.clip = musicClip;
+            Music.loop = loop;
+
+            Music.Play();
+
+            _currentlyPlayingMusic = true;
+        }
+
+        /// <summary>
+        /// Fades in the given <see cref="AudioClip"/> as music
+        /// </summary>
+        /// <param name="musicClip">The clip of music that should be played</param>
+        /// <param name="fadeInTime">The time it should take for the music to fade in</param>
+        /// <param name="volume">The volume at which the music should play at</param>
+        /// <param name="loop">Set to <see langword="true"/> if the music should loop when it ends</param>
+        /// <returns>A Unity <see cref="Coroutine"/></returns>
+        public IEnumerator PlayMusic(AudioClip musicClip, float fadeInTime, float volume = 1f, bool loop = true)
+        {
+            if (musicClip == null)
+            {
+                Debug.LogError("Parameter musicClip was null, can't play music");
+                yield break;
+            }
+
+            if (volume < 0f || volume > 1f)
+            {
+                Debug.LogWarning("Parameter volume was not between 0f and 1f, clamping given volume");
+                volume = Mathf.Clamp(volume, 0f, 1f);
+            }
+
+            fadeInTime /= 2f;
+
+            if (_currentlyPlayingMusic)
+            {
+                while (Music.volume > 0f)
+                {
+                    Music.volume -= Time.deltaTime / fadeInTime;
+                    yield return null;
+                }
+
+                Music.Stop();
+            }
+
+            Music.volume = 0f;
+
+            Music.clip = musicClip;
+            Music.loop = loop;
+
+            Music.Play();
+
+            _currentlyPlayingMusic = true;
+
+            while (Music.volume < volume)
+            {
+                Music.volume += Time.deltaTime / fadeInTime;
                 yield return null;
             }
         }
 
-        private IEnumerator CrossfadeAudioSourceDown(AudioSource source, float crossfadeTime = 1f, bool deleteOnDone = true)
+        /// <summary>
+        /// Instantly pauses the currently playing music
+        /// </summary>
+        public void PauseMusic()
         {
-            while (source.volume != 0f)
+            Music.Pause();
+            _currentlyPlayingMusic = false;
+        }
+
+        /// <summary>
+        /// Fades the currently playing music out
+        /// </summary>
+        /// <param name="fadeOutTime">The time it should take for the music to fade out</param>
+        public IEnumerator PauseMusic(float fadeOutTime)
+        {
+            if (_currentlyPlayingMusic)
             {
-                source.volume -= Time.deltaTime / crossfadeTime;
-                yield return null;
+                while (Music.volume > 0f)
+                {
+                    Music.volume -= Time.deltaTime / fadeOutTime;
+                    yield return null;
+                }
+
+                Music.Stop();
+
+                _currentlyPlayingMusic = false;
+            }
+        }
+
+        #endregion Music
+
+        #region Dialogue
+
+        /// <summary>
+        /// Plays the given <see cref="AudioClip"/> as dialogue
+        /// </summary>
+        /// <param name="dialogueClip">The clip of dialogue that should be played</param>
+        /// <param name="volume">The volume at which the dialogue should play at</param>
+        public void PlayDialogue(AudioClip dialogueClip, float volume = 1f)
+        {
+            if (dialogueClip == null)
+            {
+                Debug.LogError("Parameter dialogueClip was null, can't play dialogue");
+                return;
             }
 
-            if (deleteOnDone) Destroy(source.gameObject);
+            if (volume < 0f || volume > 1f)
+            {
+                Debug.LogWarning("Parameter volume was not between 0f and 1f, clamping given volume");
+                volume = Mathf.Clamp(volume, 0f, 1f);
+            }
+
+            Dialogue.Stop();
+
+            Dialogue.volume = volume;
+            Dialogue.clip = dialogueClip;
+
+            Dialogue.Play();
         }
+
+        /// <summary>
+        /// Pauses the currently playing dialogue
+        /// </summary>
+        public void PauseDialogue()
+        {
+            Dialogue.Pause();
+        }
+
+        #endregion
+
+        #region SFX
+
+        /// <summary>
+        /// Instantly plays a given <see cref="AudioClip"/> as SFX
+        /// </summary>
+        /// <param name="sfxClip">The SFX clip that should be played</param>
+        /// <param name="volume">The volume at which the SFX should be play at</param>
+        public IEnumerator PlaySfx(AudioClip sfxClip, float volume = 1f)
+        {
+            if (sfxClip == null)
+            {
+                Debug.LogError("Parameter sfxClip was null, can't play SFX");
+                yield break;
+            }
+
+            if (volume < 0f || volume > 1f)
+            {
+                Debug.LogWarning("Parameter volume was not between 0f and 1f, clamping given volume");
+                volume = Mathf.Clamp(volume, 0f, 1f);
+            }
+
+            GameObject sfxObject = new GameObject(sfxClip.name);
+            sfxObject.transform.SetParent(SfxParent, false);
+
+            AudioSource source = sfxObject.AddComponent<AudioSource>();
+            source.outputAudioMixerGroup = SfxGroup;
+
+            source.clip = sfxClip;
+            source.volume = volume;
+
+            source.loop = false;
+
+            source.Play();
+
+            while (source.isPlaying)
+            {
+                yield return null;
+            }
+        }
+
+        #endregion
     }
 }

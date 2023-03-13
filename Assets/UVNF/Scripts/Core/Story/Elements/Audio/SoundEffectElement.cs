@@ -1,5 +1,4 @@
-﻿using CoroutineManager;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UVNF.Core.UI;
 
@@ -33,15 +32,11 @@ namespace UVNF.Core.Story.Audio
         {
             if (WaitForAudio)
             {
-                Task task = new Task(managerCallback.AudioManager.PlaySoundCoroutine(AudioClip, Volume), true);
-                while (task.Running)
-                {
-                    yield return null;
-                }
+                yield return managerCallback.AudioManager.PlaySfx(AudioClip, Volume);
             }
             else
             {
-                managerCallback.AudioManager.PlaySound(AudioClip, Volume);
+                managerCallback.AudioManager.PlaySfx(AudioClip, Volume);
             }
         }
     }

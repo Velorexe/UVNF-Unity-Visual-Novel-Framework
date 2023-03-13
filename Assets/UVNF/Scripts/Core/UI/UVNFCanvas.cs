@@ -112,8 +112,6 @@ namespace UVNF.Core.UI
             ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
             BottomCanvasGroup.gameObject.SetActive(true);
 
-            CharacterNamePlate.SetActive(false);
-
             int textIndex = 0;
             while (textIndex < text.Length)
             {
@@ -177,11 +175,12 @@ namespace UVNF.Core.UI
         /// <param name="text">The dialogue that should be displayed</param>
         /// <param name="characterName">The name of the character that should be displayed on the nameplate</param>
         /// <param name="dialogue">The audio that should play during the dialogue</param>
-        /// <param name="audio">The <see cref="AudioManager"/> that should play the <paramref name="dialogue"/></param>
+        /// <param name="dialogueVolume">The volume at which the dialogue should be played at</param>
+        /// <param name="audioManager">The <see cref="AudioManager"/> that should play the <paramref name="dialogue"/></param>
         /// <param name="useStylesForCharacterField"><see langword="true"/> if the nameplate should use the given styles</param>
         /// <param name="displayStyles">A collection of display styles that affect the look of the dialogue</param>
         /// <returns>A Unity <see cref="Coroutine"/></returns>
-        public IEnumerator DisplayText(string text, string characterName, AudioClip dialogue, AudioManager audio, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+        public IEnumerator DisplayText(string text, string characterName, AudioClip dialogue, float dialogueVolume, AudioManager audioManager, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
         {
             ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
             if (useStylesForCharacterField)
@@ -198,7 +197,7 @@ namespace UVNF.Core.UI
                 CharacterTMP.text = characterName;
             }
 
-            audio.PlaySound(dialogue, 1f);
+            audioManager.PlayDialogue(dialogue, dialogueVolume);
 
             int textIndex = 0;
             while (textIndex < text.Length)
@@ -206,7 +205,8 @@ namespace UVNF.Core.UI
                 // If there's input, display all of the text at once
                 if (HasInput)
                 {
-                    // TODO: Stop the audio when an input is given that finishes all the text
+                    audioManager.PauseDialogue();
+
                     DialogueTMP.text = text;
                     textIndex = text.Length - 1;
                 }
