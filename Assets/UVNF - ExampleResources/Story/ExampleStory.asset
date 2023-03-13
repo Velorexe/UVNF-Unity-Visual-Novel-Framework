@@ -132,6 +132,20 @@ MonoBehaviour:
   Dialogue: I you're still confused or just want to know more about the project itself,
     don't be afraid to contact me in any way, shape or form. I'll gladly reach out
     to you.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &-6837374074360815640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +345,20 @@ MonoBehaviour:
   Dialogue: Since Characters are very important to any visual novel, I've spend some
     time on working out a "stacking" system, which allows characters to stack on
     a direction on the screen.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &-5583132717968379321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +726,20 @@ MonoBehaviour:
     _dynamic: 0
   CharacterName: Velorexe
   Dialogue: Hello!
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &-2829197401580914606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,6 +1006,20 @@ MonoBehaviour:
   CharacterName: Velorexe
   Dialogue: Welcome to UVNF! I think it's really cool that you decided to give this
     a download.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 0
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &-1522815258023470846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,6 +1086,20 @@ MonoBehaviour:
   CharacterName: Velorexe
   Dialogue: Choices are important in every Visual Novel, so I've made it easy to
     set different choices to perform different actions.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &-117251844290693304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1215,6 +1285,20 @@ MonoBehaviour:
     _dynamic: 0
   CharacterName: Velorexe
   Dialogue: Or in this case all end in the same end choice.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &426794231324701066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,6 +1434,20 @@ MonoBehaviour:
   CharacterName: Velorexe
   Dialogue: I've spend quite some time on this framework, so any feedback is appreciated.
     You can find my socials and contact information inside the README.md in the repository.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 0
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &1062457426058270779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,6 +1514,20 @@ MonoBehaviour:
   CharacterName: Velorexe
   Dialogue: You got quite some options when using this framework to customize little
     things, I hope to expand this further in the future.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &1924711864495957666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,6 +1619,9 @@ MonoBehaviour:
       connections:
       - fieldName: NextNode
         node: {fileID: 0}
+        reroutePoints: []
+      - fieldName: NextNode
+        node: {fileID: 5270346473795117227}
         reroutePoints: []
       - fieldName: NextNode
         node: {fileID: 8720503602220323719}
@@ -1706,6 +1821,12 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: NextNode
+        node: {fileID: 0}
+        reroutePoints: []
+      - fieldName: NextNode
+        node: {fileID: 7815111530212063091}
+        reroutePoints: []
+      - fieldName: NextNode
         node: {fileID: 7631607968810068611}
         reroutePoints: []
       _direction: 0
@@ -1811,6 +1932,20 @@ MonoBehaviour:
   CharacterName: Velorexe
   Dialogue: Let me give you a little tour of what you can do with this framework
     (for now).
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &5032050557008875230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,6 +2013,20 @@ MonoBehaviour:
   Dialogue: You can use Audio Dialogue's to give the characters in your Visual Novel
     a better way to express themselves! The method is the same as using a regular
     Dialogue, but you can attach an Audio Clip to the node.
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &5270346473795117227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2401,6 +2550,20 @@ MonoBehaviour:
   CharacterName: Velorexe
   Dialogue: Anyways, I'm pretty much done explaining right now. I hope you'll enjoy
     using this framework!
+  TextWriter:
+    id: 0
+  WriterSettings:
+    FontSize: 18
+    Font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    Styles: 0
+    Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+    TextDisplaySpeed: 0.025
+  DefaultTextWriter: 1
+  DefaultWriterSettings: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInTextWriter, ns: UVNF.Core.UI.Writers, asm: Assembly-CSharp}
 --- !u!114 &8720503602220323719
 MonoBehaviour:
   m_ObjectHideFlags: 0

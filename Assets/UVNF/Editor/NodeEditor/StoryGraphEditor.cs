@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UVNF.Core.Story;
 using UVNF.Core.Story.Dialogue;
+using UVNF.Editor.Settings;
 using UVNF.Entities.Containers;
 using UVNF.Extensions;
 using XNode;
@@ -50,6 +51,17 @@ namespace UVNF.Editor.Story.Nodes
                 AddContextMenuItems(menu);
                 menu.DropDown(new Rect(Event.current.mousePosition, Vector2.zero));
             }
+        }
+
+        public override Node CreateNode(Type type, Vector2 position)
+        {
+            Node node = base.CreateNode(type, position);
+            if (node is StoryElement element)
+            {
+                element.OnCreate(UVNFEditorSettings.Instance.MainResources);
+            }
+
+            return node;
         }
     }
 }

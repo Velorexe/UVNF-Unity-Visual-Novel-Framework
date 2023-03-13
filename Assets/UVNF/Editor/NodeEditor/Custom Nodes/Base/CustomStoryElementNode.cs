@@ -23,13 +23,18 @@ namespace UVNF.Editor.Story.Nodes
             DisplayElementType(Node.Type, Node.ElementName, GetWidth());
         }
 
+        public virtual void DrawBody()
+        {
+            base.OnBodyGUI();
+        }
+
         public override void OnBodyGUI()
         {
             RenderNodeConnections();
 
             if (Foldout)
             {
-                base.OnBodyGUI();
+                DrawBody();
                 GUILayout.Space(EditorGUIUtility.singleLineHeight);
             }
 

@@ -26,7 +26,7 @@ namespace UVNF.Core.Story.Dialogue
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {
-            return canvas.DisplayText(Dialogue, CharacterName, DialogueClip, DialogueVolume, managerCallback.AudioManager);
+            return canvas.DisplayText(Dialogue, CharacterName, TextWriter, WriterSettings, DialogueClip, DialogueVolume, managerCallback.AudioManager);
         }
     }
 }
