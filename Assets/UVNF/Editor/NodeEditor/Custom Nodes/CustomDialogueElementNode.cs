@@ -22,6 +22,10 @@ namespace UVNF.Editor.Story.Nodes
             DrawTextWriterSettings((DialogueElement)Node);
         }
 
+        /// <summary>
+        /// Draws the <see cref="ITextWriter"/> field
+        /// </summary>
+        /// <param name="node">The <see cref="DialogueElement"/> node from which the TextWriter should be displayed</param>
         internal void DrawTextWriter(DialogueElement node)
         {
             ITextWriter[] textWriters = UVNFEditorSettings.Instance.MainResources.TextWriterPool;
@@ -35,6 +39,7 @@ namespace UVNF.Editor.Story.Nodes
             List<string> textWritersNames = textWriters.Select(x => x.GetType().Name).ToList();
             textWritersNames.Insert(0, textWritersNames[0] + " (Default)");
 
+            // If the Dialogue Node is Default
             if (node.DefaultTextWriter && node.TextWriter != textWriters[0])
             {
                 node.TextWriter = textWriters[0];
@@ -45,11 +50,13 @@ namespace UVNF.Editor.Story.Nodes
 
             if (index != currentIndex)
             {
+                // Custom
                 if (index > 0)
                 {
                     node.TextWriter = textWriters[index - 1];
                     node.DefaultTextWriter = false;
                 }
+                // Default
                 else
                 {
                     node.DefaultTextWriter = true;
@@ -57,6 +64,10 @@ namespace UVNF.Editor.Story.Nodes
             }
         }
 
+        /// <summary>
+        /// Draws the settings that should be applied to the <see cref="ITextWriter"/>
+        /// </summary>
+        /// <param name="node">The <see cref="DialogueElement"/> node from which the TextWriterSettings should be displayed</param>
         internal void DrawTextWriterSettings(DialogueElement node)
         {
             node.DefaultWriterSettings = EditorGUILayout.Toggle("Default Writer Settings", node.DefaultWriterSettings);

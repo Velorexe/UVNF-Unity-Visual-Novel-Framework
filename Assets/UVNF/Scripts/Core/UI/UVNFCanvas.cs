@@ -119,8 +119,10 @@ namespace UVNF.Core.UI
 
             DialogueTMP.SetText("");
 
+            // Queue up a Coroutine Task to keep track of if it's finished or not
             _writerTask = new Task(textWriter.Write(DialogueTMP, text, settings.TextDisplaySpeed));
 
+            // Only true if the user clicked before all text is displayed
             _writerTask.Finished += (bool manual) =>
             {
                 if (manual)
@@ -194,10 +196,12 @@ namespace UVNF.Core.UI
 
             BottomCanvasGroup.gameObject.SetActive(true);
 
+            // Queue up a Coroutine Task to keep track of if it's finished or not
             _writerTask = new Task(textWriter.Write(DialogueTMP, text, settings.TextDisplaySpeed));
 
             _writerTask.Finished += (bool manual) =>
             {
+                // Only true if the user clicked before all text is displayed
                 if (manual)
                 {
                     textWriter.WriteInstant(DialogueTMP, text);
@@ -394,43 +398,10 @@ namespace UVNF.Core.UI
         #endregion
 
         /// <summary>
-        /// Applies a text style to a given <see cref="TextMeshProUGUI"/> component
+        /// Applies the <see cref="TextWriterSettings"/> to the <see cref="TextMeshProUGUI"/>
         /// </summary>
-        /// <param name="tmp">The TM_Pro component to apply the text effects to</param>
-        /// <param name="displayStyles">The effect that should be applied</param>
-        [Obsolete("This method is obsolete. Use ApplyTextWriterSettingsToTMP instead.", false)]
-        private void ApplyTextDisplayStylesToTMP(TextMeshProUGUI tmp, TextDisplayStyle[] displayStyles)
-        {
-            ResetTMP(tmp);
-            for (int i = 0; i < displayStyles.Length; i++)
-            {
-                switch (displayStyles[i])
-                {
-                    case TextDisplayStyle.Gigantic:
-                        tmp.fontSize = 40f;
-                        break;
-                    case TextDisplayStyle.Big:
-                        tmp.fontSize = 25f;
-                        break;
-                    case TextDisplayStyle.Small:
-                        tmp.fontSize = 12f;
-                        break;
-                    case TextDisplayStyle.Italic:
-                        tmp.fontStyle = FontStyles.Italic;
-                        break;
-                    case TextDisplayStyle.Bold:
-                        tmp.fontStyle = FontStyles.Bold;
-                        break;
-                    case TextDisplayStyle.Fast:
-                        tempDisplayInterval = TextDisplayInterval * 3f;
-                        break;
-                    case TextDisplayStyle.Slow:
-                        tempDisplayInterval = TextDisplayInterval / 2f;
-                        break;
-                }
-            }
-        }
-
+        /// <param name="tmp">The <see cref="TextMeshProUGUI"/> to which the settings should be applied</param>
+        /// <param name="settings">The <see cref="TextWriterSettings"/> that should be applied</param>
         private void ApplyTextWriterSettingsToTMP(TextMeshProUGUI tmp, TextWriterSettings settings)
         {
             tmp.fontSize = settings.FontSize;
@@ -441,44 +412,6 @@ namespace UVNF.Core.UI
             tmp.fontStyle = settings.Styles;
 
             tmp.ForceMeshUpdate();
-        }
-
-        /// <summary>
-        /// Resets the text style of a given <see cref="TextMeshProUGUI"/> to a default
-        /// </summary>
-        /// <param name="tmp">The TM_Pro component to apply the text effects to</param>
-        private void ResetTMP(TextMeshProUGUI tmp)
-        {
-            tmp.fontSize = 18f;
-            tmp.fontStyle = 0;
-            tmp.text = string.Empty;
-
-            tempDisplayInterval = TextDisplayInterval;
-        }
-
-        /// <summary>
-        /// Removes typography notes marked in a '<' and '>'
-        /// </summary>
-        /// <param name="text">The text that should be chcked for typography</param>
-        /// <param name="textIndex">The index of text that's about to be displayed</param>
-        /// <returns>The <paramref name="text"/> without typography notes</returns>
-        private string ApplyTypography(string text, ref int textIndex)
-        {
-            if (text[textIndex] == '<')
-            {
-                string subString = text.Substring(textIndex);
-                int endMark = subString.IndexOf('>');
-
-                if (endMark < 0)
-                {
-                    return text[textIndex].ToString();
-                }
-
-                textIndex += endMark;
-
-                return subString.Substring(0, endMark + 1);
-            }
-            else return text[textIndex].ToString();
         }
 
         /// <summary>

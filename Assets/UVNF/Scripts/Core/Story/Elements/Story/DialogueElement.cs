@@ -27,9 +27,15 @@ namespace UVNF.Core.Story.Dialogue
         [TextArea(8, 10)]
         public string Dialogue;
 
+        /// <summary>
+        /// The <see cref="ITextWriter"/> that's used to display the dialogue
+        /// </summary>
         [SerializeReference, HideInInspector]
         public ITextWriter TextWriter;
 
+        /// <summary>
+        /// The settings that are applied to the <see cref="TextWriter"/>
+        /// </summary>
         [HideInInspector]
         public TextWriterSettings WriterSettings;
 
