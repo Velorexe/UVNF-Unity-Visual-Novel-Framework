@@ -13,12 +13,12 @@ namespace UVNF.Core
     {
         // TODO: replace all of this with a float system (a character should be placed on { x: 0.1f, y: 0.5f }
 
-        public List<Character> CharactersOnScreen;
+        public List<OnScreenCharacter> CharactersOnScreen;
         public RectTransform MainCharacterStack;
 
-        private Character[] LeftSideCharacters { get { return CharactersOnScreen.Where(x => x.CurrentPosition == ScenePositions.Left).ToArray(); } }
-        private Character[] MiddleSideCharacters { get { return CharactersOnScreen.Where(x => x.CurrentPosition == ScenePositions.Middle).ToArray(); } }
-        private Character[] RightSideCharacters { get { return CharactersOnScreen.Where(x => x.CurrentPosition == ScenePositions.Right).ToArray(); } }
+        private OnScreenCharacter[] LeftSideCharacters { get { return CharactersOnScreen.Where(x => x.CurrentPosition == ScenePositions.Left).ToArray(); } }
+        private OnScreenCharacter[] MiddleSideCharacters { get { return CharactersOnScreen.Where(x => x.CurrentPosition == ScenePositions.Middle).ToArray(); } }
+        private OnScreenCharacter[] RightSideCharacters { get { return CharactersOnScreen.Where(x => x.CurrentPosition == ScenePositions.Right).ToArray(); } }
 
         public void AddCharacter(string characterName, Sprite characterSprite, bool flip, ScenePositions enter, ScenePositions position, float enterTime)
         {
@@ -45,7 +45,7 @@ namespace UVNF.Core
                 spriteTransform.localScale = new Vector3(1, 1, 1);
             }
 
-            Character character = obj.AddComponent<Character>();
+            OnScreenCharacter character = obj.AddComponent<OnScreenCharacter>();
 
             character.Name = characterName;
             character.Transform = spriteTransform;
@@ -79,7 +79,7 @@ namespace UVNF.Core
                 case ScenePositions.Left:
                     endPosition = new Vector2(-(parentTransform.sizeDelta.x / 2), 0);
 
-                    Character[] leftCharacters = LeftSideCharacters.Reverse().ToArray();
+                    OnScreenCharacter[] leftCharacters = LeftSideCharacters.Reverse().ToArray();
                     if (leftCharacters.Length > 1)
                     {
                         float leftPosition = Mathf.Abs(parentTransform.sizeDelta.x);
@@ -106,7 +106,7 @@ namespace UVNF.Core
                 case ScenePositions.Right:
                     endPosition = new Vector2(parentTransform.sizeDelta.x / 2, 0);
 
-                    Character[] rightCharacters = RightSideCharacters;
+                    OnScreenCharacter[] rightCharacters = RightSideCharacters;
 
                     if (rightCharacters.Length > 1)
                     {
@@ -130,7 +130,7 @@ namespace UVNF.Core
 
         public void RemoveCharacter(string characterName, ScenePositions exitPosition, float exitTime)
         {
-            Character character = CharactersOnScreen.Find(x => x.Name == characterName);
+            OnScreenCharacter character = CharactersOnScreen.Find(x => x.Name == characterName);
 
             Vector3 endPosition = new Vector3();
 
@@ -153,15 +153,15 @@ namespace UVNF.Core
 
         public void MoveCharacterTo(string characterName, string characterToMoveTo, float moveTime)
         {
-            Character mainCharacter = CharactersOnScreen.Find(x => x.Name == characterName);
-            Character moveToCharacter = CharactersOnScreen.Find(x => x.Name == characterToMoveTo);
+            OnScreenCharacter mainCharacter = CharactersOnScreen.Find(x => x.Name == characterName);
+            OnScreenCharacter moveToCharacter = CharactersOnScreen.Find(x => x.Name == characterToMoveTo);
 
             mainCharacter.MoveCharacter(moveToCharacter.Transform.anchoredPosition, moveTime);
         }
 
         public void ChangeCharacterSprite(string characterName, Sprite characterSprite)
         {
-            Character character = CharactersOnScreen.Find(x => x.Name == characterName);
+            OnScreenCharacter character = CharactersOnScreen.Find(x => x.Name == characterName);
             character.ChangeSprite(characterSprite);
         }
 

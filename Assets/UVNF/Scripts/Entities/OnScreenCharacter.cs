@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UVNF.Entities
 {
-    public class Character : MonoBehaviour
+    public class OnScreenCharacter : MonoBehaviour
     {
         public string Name;
 

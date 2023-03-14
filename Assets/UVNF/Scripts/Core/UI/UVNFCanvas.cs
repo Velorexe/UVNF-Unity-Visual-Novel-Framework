@@ -1,8 +1,12 @@
-﻿using System;
+﻿using CoroutineManager;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UVNF.Core.UI.Writers;
+using UVNF.Core.UI.Writers.Settings;
+using UVNF.Entities;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace UVNF.Core.UI
@@ -13,6 +17,9 @@ namespace UVNF.Core.UI
     /// </summary>
     public class UVNFCanvas : MonoBehaviour
     {
+        // TODO: Make UVNFManager class with this as a default field
+        public UVNFGameResources Resources;
+
         [Header("Canvas Group")]
         public CanvasGroup BottomCanvasGroup;
         public CanvasGroup ChoiceCanvasGroup;
@@ -41,6 +48,8 @@ namespace UVNF.Core.UI
         public Image BackgroundImage;
         public Image BackgroundFade;
 
+        private Task _writerTask = null;
+
         /// <summary>
         /// The index of the choice that's read from a callback from a choice being displayed
         /// </summary>
@@ -52,21 +61,11 @@ namespace UVNF.Core.UI
         public void ResetChoice() => ChoiceCallback = -1;
 
         /// <summary>
-        /// <see langword="true"/> if there's currently an input.
-        /// Resets to <see langword="false"/> when <see langword="get"/> is called
+        /// <see langword="true"/> if there's currently input
         /// </summary>
         private bool HasInput
         {
-            get
-            {
-                if (_hasInput)
-                {
-                    _hasInput = false;
-                    return true;
-                }
-
-                return false;
-            }
+            get { return _hasInput; }
             set { _hasInput = value; }
         }
 
@@ -97,45 +96,50 @@ namespace UVNF.Core.UI
         public void ProcessInput(CallbackContext ctx)
         {
             HasInput = ctx.performed;
+
+            if (HasInput && _writerTask != null && _writerTask.Running)
+            {
+                _writerTask.Stop();
+                HasInput = false;
+            }
         }
 
         #region Dialogue
 
         /// <summary>
-        /// Displays the given dialogue without a character nameplate
+        /// Displays the given dialogue
         /// </summary>
         /// <param name="text">The dialogue that should be displayed</param>
         /// <param name="displayStyles">A collection of display styles that affect the look of the dialogue</param>
         /// <returns>A Unity <see cref="Coroutine"/></returns>
-        public IEnumerator DisplayText(string text, params TextDisplayStyle[] displayStyles)
+        public IEnumerator DisplayText(string text, ITextWriter textWriter, TextWriterSettings settings)
         {
-            ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
+            ApplyTextWriterSettingsToTMP(DialogueTMP, settings);
             BottomCanvasGroup.gameObject.SetActive(true);
 
-            int textIndex = 0;
-            while (textIndex < text.Length)
-            {
-                // If there's input, display all of the text at once
-                if (HasInput)
-                {
-                    DialogueTMP.text = text;
-                    textIndex = text.Length - 1;
-                }
-                // Else if the timer is over the time it should take
-                // for a character to be shown, show a character
-                else if (displayIntervalTimer >= tempDisplayInterval)
-                {
-                    DialogueTMP.text += ApplyTypography(text, ref textIndex);
-                    textIndex++;
-                    displayIntervalTimer = 0f;
-                }
-                else
-                {
-                    displayIntervalTimer += Time.deltaTime;
-                }
+            DialogueTMP.SetText("");
 
+            // Queue up a Coroutine Task to keep track of if it's finished or not
+            _writerTask = new Task(textWriter.Write(DialogueTMP, text, settings.TextDisplaySpeed));
+
+            // Only true if the user clicked before all text is displayed
+            _writerTask.Finished += (bool manual) =>
+            {
+                if (manual)
+                {
+                    textWriter.WriteInstant(DialogueTMP, text);
+                    HasInput = false;
+                }
+            };
+
+            _writerTask.Start();
+
+            while (_writerTask.Running)
+            {
                 yield return null;
             }
+
+            _writerTask = null;
 
             // Wait for input again before proceeding to the next story element
             while (!HasInput)
@@ -152,11 +156,11 @@ namespace UVNF.Core.UI
         /// <param name="useStylesForCharacterField"><see langword="true"/> if the nameplate should use the given styles in <paramref name="displayStyles"/></param>
         /// <param name="displayStyles">A collection of display styles that affect the look of the dialogue</param>
         /// <returns>A Unity <see cref="Coroutine"/></returns>
-        public IEnumerator DisplayText(string text, string characterName, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+        public IEnumerator DisplayText(string text, string characterName, ITextWriter textWriter, TextWriterSettings settings, bool useStylesForCharacterField = false)
         {
             if (useStylesForCharacterField)
             {
-                ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+                ApplyTextWriterSettingsToTMP(CharacterTMP, settings);
             }
 
             if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
@@ -166,7 +170,7 @@ namespace UVNF.Core.UI
 
             CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
-            return DisplayText(text, displayStyles);
+            return DisplayText(text, textWriter, settings);
         }
 
         /// <summary>
@@ -180,52 +184,44 @@ namespace UVNF.Core.UI
         /// <param name="useStylesForCharacterField"><see langword="true"/> if the nameplate should use the given styles</param>
         /// <param name="displayStyles">A collection of display styles that affect the look of the dialogue</param>
         /// <returns>A Unity <see cref="Coroutine"/></returns>
-        public IEnumerator DisplayText(string text, string characterName, AudioClip dialogue, float dialogueVolume, AudioManager audioManager, bool useStylesForCharacterField = false, params TextDisplayStyle[] displayStyles)
+        public IEnumerator DisplayText(string text, string characterName, ITextWriter textWriter, TextWriterSettings settings, AudioClip dialogue, float dialogueVolume, AudioManager audioManager, bool useStylesForCharacterField = false)
         {
-            ApplyTextDisplayStylesToTMP(DialogueTMP, displayStyles);
+            ApplyTextWriterSettingsToTMP(DialogueTMP, settings);
             if (useStylesForCharacterField)
             {
-                ApplyTextDisplayStylesToTMP(CharacterTMP, displayStyles);
+                ApplyTextWriterSettingsToTMP(CharacterTMP, settings);
             }
 
             CharacterNamePlate.SetActive(!string.IsNullOrEmpty(characterName));
 
             BottomCanvasGroup.gameObject.SetActive(true);
 
-            if (!string.Equals(CharacterTMP.text, characterName, StringComparison.Ordinal))
-            {
-                CharacterTMP.text = characterName;
-            }
+            // Queue up a Coroutine Task to keep track of if it's finished or not
+            _writerTask = new Task(textWriter.Write(DialogueTMP, text, settings.TextDisplaySpeed));
 
-            audioManager.PlayDialogue(dialogue, dialogueVolume);
-
-            int textIndex = 0;
-            while (textIndex < text.Length)
+            _writerTask.Finished += (bool manual) =>
             {
-                // If there's input, display all of the text at once
-                if (HasInput)
+                // Only true if the user clicked before all text is displayed
+                if (manual)
                 {
+                    textWriter.WriteInstant(DialogueTMP, text);
                     audioManager.PauseDialogue();
 
-                    DialogueTMP.text = text;
-                    textIndex = text.Length - 1;
+                    HasInput = false;
                 }
-                // Else if the timer is over the time it should take
-                // for a character to be shown, show a character
-                else if (displayIntervalTimer >= tempDisplayInterval)
-                {
-                    DialogueTMP.text += ApplyTypography(text, ref textIndex);
-                    textIndex++;
-                    displayIntervalTimer = 0f;
-                }
-                else
-                {
-                    displayIntervalTimer += Time.deltaTime;
-                }
+            };
 
+            audioManager.PlayDialogue(dialogue, dialogueVolume);
+            _writerTask.Start();
+
+            while (_writerTask.Running)
+            {
                 yield return null;
             }
 
+            _writerTask = null;
+
+            // Wait for input again before proceeding to the next story element
             while (!HasInput)
             {
                 yield return null;
@@ -402,78 +398,20 @@ namespace UVNF.Core.UI
         #endregion
 
         /// <summary>
-        /// Applies a text style to a given <see cref="TextMeshProUGUI"/> component
+        /// Applies the <see cref="TextWriterSettings"/> to the <see cref="TextMeshProUGUI"/>
         /// </summary>
-        /// <param name="tmp">The TM_Pro component to apply the text effects to</param>
-        /// <param name="displayStyles">The effect that should be applied</param>
-        private void ApplyTextDisplayStylesToTMP(TextMeshProUGUI tmp, TextDisplayStyle[] displayStyles)
+        /// <param name="tmp">The <see cref="TextMeshProUGUI"/> to which the settings should be applied</param>
+        /// <param name="settings">The <see cref="TextWriterSettings"/> that should be applied</param>
+        private void ApplyTextWriterSettingsToTMP(TextMeshProUGUI tmp, TextWriterSettings settings)
         {
-            ResetTMP(tmp);
-            for (int i = 0; i < displayStyles.Length; i++)
-            {
-                switch (displayStyles[i])
-                {
-                    case TextDisplayStyle.Gigantic:
-                        tmp.fontSize = 40f;
-                        break;
-                    case TextDisplayStyle.Big:
-                        tmp.fontSize = 25f;
-                        break;
-                    case TextDisplayStyle.Small:
-                        tmp.fontSize = 12f;
-                        break;
-                    case TextDisplayStyle.Italic:
-                        tmp.fontStyle = FontStyles.Italic;
-                        break;
-                    case TextDisplayStyle.Bold:
-                        tmp.fontStyle = FontStyles.Bold;
-                        break;
-                    case TextDisplayStyle.Fast:
-                        tempDisplayInterval = TextDisplayInterval * 3f;
-                        break;
-                    case TextDisplayStyle.Slow:
-                        tempDisplayInterval = TextDisplayInterval / 2f;
-                        break;
-                }
-            }
-        }
+            tmp.fontSize = settings.FontSize;
+            tmp.font = settings.Font;
 
-        /// <summary>
-        /// Resets the text style of a given <see cref="TextMeshProUGUI"/> to a default
-        /// </summary>
-        /// <param name="tmp">The TM_Pro component to apply the text effects to</param>
-        private void ResetTMP(TextMeshProUGUI tmp)
-        {
-            tmp.fontSize = 18f;
-            tmp.fontStyle = 0;
-            tmp.text = string.Empty;
+            tmp.color = settings.Color;
 
-            tempDisplayInterval = TextDisplayInterval;
-        }
+            tmp.fontStyle = settings.Styles;
 
-        /// <summary>
-        /// Removes typography notes marked in a '<' and '>'
-        /// </summary>
-        /// <param name="text">The text that should be chcked for typography</param>
-        /// <param name="textIndex">The index of text that's about to be displayed</param>
-        /// <returns>The <paramref name="text"/> without typography notes</returns>
-        private string ApplyTypography(string text, ref int textIndex)
-        {
-            if (text[textIndex] == '<')
-            {
-                string subString = text.Substring(textIndex);
-                int endMark = subString.IndexOf('>');
-
-                if (endMark < 0)
-                {
-                    return text[textIndex].ToString();
-                }
-
-                textIndex += endMark;
-
-                return subString.Substring(0, endMark + 1);
-            }
-            else return text[textIndex].ToString();
+            tmp.ForceMeshUpdate();
         }
 
         /// <summary>

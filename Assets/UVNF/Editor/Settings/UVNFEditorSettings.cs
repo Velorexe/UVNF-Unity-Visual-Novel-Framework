@@ -1,15 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UVNF.Core.Story;
-using UVNF.Extensions;
+using UVNF.Editor.Helpers;
+using UVNF.Entities;
 using UVNF.Entities.Containers.Variables;
+using UVNF.Extensions;
 
 namespace UVNF.Editor.Settings
 {
     public class UVNFEditorSettings : ScriptableObject, ISerializationCallbackReceiver
     {
+        public static UVNFEditorSettings Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = AssemblyHelpers.FindAssetsByType<UVNFEditorSettings>()[0];
+                }
+
+                return _instance;
+            }
+        }
+        private static UVNFEditorSettings _instance;
+
         [Header("DVNF GUI Skin")]
         public GUISkin UVNFSkin;
         public Color32 ActiveElementColor = new Color32(0xf1, 0xd1, 0xff, 0xff);
@@ -35,6 +49,9 @@ namespace UVNF.Editor.Settings
         public List<Texture2D> ElementHintTextures = new List<Texture2D>();
 
         public Dictionary<string, Texture2D> ElementHints = new Dictionary<string, Texture2D>();
+
+        [Header("Main Game Resources")]
+        public UVNFGameResources MainResources;
 
         [Header("Variables")]
         public VariableManager Variables;

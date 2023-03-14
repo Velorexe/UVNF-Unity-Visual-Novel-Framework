@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UVNF.Core.UI;
+using UVNF.Entities;
 using XNode;
 
 namespace UVNF.Core.Story
@@ -69,7 +70,7 @@ namespace UVNF.Core.Story
         /// <summary>
         /// Called when the Node is created inside the <see cref="UVNF.Entities.Containers.StoryGraph"/>
         /// </summary>
-        public virtual void OnCreate() { }
+        public virtual void OnCreate(UVNFGameResources resources) { }
 
         /// <summary>
         /// Called when the Node is deleted inside the <see cref="UVNF.Entities.Containers.StoryGraph"/>

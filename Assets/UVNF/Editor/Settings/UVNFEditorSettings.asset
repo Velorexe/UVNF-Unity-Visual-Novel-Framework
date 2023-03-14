@@ -73,4 +73,5 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 2aa84ad199972614993b9d90300748ad, type: 3}
   - {fileID: 2800000, guid: 999474cf869963b4cad2726f2eae0bab, type: 3}
   - {fileID: 2800000, guid: e3302b2c055f99c4a9e05703729bb807, type: 3}
+  MainResources: {fileID: 11400000, guid: d2665f2126aa7374384426832d1b8807, type: 2}
   Variables: {fileID: 0}

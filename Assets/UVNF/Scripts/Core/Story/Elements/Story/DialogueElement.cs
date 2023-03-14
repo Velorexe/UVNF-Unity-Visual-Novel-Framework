@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UVNF.Core.UI;
+using UVNF.Core.UI.Writers;
+using UVNF.Core.UI.Writers.Settings;
+using UVNF.Entities;
 
 namespace UVNF.Core.Story.Dialogue
 {
@@ -24,9 +27,34 @@ namespace UVNF.Core.Story.Dialogue
         [TextArea(8, 10)]
         public string Dialogue;
 
+        /// <summary>
+        /// The <see cref="ITextWriter"/> that's used to display the dialogue
+        /// </summary>
+        [SerializeReference, HideInInspector]
+        public ITextWriter TextWriter;
+
+        /// <summary>
+        /// The settings that are applied to the <see cref="TextWriter"/>
+        /// </summary>
+        [HideInInspector]
+        public TextWriterSettings WriterSettings;
+
+#if UNITY_EDITOR
+        public override void OnCreate(UVNFGameResources resources)
+        {
+            WriterSettings = resources.DefaultWriterSettings;
+        }
+
+        [HideInInspector]
+        public bool DefaultTextWriter = true;
+
+        [HideInInspector]
+        public bool DefaultWriterSettings = true;
+#endif
+
         public override IEnumerator Execute(UVNFManager gameManager, UVNFCanvas canvas)
         {
-            return canvas.DisplayText(Dialogue, CharacterName);
+            return canvas.DisplayText(Dialogue, CharacterName, TextWriter, WriterSettings);
         }
     }
 }
