@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UVNF.Core.UI;
 using UVNF.Extensions;
-using XNode;
 
 namespace UVNF.Core.Story.Dialogue
 {
@@ -19,7 +19,8 @@ namespace UVNF.Core.Story.Dialogue
         /// <summary>
         /// The choices that player can choose from
         /// </summary>
-        public List<string> Choices = new List<string>();
+        [Output(dynamicPortList = true)]
+        public string[] Choices = Array.Empty<string>();
 
         /// <summary>
         /// Set to <see langword="true"/> if the choices should be shuffled
@@ -30,27 +31,6 @@ namespace UVNF.Core.Story.Dialogue
         /// Set to <see langword="true"/> if the dialogue should be hidden while the choices are presented
         /// </summary>
         public bool HideDialogue = false;
-
-#if UNITY_EDITOR
-        /// <summary>
-        /// Adds a choice to <see cref="Choices"/> and creates a new <see cref="NodePort"/>
-        /// </summary>
-        public void AddChoice()
-        {
-            Choices.Add(string.Empty);
-            AddDynamicOutput(typeof(NodePort), ConnectionType.Override, TypeConstraint.Inherited, "Choice" + (Choices.Count - 1));
-        }
-
-        /// <summary>
-        /// Removes a choice from <see cref="Choices"/> and removes the associated <see cref="NodePort"/>
-        /// </summary>
-        /// <param name="index">The index of the choice that needs to be removed</param>
-        public void RemoveChoice(int index)
-        {
-            Choices.RemoveAt(index);
-            RemoveDynamicPort(DynamicPorts.ElementAt(index));
-        }
-#endif
 
         public override IEnumerator Execute(UVNFManager managerCallback, UVNFCanvas canvas)
         {

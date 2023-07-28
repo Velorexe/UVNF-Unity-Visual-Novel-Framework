@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Variables
   m_EditorClassIdentifier: 
   Variables:
-  - VariableName: PlayerName
+  - VariableName: New Variable
     ValueType: 0
     NumberValue: 0
     BooleanValue: 0
-    TextValue: Velorexe
+    TextValue: 
   VariableValues:
-  - Type: Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    Data: '{"VariableName":"PlayerName","ValueType":0,"NumberValue":0.0,"BooleanValue":false,"TextValue":"Velorexe"}'
+  - Type: UVNF.Entities.Containers.Variables.Variable, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    Data: '{"VariableName":"New Variable","ValueType":0,"NumberValue":0.0,"BooleanValue":false,"TextValue":""}'
