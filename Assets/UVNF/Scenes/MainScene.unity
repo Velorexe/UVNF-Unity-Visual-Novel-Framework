@@ -867,7 +867,7 @@ PrefabInstance:
         type: 3}
       propertyPath: StartingStory
       value: 
-      objectReference: {fileID: 11400000, guid: 773e6d38e70fba246bbf130890c1a54d,
+      objectReference: {fileID: 11400000, guid: ce9cd3799bc9bc34794cd3d8e3ec9e0c,
         type: 2}
     - target: {fileID: 1492045211013053232, guid: 19e2e4406c5853a498865440543889a5,
         type: 3}

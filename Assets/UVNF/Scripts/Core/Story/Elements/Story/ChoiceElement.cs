@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UVNF.Core.UI;
-using UVNF.Extensions;
+using XNode;
 
 namespace UVNF.Core.Story.Dialogue
 {
@@ -19,13 +19,10 @@ namespace UVNF.Core.Story.Dialogue
         /// <summary>
         /// The choices that player can choose from
         /// </summary>
-        [Output(dynamicPortList = true)]
+        [Output(
+            dynamicPortList = true,
+            connectionType = ConnectionType.Override)]
         public string[] Choices = Array.Empty<string>();
-
-        /// <summary>
-        /// Set to <see langword="true"/> if the choices should be shuffled
-        /// </summary>
-        public bool ShuffleChocies = true;
 
         /// <summary>
         /// Set to <see langword="true"/> if the dialogue should be hidden while the choices are presented
@@ -36,11 +33,6 @@ namespace UVNF.Core.Story.Dialogue
         {
             List<string> choiceList = new List<string>(Choices);
 
-            if (ShuffleChocies)
-            {
-                choiceList.Shuffle();
-            }
-
             canvas.DisplayChoice(choiceList.ToArray(), HideDialogue);
 
             while (canvas.ChoiceCallback == -1)
@@ -50,6 +42,7 @@ namespace UVNF.Core.Story.Dialogue
 
             if (DynamicPorts.ElementAt(canvas.ChoiceCallback).IsConnected)
             {
+                NodePort nodePort = DynamicPorts.ElementAt(canvas.ChoiceCallback);
                 int choice = canvas.ChoiceCallback;
 
                 canvas.ResetChoice();
